@@ -1,0 +1,77 @@
+#Wed, 13 Nov 2013 15:59:49 -0500
+name=CummeRbund.QcReport
+commandLine=<R2.15_HOME>/bin/Rscript --no-save --quiet --slave --no-restore <libdir>run_gp_cummerbund_qc_report.R <libdir> <user.dir> <patches> --cuffdiff.input\=<cuffdiff.input> <reference.GTF> <genome.file> --output.format=<output.format>
+license=
+taskDoc=
+fileFormat=
+taskType=RNA-Seq
+os=any
+privacy=public
+description=Cuffdiff visualization package providing QC reports  
+version=
+minGenePatternVersion=
+author=Loyal Goff, 
+
+p1_default_value=
+p1_description=A Cuffdiff job
+p1_fileFormat=directory
+p1_MODE=IN
+p1_name=cuffdiff.input
+p1_optional=
+p1_prefix_when_specified=
+p1_TYPE=FILE
+p1_type=java.io.File
+p1_value=
+
+p2_MODE=IN
+p2_TYPE=FILE
+p2_choiceDir=ftp\://gpftp.broadinstitute.org/module_support_files/annotation/gtf/
+p2_choiceDirFilter=*.gtf;*.GTF
+p2_default_value=
+p2_description=An optional reference annotation GTF. The input assemblies are merged together with the reference GTF and included in the final output. Cuffmerge will use this to attach gene names and other metadata to the merged catalog.
+p2_fileFormat=gtf
+p2_flag=--ref.gtf\=
+p2_name=reference.GTF
+p2_optional=on
+p2_prefix=--ref.gtf\=
+p2_prefix_when_specified=--ref.gtf\=
+p2_type=java.io.File
+p2_value=
+
+p3_MODE=IN
+p3_TYPE=FILE
+p3_choiceDir=ftp\://gpftp.broadinstitute.org/module_support_files/sequence/whole_genome/
+p3_choiceDirFilter=*.fa;*.fasta;*.FA;*.FASTA
+p3_default_value=
+p3_description=A file containing the genomic DNA sequences for the reference.  This should be a multi-FASTA file with all contigs present.
+p3_fileFormat=fa;fasta
+p3_flag=-genome.file\=
+p3_name=genome.file
+p3_optional=on
+p3_prefix=--genome.file\=
+p3_prefix_when_specified=--genome.file\=
+p3_type=java.io.File
+p3_value=
+
+p4_default_value=pdf
+p4_description=The output file format.
+p4_fileFormat=
+p4_name=output.format
+p4_optional=
+p4_prefix_when_specified=
+p4_type=java.lang.String
+p4_value=pdf;svg;png
+
+requiredPatchLSIDs=urn\:lsid\:broadinstitute.org\:plugin\:Ant_1.8\:1,urn\:lsid\:broadinstitute.org\:plugin\:R2.15_Installer\:0.5,urn\:lsid\:broadinstitute.org\:plugin\:rdep_2.15_cummeRbund\:0.2
+requiredPatchURLs=http\://www.broadinstitute.org/webservices/gpModuleRepository/download/prod/patch/?file\=/Ant_1_8/broadinstitute.org\:plugin/Ant_1.8/1/Ant_1_8.zip,http\://www.broadinstitute.org/webservices/gpModuleRepository/download/dev/patch/?file\=/R2.15_Installer/broadinstitute.org\:plugin/R2.15_Installer/0.5/R2.15_Installer.zip,http\://iwww.broadinstitute.org/~eby/rdep_2.15_cummeRbund.zip
+#  http\://www.broadinstitute.org/webservices/gpModuleRepository/download/dev/patch/?file\=/rdep_2.15_cummeRbund/broadinstitute.org\:plugin/rdep_2.15_cummeRbund/0.3/rdep_2.15_cummeRbund.zip
+
+# The following should be the final LSID & URL for R2.15_Installer when it's done.  Remove this comment and place the values above.
+#  urn\:lsid\:broadinstitute.org\:plugin\:R2.15_Installer\:1,\
+#  http\://www.broadinstitute.org/webservices/gpModuleRepository/download/prod/patch/?file\=/R2.15_Installer/broadinstitute.org\:plugin/R2.15_Installer/1/R2.15_Installer.zip,\
+# ... and for cummeRbund:
+#  urn:lsid:broadinstitute.org:plugin:rdep_2.15_cummeRbund:1
+#  http\://www.broadinstitute.org/webservices/gpModuleRepository/download/prod/patch/?file\=/rdep_2.15_cummeRbund/broadinstitute.org\:plugin/rdep_2.15_cummeRbund/1/rdep_2.15_cummeRbund.zip
+
+LSID=urn\:lsid\:broad.mit.edu\:cancer.software.genepattern.module.analysis\:00326\:999999999
+publicationDate=11/13/2013 15\:59 
