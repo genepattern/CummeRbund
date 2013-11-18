@@ -19,39 +19,30 @@ GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome.file, output.
    
    disp<-dispersionPlot(genes(cuff))
    print.plotObject(disp, "DispersionPlot", device.open)
-   #ggsave(build.filename("DispersionPlot", output.format), plot=disp)
    
    genes.scv<-fpkmSCVPlot(genes(cuff))
    print.plotObject(genes.scv, "Genes.fpkmSCVPlot", device.open)
-   #ggsave(build.filename("Genes.fpkmSCVPlot", output.format),plot=genes.scv)
    
    isoforms.scv<-fpkmSCVPlot(isoforms(cuff))
    print.plotObject(isoforms.scv, "Isoforms.fpkmSCVPlot", device.open) 
-   #ggsave(build.filename("Isoforms.fpkmSCVPlot", output.format), plot=isoforms.scv)
    
    dens<-csDensity(genes(cuff))
    print.plotObject(dens, "Density", device.open) 
-   #ggsave(build.filename("Density", output.format), plot=dens)
 
    densRep<-csDensity(genes(cuff),replicates=T)
    print.plotObject(densRep, "Density.rep", device.open) 
-   #ggsave(build.filename("Density.rep", output.format), plot=densRep)
 
    b<-csBoxplot(genes(cuff))
    print.plotObject(b, "Boxplot", device.open) 
-   #ggsave(build.filename("Boxplot", output.format), plot=b)
 
    brep<-csBoxplot(genes(cuff),replicates=T)
    print.plotObject(brep, "Boxplot.rep", device.open) 
-   #ggsave(build.filename("Boxplot.rep", output.format), plot=brep)
 
    s<-csScatterMatrix(genes(cuff))
    print.plotObject(s, "ScatterMatrix", device.open) 
-   #ggsave(build.filename("ScatterMatrix", output.format), plot=s)
 
    v<-csVolcanoMatrix(genes(cuff))
    print.plotObject(v, "VolcanoMatrix", device.open) 
-   #ggsave(build.filename("VolcanoMatrix", output.format), plot=v)
 
    # Not yet: need to figure out how to pass labels
    # s<-csScatter(genes(cuff),"hESC","Fibroblasts",smooth=T)
@@ -60,39 +51,10 @@ GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome.file, output.
 
    # The dendrogram plots behave differently - apparently the print/plot call is embedded within.
    device.open("Dendrogram")
-   #pdf(build.filename("Dendrogram", "pdf"))
-   #dend<-csDendro(genes(cuff))
+   dend<-csDendro(genes(cuff))
    dev.off()
-   #ggsave(build.filename("Dendrogram", output.format))
 
    device.open("Dendrogram.rep")
-   #pdf(build.filename("Dendrogram.rep", "pdf"))
-   #dendRep<-csDendro(genes(cuff),replicates=T)
-   dev.off()
-   #ggsave(build.filename("Dendrogram.rep", output.format))
-}
-
-get.device.open <- function(extension) {
-   if (extension == "pdf") { 
-      return(function(filename_base) {
-         pdf(paste0(filename_base, ".pdf"))
-      })
-   }
-   if (extension == "svg") { 
-      return(function(filename_base) {
-         svg(paste0(filename_base, ".svg"))
-      })
-   }
-   if (extension == "png") { 
-      return(function(filename_base) {
-         png(paste0(filename_base, ".png"))
-      })
-   }
-   stop("Unhandled extension")
-}
-
-print.plotObject <- function(plotObj, filename_base, device.open) {
-   device.open(filename_base)
-   print(plotObj)
+   dendRep<-csDendro(genes(cuff),replicates=T)
    dev.off()
 }

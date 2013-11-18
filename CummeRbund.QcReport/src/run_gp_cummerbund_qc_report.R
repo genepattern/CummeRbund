@@ -37,6 +37,7 @@ if (!(opts$output.format %in% c("pdf", "svg", "png"))) {
    stop(paste0("Unrecognized output format ", opts$output.format))
 }
 
+source(file.path(libdir, "gp_cummerbund_util.R"))
 source(file.path(libdir, "gp_cummerbund_qc_report.R"))
 
 sessionInfo()
