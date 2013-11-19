@@ -2,7 +2,7 @@
 name=CummeRbund.QcReport
 commandLine=<R2.15_HOME>/bin/Rscript --no-save --quiet --slave --no-restore <libdir>run_gp_cummerbund_qc_report.R <libdir> <patches>/rlib/2.15_20131119/site-library --cuffdiff.input\=<cuffdiff.input> <reference.GTF> <genome.file> --output.format=<output.format> --feature.level=<feature.level> --show.replicates=<show.replicates> --log.transform=<log.transform>
 license=
-taskDoc=
+taskDoc=doc.html
 fileFormat=
 taskType=RNA-Seq
 os=any
