@@ -27,8 +27,16 @@ get.device.open <- function(extension) {
    stop("Unhandled extension")
 }
 
+get.feature.selector <- function(feature.level) {
+   # Return a feature selection function based on the specified feature level
+   if (feature.level == "gene") { return(genes) }
+   if (feature.level == "isoform") { return(isoforms) }
+   if (feature.level == "TSS") { return(TSS) }
+   if (feature.level == "CDS") { return(CDS) }
+}
+
 print.plotObject <- function(plotObj, filename_base, device.open) {
    device.open(filename_base)
    print(plotObj)
-   dev.off()
+   dev.off()  
 }

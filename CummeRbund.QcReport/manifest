@@ -1,6 +1,6 @@
 #Wed, 13 Nov 2013 15:59:49 -0500
 name=CummeRbund.QcReport
-commandLine=<R2.15_HOME>/bin/Rscript --no-save --quiet --slave --no-restore <libdir>run_gp_cummerbund_qc_report.R <libdir> <user.dir> <patches> --cuffdiff.input\=<cuffdiff.input> <reference.GTF> <genome.file> --output.format=<output.format>
+commandLine=<R2.15_HOME>/bin/Rscript --no-save --quiet --slave --no-restore <libdir>run_gp_cummerbund_qc_report.R <libdir> <patches>/rlib/2.15_20131119/site-library --cuffdiff.input\=<cuffdiff.input> <reference.GTF> <genome.file> --output.format=<output.format> --feature.level=<feature.level> --show.replicates=<show.replicates> --log.transform=<log.transform>
 license=
 taskDoc=
 fileFormat=
@@ -8,13 +8,13 @@ taskType=RNA-Seq
 os=any
 privacy=public
 description=Cuffdiff visualization package providing QC reports  
-version=
+version=Initial version for testing.
 minGenePatternVersion=
 author=Loyal Goff, 
 
 p1_default_value=
-p1_description=A Cuffdiff job
-p1_fileFormat=directory
+p1_description=A Cuffdiff job, a previous CummeRbund job, or a cuffData.db file from a previous CummeRbund job
+p1_fileFormat=directory;db
 p1_MODE=IN
 p1_name=cuffdiff.input
 p1_optional=
@@ -62,9 +62,38 @@ p4_prefix_when_specified=
 p4_type=java.lang.String
 p4_value=pdf;svg;png
 
-requiredPatchLSIDs=urn\:lsid\:broadinstitute.org\:plugin\:Ant_1.8\:1,urn\:lsid\:broadinstitute.org\:plugin\:R2.15_Installer\:0.5,urn\:lsid\:broadinstitute.org\:plugin\:rdep_2.15_cummeRbund\:0.2
-requiredPatchURLs=http\://www.broadinstitute.org/webservices/gpModuleRepository/download/prod/patch/?file\=/Ant_1_8/broadinstitute.org\:plugin/Ant_1.8/1/Ant_1_8.zip,http\://www.broadinstitute.org/webservices/gpModuleRepository/download/dev/patch/?file\=/R2.15_Installer/broadinstitute.org\:plugin/R2.15_Installer/0.5/R2.15_Installer.zip,http\://iwww.broadinstitute.org/~eby/rdep_2.15_cummeRbund.zip
-#  http\://www.broadinstitute.org/webservices/gpModuleRepository/download/dev/patch/?file\=/rdep_2.15_cummeRbund/broadinstitute.org\:plugin/rdep_2.15_cummeRbund/0.3/rdep_2.15_cummeRbund.zip
+p5_default_value=gene
+p5_description=Feature level for the report
+p5_fileFormat=
+p5_name=feature.level
+p5_optional=
+p5_prefix_when_specified=
+p5_type=java.lang.String
+p5_value=gene\=gene;isoform\=isoform;TSS\=transcription start site (TSS);CDS\=coding sequence (CDS)
+
+p6_default_value=yes
+p6_description=Whether to show separate plots for replicates or to show aggregate samples.  Note that the Dispersion, FPKM.SCV, and Volcano plots always show aggregate samples
+p6_fileFormat=
+p6_name=show.replicates
+p6_optional=
+p6_prefix_when_specified=
+p6_type=java.lang.String
+p6_value=yes;no
+
+p7_default_value=yes
+p7_description=Whether or not to log transform the FPKM values.  Note that the Dispersion, FPKM.SCV and Volcano plot values are never log transformed.  Also note that the Boxplot, Dendrogram, Density plot values are log10 transformed while the Scatter plot values are log2 transformed. 
+p7_fileFormat=
+p7_name=log.transform
+p7_optional=
+p7_prefix_when_specified=
+p7_type=java.lang.String
+p7_value=yes;no
+
+requiredPatchLSIDs=urn\:lsid\:broadinstitute.org\:plugin\:Ant_1.8\:1,urn\:lsid\:broadinstitute.org\:plugin\:R2.15_Installer\:0.5,urn\:lsid\:broadinstitute.org\:plugin\:rdep_2.15_cummeRbund\:0.4
+requiredPatchURLs=http\://www.broadinstitute.org/webservices/gpModuleRepository/download/prod/patch/?file\=/Ant_1_8/broadinstitute.org\:plugin/Ant_1.8/1/Ant_1_8.zip,http\://www.broadinstitute.org/webservices/gpModuleRepository/download/dev/patch/?file\=/R2.15_Installer/broadinstitute.org\:plugin/R2.15_Installer/0.5/R2.15_Installer.zip,\
+  http\://www.broadinstitute.org/webservices/gpModuleRepository/download/dev/patch/?file\=/rdep_2.15_cummeRbund/broadinstitute.org\:plugin/rdep_2.15_cummeRbund/0.4/rdep_2.15_cummeRbund.zip
+
+#http\://iwww.broadinstitute.org/~eby/rdep_2.15_cummeRbund.zip
 
 # The following should be the final LSID & URL for R2.15_Installer when it's done.  Remove this comment and place the values above.
 #  urn\:lsid\:broadinstitute.org\:plugin\:R2.15_Installer\:1,\
