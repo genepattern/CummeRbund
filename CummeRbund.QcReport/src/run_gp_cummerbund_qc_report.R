@@ -10,23 +10,25 @@
 
 args <- commandArgs(trailingOnly=TRUE)
 
-vers <- "2.15"            # R version
 libdir <- args[1]
-server.dir <- args[2]
-patch.dir <- args[3]
-    parent.dir <- paste(patch.dir, "rlib", vers, sep="/")
-    site.library <- paste(parent.dir, "site-library", sep="/")
+site.library <- args[2]
 
-    cat("\nLibrary dir: ",site.library)
-    .libPaths(c(site.library, .libPaths()))
+cat("\nLibrary dir: ",site.library)
+.libPaths(site.library)
 
 suppressPackageStartupMessages(library(optparse))
+suppressMessages(suppressWarnings(
+   library(cummeRbund)
+))
 
 option_list <- list(
   make_option("--cuffdiff.input", dest="cuffdiff.input"),
   make_option("--ref.gtf", dest="ref.gtf", default=NULL),
   make_option("--genome.file", dest="genome.file", default=NULL),
-  make_option("--output.format", dest="output.format")
+  make_option("--output.format", dest="output.format"),
+  make_option("--feature.level", dest="feature.level"),
+  make_option("--show.replicates", dest="show.replicates"),
+  make_option("--log.transform", dest="log.transform")
   )
 
 opt <- parse_args(OptionParser(option_list=option_list), positional_arguments=TRUE, args=args)
@@ -37,12 +39,19 @@ if (!(opts$output.format %in% c("pdf", "svg", "png"))) {
    stop(paste0("Unrecognized output format ", opts$output.format))
 }
 
+if (!(opts$feature.level %in% c("gene", "isoform", "TSS", "CDS"))) {
+   stop(paste0("Unrecognized feature level ", opts$feature.level))
+}
+
+show.replicates <- (opts$show.replicates == "yes")
+log.transform <- (opts$log.transform == "yes")
+
 source(file.path(libdir, "gp_cummerbund_util.R"))
 source(file.path(libdir, "gp_cummerbund_qc_report.R"))
 
 sessionInfo()
 
-run.job <- function(cuffdiff.input, gtf.file, genome.file, output.format) {
+run.job <- function(cuffdiff.input, gtf.file, genome.file, output.format, feature.level, show.replicates, log.transform) {
    print(c("Running GenePattern CummeRbund QC Report on data from:", basename(cuffdiff.input)))
 
    if (file_test("-f", cuffdiff.input)) {
@@ -52,7 +61,8 @@ run.job <- function(cuffdiff.input, gtf.file, genome.file, output.format) {
       # need to create a local symlink.  We don't want to clean this up afterward.
       file.symlink(cuffdiff.input, "cuffData.db")
       
-      GP.CummeRbund.QC.Report(cuffdiff.job = getwd(), gtf.file, genome.file, output.format)
+      GP.CummeRbund.QC.Report(cuffdiff.job = getwd(), gtf.file, genome.file, output.format, 
+                              feature.level, show.replicates, log.transform)
    } 
    else {
       # Otherwise it's a directory.  Check whether it contains a cuffData.db file from a previous
@@ -64,7 +74,8 @@ run.job <- function(cuffdiff.input, gtf.file, genome.file, output.format) {
          # need to create a local symlink.  As above, we don't want to clean this up afterward.
          file.symlink(dbFile, "cuffData.db")
          
-         GP.CummeRbund.QC.Report(cuffdiff.job = getwd(), gtf.file, genome.file, output.format)
+         GP.CummeRbund.QC.Report(cuffdiff.job = getwd(), gtf.file, genome.file, output.format,
+                                 feature.level, show.replicates, log.transform)
       }
       else {
          # We need to set up a local copy of these files (using symlinks) so that the resulting
@@ -77,7 +88,8 @@ run.job <- function(cuffdiff.input, gtf.file, genome.file, output.format) {
          apply(dir.contents, FUN = symlinker)
 
          tryCatch({
-            GP.CummeRbund.QC.Report(cuffdiff.job = input.job, gtf.file, genome.file, output.format)
+            GP.CummeRbund.QC.Report(cuffdiff.job = input.job, gtf.file, genome.file, output.format,
+                                    feature.level, show.replicates, log.transform)
          },
          finally = {
             # Need to move the SQLite DB to the jobResults dir and clean up the symlinks
@@ -91,7 +103,7 @@ run.job <- function(cuffdiff.input, gtf.file, genome.file, output.format) {
    }
 }
 
-
 suppressMessages(suppressWarnings(
-   run.job(opts$cuffdiff.input, opts$gtf.file, opts$genome.file, opts$output.format)
+   run.job(opts$cuffdiff.input, opts$gtf.file, opts$genome.file, opts$output.format,
+           opts$feature.level, show.replicates, log.transform)
 ))
