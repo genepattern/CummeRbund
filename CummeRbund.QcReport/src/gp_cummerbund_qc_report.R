@@ -14,12 +14,10 @@ GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome.file, output.
    
    feature.selector <- get.feature.selector(feature.level)
 
-   ## Calls based on examples from http://compbio.mit.edu/cummeRbund/manual_2_0.html
-   cuff<-readCufflinks(cuffdiff.job, gtfFile = gtf.file, genome = genome.file)
-   cuff
-   
+   cuff <- readCufflinks.silent(cuffdiff.job, gtf.file, genome.file)
    features <-feature.selector(cuff)
-    
+
+   ## Calls based on examples from http://compbio.mit.edu/cummeRbund/manual_2_0.html
    disp<-dispersionPlot(features)
    print.plotObject(disp, "Dispersion", device.open)
    
@@ -33,7 +31,7 @@ GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome.file, output.
    print.plotObject(box, "Boxplot", device.open) 
 
    # expose colorByStatus to user?
-   s<-csScatterMatrix(features,replicates=show.replicates,logMode=log.transform,colorByStatus=TRUE)
+   s<-csScatterMatrix(features,replicates=show.replicates,logMode=log.transform)
    print.plotObject(s, "Scatter", device.open) 
 
    v<-csVolcanoMatrix(features)

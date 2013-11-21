@@ -40,3 +40,15 @@ print.plotObject <- function(plotObj, filename_base, device.open) {
    print(plotObj)
    dev.off()  
 }
+
+readCufflinks.silent <-function(cuffdiff.job, gtf.file, genome.file) {
+   # readCufflinks() is very chatty on stderr even with verbose=FALSE (seems to be due to
+   # the underlying RSQLite calls).  Make it quiet...   
+   tryCatch({
+      sink(file=stdout(), type="message")
+      return(readCufflinks(cuffdiff.job, gtfFile = gtf.file, genome = genome.file, verbose=FALSE))
+   },
+   finally = {
+      sink()
+   })
+}
