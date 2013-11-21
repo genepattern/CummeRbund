@@ -24,18 +24,31 @@ GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome.file, output.
    fpkm.scv<-fpkmSCVPlot(features)
    print.plotObject(fpkm.scv, "FPKM.SCV", device.open)
 
-   dens<-csDensity(features,replicates=show.replicates,logMode=log.transform)
+   dens<-csDensity(features, replicates=show.replicates, logMode=log.transform)
    print.plotObject(dens, "Density", device.open) 
 
-   box<-csBoxplot(features,replicates=show.replicates,logMode=log.transform)
+   box<-csBoxplot(features, replicates=show.replicates, logMode=log.transform)
    print.plotObject(box, "Boxplot", device.open) 
 
    # expose colorByStatus to user?
-   s<-csScatterMatrix(features,replicates=show.replicates,logMode=log.transform)
+   s<-csScatterMatrix(features, replicates=show.replicates, logMode=log.transform)
    print.plotObject(s, "Scatter", device.open) 
 
    v<-csVolcanoMatrix(features)
    print.plotObject(v, "Volcano", device.open) 
+
+   # The significance matrix behaves differently in that it handles the selection within the call.
+   sM <- sigMatrix(cuff, level=feature.level)
+   print.plotObject(sM, "SignificanceMatrix", device.open) 
+
+   mds <- MDSplot(features, replicates=show.replicates, logMode=log.transform)
+   print.plotObject(mds, "DimensionalityReduction.mds", device.open) 
+
+   pca <- PCAplot(features, replicates=show.replicates)
+   print.plotObject(pca, "DimensionalityReduction.pca", device.open) 
+
+   distHeatSamples <- csDistHeat(features, replicates=show.replicates, samples.not.genes=TRUE, logMode=log.transform)
+   print.plotObject(distHeatSamples, "JSDistanceHeatmap.Samples", device.open) 
 
    # Not yet: need to figure out how to pass labels
    # s<-csScatter(features,"hESC","Fibroblasts",smooth=T)
