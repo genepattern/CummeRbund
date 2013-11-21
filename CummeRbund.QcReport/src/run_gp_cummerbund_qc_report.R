@@ -35,19 +35,14 @@ opt <- parse_args(OptionParser(option_list=option_list), positional_arguments=TR
 print(opt)
 opts <- opt$options
 
-if (!(opts$output.format %in% c("pdf", "svg", "png"))) {
-   stop(paste0("Unrecognized output format ", opts$output.format))
-}
+source(file.path(libdir, "gp_cummerbund_util.R"))
+source(file.path(libdir, "gp_cummerbund_qc_report.R"))
 
-if (!(opts$feature.level %in% c("gene", "isoform", "TSS", "CDS"))) {
-   stop(paste0("Unrecognized feature level ", opts$feature.level))
-}
+check.output.format(opts$output.format)
+check.feature.level(opts$feature.level)
 
 show.replicates <- (opts$show.replicates == "yes")
 log.transform <- (opts$log.transform == "yes")
-
-source(file.path(libdir, "gp_cummerbund_util.R"))
-source(file.path(libdir, "gp_cummerbund_qc_report.R"))
 
 sessionInfo()
 
@@ -103,7 +98,6 @@ run.job <- function(cuffdiff.input, gtf.file, genome.file, output.format, featur
    }
 }
 
-options(verbose=FALSE)
 suppressMessages(suppressWarnings(
    run.job(opts$cuffdiff.input, opts$gtf.file, opts$genome.file, opts$output.format,
            opts$feature.level, show.replicates, log.transform)

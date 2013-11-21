@@ -7,10 +7,10 @@ fileFormat=
 taskType=RNA-Seq
 os=any
 privacy=public
-description=Cuffdiff visualization package providing QC reports  
-version=Fixed issues with initial generation of the RSQLite database file.
+description=Cuffdiff visualization package providing QC plots
+version=Added some new types of plots.
 minGenePatternVersion=
-author=Loyal Goff, 
+author=Loyal Goff, MIT Computer Science and Artificial Intelligence Lab
 
 p1_default_value=
 p1_description=A Cuffdiff job, a previous CummeRbund job, or a cuffData.db file from a previous CummeRbund job
@@ -62,14 +62,14 @@ p4_prefix_when_specified=
 p4_type=java.lang.String
 p4_value=pdf;svg;png
 
-p5_default_value=gene
+p5_default_value=genes
 p5_description=Feature level for the report
 p5_fileFormat=
 p5_name=feature.level
 p5_optional=
 p5_prefix_when_specified=
 p5_type=java.lang.String
-p5_value=gene\=gene;isoform\=isoform;TSS\=transcription start site (TSS);CDS\=coding sequence (CDS)
+p5_value=genes\=genes;isoforms\=isoforms;TSS\=transcription start site (TSS);CDS\=coding sequence (CDS)
 
 p6_default_value=yes
 p6_description=Whether to show separate plots for replicates or to show aggregate samples.  Note that the Dispersion, FPKM.SCV, and Volcano plots always show aggregate samples
