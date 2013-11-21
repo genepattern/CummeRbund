@@ -8,7 +8,7 @@ taskType=RNA-Seq
 os=any
 privacy=public
 description=Cuffdiff visualization package providing QC reports  
-version=Fixed a bug in the package dependency installer plug-in.
+version=Fixed issues with initial generation of the RSQLite database file.
 minGenePatternVersion=
 author=Loyal Goff, 
 

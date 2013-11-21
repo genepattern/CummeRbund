@@ -85,7 +85,7 @@ run.job <- function(cuffdiff.input, gtf.file, genome.file, output.format, featur
          symlinker <- function(x) {
             file.symlink(file.path(cuffdiff.input, x), file.path(input.job, x))
          }
-         apply(dir.contents, FUN = symlinker)
+         lapply(dir.contents, FUN = symlinker)
 
          tryCatch({
             GP.CummeRbund.QC.Report(cuffdiff.job = input.job, gtf.file, genome.file, output.format,
@@ -97,12 +97,13 @@ run.job <- function(cuffdiff.input, gtf.file, genome.file, output.format, featur
             if (file.exists(dbFile)) {
                file.rename(dbFile, file.path(getwd(), "cuffData.db"))
             }
-            unlink(input.job)
+            unlink(input.job, recursive=TRUE)
          })
       }
    }
 }
 
+options(verbose=FALSE)
 suppressMessages(suppressWarnings(
    run.job(opts$cuffdiff.input, opts$gtf.file, opts$genome.file, opts$output.format,
            opts$feature.level, show.replicates, log.transform)
