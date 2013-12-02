@@ -9,6 +9,7 @@
 		<antcall target="prezip" />
 		<zip destfile="${dest.dir}/${ant.project.name}.zip" whenempty="fail" defaultexcludes="true">
             <fileset dir="src" includes="*.R" />
+            <fileset dir="../common/src" includes="*.R" />
             <fileset dir="." includes="manifest, *.html, *.txt" excludes="test/**" />
         </zip>
 		<antcall target="postzip" />
