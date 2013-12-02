@@ -8,7 +8,7 @@ taskType=RNA-Seq
 os=any
 privacy=public
 description=Cuffdiff visualization package providing QC plots
-version=Added some new types of plots.
+version=Fixed a bug where MDS plots don't work with fewer than 3 samples/replicates.  Updated to newer version of dependency installer.
 minGenePatternVersion=
 author=Loyal Goff, MIT Computer Science and Artificial Intelligence Lab
 
@@ -89,9 +89,9 @@ p7_prefix_when_specified=
 p7_type=java.lang.String
 p7_value=yes;no
 
-requiredPatchLSIDs=urn\:lsid\:broadinstitute.org\:plugin\:Ant_1.8\:1,urn\:lsid\:broadinstitute.org\:plugin\:R2.15_Installer\:0.5,urn\:lsid\:broadinstitute.org\:plugin\:rdep_2.15_cummeRbund\:0.5
+requiredPatchLSIDs=urn\:lsid\:broadinstitute.org\:plugin\:Ant_1.8\:1,urn\:lsid\:broadinstitute.org\:plugin\:R2.15_Installer\:0.5,urn\:lsid\:broadinstitute.org\:plugin\:rdep_2.15_cummeRbund\:0.6
 requiredPatchURLs=http\://www.broadinstitute.org/webservices/gpModuleRepository/download/prod/patch/?file\=/Ant_1_8/broadinstitute.org\:plugin/Ant_1.8/1/Ant_1_8.zip,http\://www.broadinstitute.org/webservices/gpModuleRepository/download/dev/patch/?file\=/R2.15_Installer/broadinstitute.org\:plugin/R2.15_Installer/0.5/R2.15_Installer.zip,\
-  http\://www.broadinstitute.org/webservices/gpModuleRepository/download/dev/patch/?file\=/rdep_2.15_cummeRbund/broadinstitute.org\:plugin/rdep_2.15_cummeRbund/0.5/rdep_2.15_cummeRbund.zip
+  http\://www.broadinstitute.org/webservices/gpModuleRepository/download/dev/patch/?file\=/rdep_2.15_cummeRbund/broadinstitute.org\:plugin/rdep_2.15_cummeRbund/0.6/rdep_2.15_cummeRbund.zip
 
 #http\://iwww.broadinstitute.org/~eby/rdep_2.15_cummeRbund.zip
 

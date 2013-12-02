@@ -45,6 +45,7 @@ get.feature.selector <- function(feature.level) {
    if (feature.level == "isoforms") { return(isoforms) }
    if (feature.level == "TSS") { return(TSS) }
    if (feature.level == "CDS") { return(CDS) }
+   stop(paste0("Unrecognized feature level ", feature.level))
 }
 
 print.plotObject <- function(plotObj, filename_base, device.open) {
