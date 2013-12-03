@@ -1,0 +1,127 @@
+#Wed, 13 Nov 2013 15:59:49 -0500
+name=CummeRbund.GeneSetReport
+commandLine=<R2.15_HOME>/bin/Rscript --no-save --quiet --slave --no-restore <libdir>run_gp_cummerbund_geneset_report.R <libdir> <patches>/rlib/2.15_20131119/site-library --cuffdiff.input\=<cuffdiff.input> --geneset.file=<geneset.file> <reference.GTF> <genome.file> --output.format=<output.format> --feature.level=<feature.level> --show.replicates=<show.replicates> --log.transform=<log.transform> <cluster.count>
+license=
+taskDoc=doc.html
+fileFormat=
+taskType=RNA-seq
+os=any
+privacy=public
+description=Cuffdiff visualization package providing plots based on a user-provided list of genes. 
+version=Initial version
+minGenePatternVersion=
+author=Loyal Goff, MIT Computer Science and Artificial Intelligence Lab
+
+p1_default_value=
+p1_description=A Cuffdiff job, a previous CummeRbund job, or a cuffData.db file from a previous CummeRbund job
+p1_fileFormat=directory;db
+p1_MODE=IN
+p1_name=cuffdiff.input
+p1_optional=
+p1_prefix_when_specified=
+p1_TYPE=FILE
+p1_type=java.io.File
+p1_value=
+
+p2_MODE=IN
+p2_TYPE=FILE
+p2_default_value=
+p2_description=A file containing the list of genes for this report, one gene symbol or gene_id per line.
+p2_fileFormat=txt
+p2_name=geneset.file
+p2_optional=
+p2_type=java.io.File
+p2_value=
+
+p3_MODE=IN
+p3_TYPE=FILE
+p3_choiceDir=ftp\://gpftp.broadinstitute.org/module_support_files/annotation/gtf/
+p3_choiceDirFilter=*.gtf;*.GTF
+p3_default_value=
+p3_description=An optional reference annotation GTF. The input assemblies are merged together with the reference GTF and included in the final output. Cuffmerge will use this to attach gene names and other metadata to the merged catalog.
+p3_fileFormat=gtf
+p3_flag=--ref.gtf\=
+p3_name=reference.GTF
+p3_optional=on
+p3_prefix=--ref.gtf\=
+p3_prefix_when_specified=--ref.gtf\=
+p3_type=java.io.File
+p3_value=
+
+p4_MODE=IN
+p4_TYPE=FILE
+p4_choiceDir=ftp\://gpftp.broadinstitute.org/module_support_files/sequence/whole_genome/
+p4_choiceDirFilter=*.fa;*.fasta;*.FA;*.FASTA
+p4_default_value=
+p4_description=A file containing the genomic DNA sequences for the reference.  This should be a multi-FASTA file with all contigs present.
+p4_fileFormat=fa;fasta
+p4_flag=-genome.file\=
+p4_name=genome.file
+p4_optional=on
+p4_prefix=--genome.file\=
+p4_prefix_when_specified=--genome.file\=
+p4_type=java.io.File
+p4_value=
+
+p5_default_value=pdf
+p5_description=The output file format.
+p5_fileFormat=
+p5_name=output.format
+p5_optional=
+p5_prefix_when_specified=
+p5_type=java.lang.String
+p5_value=pdf;svg;png
+
+p6_default_value=genes
+p6_description=Feature level for the report.  The Heatmap, Volcano, Expression Plot and Expression Barplot will always be drawn at the "genes" level.
+p6_fileFormat=
+p6_name=feature.level
+p6_optional=
+p6_prefix_when_specified=
+p6_type=java.lang.String
+p6_value=genes\=genes;isoforms\=isoforms;TSS\=transcription start site (TSS);CDS\=coding sequence (CDS)
+
+p7_default_value=yes
+p7_description=Whether to show separate plots for replicates or to show aggregate samples.  Note that the Volcano plot always shows aggregate samples.
+p7_fileFormat=
+p7_name=show.replicates
+p7_optional=
+p7_prefix_when_specified=
+p7_type=java.lang.String
+p7_value=yes;no
+
+p8_default_value=yes
+p8_description=Whether or not to log transform the FPKM values.  Note that the FPKM values are always log transformed for the Volcano plots and that the Scatter plot will use a log2 rather than log10 transformation.  For the Expression Plot and Expression Barplot, this directs that the y-axis will be drawn on a log10 scale.
+p8_fileFormat=
+p8_name=log.transform
+p8_optional=
+p8_prefix_when_specified=
+p8_type=java.lang.String
+p8_value=yes;no
+
+p9_default_value=
+p9_description=An optional count for the K-Means clustering plot.  If blank, this plot will be skipped.
+p9_fileFormat=
+p9_flag=--cluster.count\=
+p9_name=cluster.count
+p9_optional=on
+p9_prefix=--cluster.count\=
+p9_prefix_when_specified=--cluster.count\=
+p9_type=java.lang.Integer
+p9_value=
+
+requiredPatchLSIDs=urn\:lsid\:broadinstitute.org\:plugin\:Ant_1.8\:1,urn\:lsid\:broadinstitute.org\:plugin\:R2.15_Installer\:0.5,urn\:lsid\:broadinstitute.org\:plugin\:rdep_2.15_cummeRbund\:0.6
+requiredPatchURLs=http\://www.broadinstitute.org/webservices/gpModuleRepository/download/prod/patch/?file\=/Ant_1_8/broadinstitute.org\:plugin/Ant_1.8/1/Ant_1_8.zip,http\://www.broadinstitute.org/webservices/gpModuleRepository/download/dev/patch/?file\=/R2.15_Installer/broadinstitute.org\:plugin/R2.15_Installer/0.6/R2.15_Installer.zip,\
+  http\://www.broadinstitute.org/webservices/gpModuleRepository/download/dev/patch/?file\=/rdep_2.15_cummeRbund/broadinstitute.org\:plugin/rdep_2.15_cummeRbund/0.5/rdep_2.15_cummeRbund.zip
+
+#http\://iwww.broadinstitute.org/~eby/rdep_2.15_cummeRbund.zip
+
+# The following should be the final LSID & URL for R2.15_Installer when it's done.  Remove this comment and place the values above.
+#  urn\:lsid\:broadinstitute.org\:plugin\:R2.15_Installer\:1,\
+#  http\://www.broadinstitute.org/webservices/gpModuleRepository/download/prod/patch/?file\=/R2.15_Installer/broadinstitute.org\:plugin/R2.15_Installer/1/R2.15_Installer.zip,\
+# ... and for cummeRbund:
+#  urn:lsid:broadinstitute.org:plugin:rdep_2.15_cummeRbund:1
+#  http\://www.broadinstitute.org/webservices/gpModuleRepository/download/prod/patch/?file\=/rdep_2.15_cummeRbund/broadinstitute.org\:plugin/rdep_2.15_cummeRbund/1/rdep_2.15_cummeRbund.zip
+
+LSID=urn\:lsid\:broad.mit.edu\:cancer.software.genepattern.module.analysis\:00326\:999999999
+publicationDate=11/13/2013 15\:59 
