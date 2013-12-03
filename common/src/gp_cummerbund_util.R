@@ -21,22 +21,22 @@ check.feature.level <- function(feature.level) {
 }
 
 get.device.open <- function(extension) {
-   if (extension == "pdf") { 
+   if (extension == "pdf") {
       return(function(filename_base) {
          pdf(paste0(filename_base, ".pdf"))
       })
    }
-   if (extension == "svg") { 
+   if (extension == "svg") {
       return(function(filename_base) {
          svg(paste0(filename_base, ".svg"))
       })
    }
-   if (extension == "png") { 
+   if (extension == "png") {
       return(function(filename_base) {
          png(paste0(filename_base, ".png"))
       })
    }
-   stop("Unhandled extension")
+   stop("Unhandled plot file format")
 }
 
 get.feature.selector <- function(feature.level) {
