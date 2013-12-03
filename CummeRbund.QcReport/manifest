@@ -4,7 +4,7 @@ commandLine=<R2.15_HOME>/bin/Rscript --no-save --quiet --slave --no-restore <lib
 license=
 taskDoc=doc.html
 fileFormat=
-taskType=RNA-Seq
+taskType=RNA-seq
 os=any
 privacy=public
 description=Cuffdiff visualization package providing QC plots
@@ -81,7 +81,7 @@ p6_type=java.lang.String
 p6_value=yes;no
 
 p7_default_value=yes
-p7_description=Whether or not to log transform the FPKM values.  Note that the Dispersion, FPKM.SCV and Volcano plot values are never log transformed.  Also note that the Boxplot, Dendrogram, Density plot values are log10 transformed while the Scatter plot values are log2 transformed. 
+p7_description=Whether or not to log transform FPKM values.  Note that the FPKM values are always log transformed for the FPKM.SCV and Volcano plots, and that the Scatter plot will use a log2 rather than log10 transformation.  Log transformation does not apply to the Dispersion, MDS, PCA, and Significance Matrix plots.
 p7_fileFormat=
 p7_name=log.transform
 p7_optional=
