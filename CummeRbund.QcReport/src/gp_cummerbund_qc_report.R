@@ -123,7 +123,7 @@ GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome.file, output.
       print("Error printing the QC.JSDistanceHeatmap.Samples plot - skipping")
    })
 
-   print.dendrogram(selected.features, show.replicates, log.transform, device.open, "QC.Dendrogram")
+   print.dendrogram(selected.features, show.replicates, log.transform, device.open, "QC")
 
    # Generate plots for all pair-wise sample comparisons
    samples <- samples(cuff@genes)
@@ -137,13 +137,13 @@ GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome.file, output.
          for (j in (i+1):count) {
             currI <- samples[i]
             currJ <- samples[j]
-            print.volcanoPlot(selected.features, currI, currJ, device.open, "QC.Volcano")
+            print.volcanoPlot(selected.features, currI, currJ, device.open, "QC")
             # Seems to be identical to the above even with args reversed.
-            #print.volcanoPlot(selected.features, currJ, currI, device.open, "QC.Volcano")
-            print.scatterPlot(selected.features, currI, currJ, log.transform, device.open, "QC.Scatter")
-            print.scatterPlot(selected.features, currJ, currI, log.transform, device.open, "QC.Scatter")
-            print.MAplot(selected.features, currI, currJ, log.transform, device.open, "QC.MAplot")
-            print.MAplot(selected.features, currJ, currI, log.transform, device.open, "QC.MAplot")
+            #print.volcanoPlot(selected.features, currJ, currI, device.open, "QC")
+            print.scatterPlot(selected.features, currI, currJ, log.transform, device.open, "QC")
+            print.scatterPlot(selected.features, currJ, currI, log.transform, device.open, "QC")
+            print.MAplot(selected.features, currI, currJ, log.transform, device.open, "QC")
+            print.MAplot(selected.features, currJ, currI, log.transform, device.open, "QC")
          }
       }
    }
