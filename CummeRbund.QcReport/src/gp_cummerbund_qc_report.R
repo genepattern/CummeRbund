@@ -28,6 +28,7 @@ GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome.file, output.
    },
    error = function(err) {
       print("Error printing table of the differentially expressed features - skipping")
+      print(err)
    })
    
    tryCatch({
@@ -36,6 +37,7 @@ GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome.file, output.
    },
    error = function(err) {
       print("Error printing the QC.Dispersion plot - skipping")
+      print(err)
    })
    
    tryCatch({
@@ -44,6 +46,7 @@ GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome.file, output.
    },
    error = function(err) {
       print("Error printing the QC.FPKM.SCV plot - skipping")
+      print(err)
    })
 
    tryCatch({
@@ -52,6 +55,7 @@ GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome.file, output.
    },
    error = function(err) {
       print("Error printing the QC.Density plot - skipping")
+      print(err)
    })
 
    tryCatch({
@@ -60,6 +64,7 @@ GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome.file, output.
    },
    error = function(err) {
       print("Error printing the QC.Boxplot plot - skipping")
+      print(err)
    })
 
    tryCatch({
@@ -68,6 +73,7 @@ GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome.file, output.
    },
    error = function(err) {
       print("Error printing the QC.ScatterMatrix plot - skipping")
+      print(err)
    })
 
    tryCatch({
@@ -76,6 +82,7 @@ GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome.file, output.
    },
    error = function(err) {
       print("Error printing the QC.VolcanoMatrix plot - skipping")
+      print(err)
    })
 
    # The sigMatrix is not useful with fewer than three samples
@@ -90,6 +97,7 @@ GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome.file, output.
       },
       error = function(err) {
          print("Error printing the QC.SignificanceMatrix plot - skipping")
+         print(err)
       })
    }
 
@@ -104,6 +112,7 @@ GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome.file, output.
       },
       error = function(err) {
          print("Error printing the QC.DimensionalityReduction.mds plot - skipping")
+         print(err)
       })
    }
 
@@ -113,6 +122,7 @@ GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome.file, output.
    },
    error = function(err) {
       print("Error printing the QC.DimensionalityReduction.pca plot - skipping")
+      print(err)
    })
 
    tryCatch({
@@ -121,6 +131,7 @@ GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome.file, output.
    },
    error = function(err) {
       print("Error printing the QC.JSDistanceHeatmap.Samples plot - skipping")
+      print(err)
    })
 
    print.dendrogram(selected.features, show.replicates, log.transform, device.open, "QC")

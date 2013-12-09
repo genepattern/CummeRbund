@@ -35,6 +35,7 @@ GP.CummeRbund.Geneset.Report <- function(cuffdiff.job, geneset.file, gtf.file, g
    },
    error = function(err) {
       print("Error printing the GeneSet.Heatmap plot - skipping")
+      print(err)
    })
    
    print.expressonBarplot(selected.features, show.replicates, log.transform, device.open, "GeneSet")
@@ -53,6 +54,7 @@ GP.CummeRbund.Geneset.Report <- function(cuffdiff.job, geneset.file, gtf.file, g
       },
       error = function(err) {
          print(paste0("Error printing the ", plotname, " plot - skipping"))
+         print(err)
       })
    }
    
