@@ -29,6 +29,9 @@ checkCuffVersionAbove2 <- function(cuff) {
     if (cuffMajorVersion < 2) {
        print(paste0("The data was generated with Cufflinks ", myVersionInfo, "; Cufflinks 2+ is recommended.  Some plots may not be available."))
     }
+    else {
+       print(paste0("  ---> The data was generated with Cufflinks ", myVersionInfo, "."))
+    }
   },
   error = function(err) {
     print("Unable to determine the Cufflinks version; Cufflinks 2+ is recommended.  Some plots may not be available.")
@@ -82,7 +85,7 @@ readCufflinks.silent <-function(cuffdiff.job, gtf.file, genome.file) {
 }
 
 print.volcanoPlot <- function(selected.features, x, y, device.open, filename_base) {
-   plotname <- paste0(filename_base,".",x,"_",y)
+   plotname <- paste0(filename_base,".Volcano.",x,"_",y)
    tryCatch({
       v<-csVolcano(selected.features, x, y, showSignificant=TRUE)
       print.plotObject(v, plotname, device.open)
@@ -94,7 +97,7 @@ print.volcanoPlot <- function(selected.features, x, y, device.open, filename_bas
 }
 
 print.scatterPlot <- function(selected.features, x, y, log.transform, device.open, filename_base) {
-   plotname <- paste0(filename_base,".",x,"_",y)
+   plotname <- paste0(filename_base,".Scatter.",x,"_",y)
    tryCatch({
       s <- csScatter(selected.features, x=x, y=y, colorByStatus=TRUE, smooth=TRUE, logMode=log.transform)
       print.plotObject(s, plotname, device.open)
@@ -106,7 +109,7 @@ print.scatterPlot <- function(selected.features, x, y, log.transform, device.ope
 }
 
 print.MAplot <- function(selected.features, x, y, log.transform, device.open, filename_base) {
-   plotname <- paste0(filename_base,".",x,"_",y)
+   plotname <- paste0(filename_base,".MAplot.",x,"_",y)
    tryCatch({
       m <- MAplot(selected.features, x=x, y=y, smooth=TRUE, logMode=log.transform)
       print.plotObject(m, plotname, device.open)
@@ -118,37 +121,40 @@ print.MAplot <- function(selected.features, x, y, log.transform, device.open, fi
 }
 
 print.expressonBarplot <- function(selected.features, show.replicates, log.transform, device.open, filename_base) {
+   plotname <- paste0(filename_base,".ExpressionBarplot")
    tryCatch({
       expBarplot<-expressionBarplot(selected.features, replicates=show.replicates, logMode=log.transform)
-      print.plotObject(expBarplot, filename_base, device.open)
+      print.plotObject(expBarplot, plotname, device.open)
    },
    error = function(err) {
-      print(paste0("Error printing the ", filename_base, " plot - skipping"))
+      print(paste0("Error printing the ", plotname, " plot - skipping"))
       print(err)
    })
 }
 
 
 print.expressonPlot <- function(selected.features, show.replicates, log.transform, device.open, filename_base) {
+   plotname <- paste0(filename_base,".ExpressionPlot")
    tryCatch({
-      expBarplot<-expressionPlot(selected.features, replicates=show.replicates, logMode=log.transform)
-      print.plotObject(expPlot, filename_base, device.open)
+      expPlot<-expressionPlot(selected.features, replicates=show.replicates, logMode=log.transform)
+      print.plotObject(expPlot, plotname, device.open)
    },
    error = function(err) {
-      print(paste0("Error printing the ", filename_base, " plot - skipping"))
+      print(paste0("Error printing the ", plotname, " plot - skipping"))
       print(err)
    })
 }
 
 print.dendrogram <- function(selected.features, show.replicates, log.transform, device.open, filename_base) {
+   plotname <- paste0(filename_base,".Dendrogram")
    tryCatch({
       # The dendrogram plots behave differently - apparently the print/plot call is embedded within.
-      device.open(filename_base)
+      device.open(plotname)
       dend <- csDendro(selected.features, replicates=show.replicates, logMode=log.transform)
       dev.off()
    },
    error = function(err) {
-      print(paste0("Error printing the ", filename_base, " plot - skipping"))
+      print(paste0("Error printing the ", plotname, " plot - skipping"))
       print(err)
    })
 }
