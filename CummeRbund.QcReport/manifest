@@ -8,7 +8,7 @@ taskType=RNA-seq
 os=any
 privacy=public
 description=Cuffdiff visualization package providing QC plots
-version=Fixed a bug where MDS plots don't work with fewer than 3 samples/replicates.  Updated to newer version of dependency installer.
+version=Improved error checking.  Added pairwise sample comparison plots.  Dropped sigMatrix for fewer than 3 sample.  Renamed plot files for clarity.
 minGenePatternVersion=
 author=Loyal Goff, MIT Computer Science and Artificial Intelligence Lab
 
