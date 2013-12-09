@@ -24,7 +24,7 @@ checkCuffVersionAbove2 <- function(cuff) {
   # Emit a warning if the results were generated with a Cufflinks version less than 2.0
   tryCatch({
     print("Checking the version of Cufflinks used to generate this data...")
-    myVersionInfo <- runInfo()[2,2]
+    myVersionInfo <- runInfo(cuff)[2,2]
     cuffMajorVersion <- as.integer(substring(myVersionInfo, 1, 1))
     if (cuffMajorVersion < 2) {
        print(paste0("The data was generated with Cufflinks ", myVersionInfo, "; Cufflinks 2+ is recommended.  Some plots may not be available."))
