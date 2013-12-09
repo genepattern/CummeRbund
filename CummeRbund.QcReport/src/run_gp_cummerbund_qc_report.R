@@ -35,6 +35,8 @@ opt <- parse_args(OptionParser(option_list=option_list), positional_arguments=TR
 print(opt)
 opts <- opt$options
 
+sessionInfo()
+
 source(file.path(libdir, "gp_cummerbund_util.R"))
 source(file.path(libdir, "gp_cummerbund_qc_report.R"))
 
@@ -43,8 +45,6 @@ check.feature.level(opts$feature.level)
 
 show.replicates <- (opts$show.replicates == "yes")
 log.transform <- (opts$log.transform == "yes")
-
-sessionInfo()
 
 run.job <- function(cuffdiff.input, gtf.file, genome.file, output.format, feature.level, show.replicates, log.transform) {
    print(c("Running GenePattern CummeRbund QC Report on data from:", basename(cuffdiff.input)))
@@ -99,6 +99,6 @@ run.job <- function(cuffdiff.input, gtf.file, genome.file, output.format, featur
 }
 
 suppressMessages(suppressWarnings(
-   run.job(opts$cuffdiff.input, opts$gtf.file, opts$genome.file, opts$output.format,
+   run.job(opts$cuffdiff.input, opts$ref.gtf, opts$genome.file, opts$output.format,
            opts$feature.level, show.replicates, log.transform)
 ))

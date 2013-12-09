@@ -15,60 +15,136 @@ GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome.file, output.
    feature.selector <- get.feature.selector(feature.level)
 
    cuff <- readCufflinks.silent(cuffdiff.job, gtf.file, genome.file)
+   checkCuffVersionAbove2(cuff)
    print(cuff)
-   features <- feature.selector(cuff)
+   selected.features <- feature.selector(cuff)
    
    # Write out a table of the differentially expressed features
-   feature_diff_data <- diffData(features)
-   sig_feature_data <- subset(feature_diff_data, (significant == 'yes'))
-   write.table(sig_feature_data, paste0('sig_diffExp_', feature.level,'.txt'), sep='\t',
-               row.names = F, col.names = T, quote = F)
-
-   ## Calls based on examples from http://compbio.mit.edu/cummeRbund/manual_2_0.html
-   disp <- dispersionPlot(features)
-   print.plotObject(disp, "Dispersion", device.open)
+   tryCatch({
+      feature_diff_data <- diffData(selected.features)
+      sig_feature_data <- subset(feature_diff_data, (significant == 'yes'))
+      write.table(sig_feature_data, paste0('QC.sig_diffExp_', feature.level,'.txt'), sep='\t',
+                  row.names = F, col.names = T, quote = F)
+   },
+   error = function(err) {
+      print("Error printing table of the differentially expressed features - skipping")
+   })
    
-   fpkm.scv <- fpkmSCVPlot(features)
-   print.plotObject(fpkm.scv, "FPKM.SCV", device.open)
+   tryCatch({
+      disp <- dispersionPlot(selected.features)
+      print.plotObject(disp, "QC.Dispersion", device.open)
+   },
+   error = function(err) {
+      print("Error printing the QC.Dispersion plot - skipping")
+   })
+   
+   tryCatch({
+      fpkm.scv <- fpkmSCVPlot(selected.features)
+      print.plotObject(fpkm.scv, "QC.FPKM.SCV", device.open)
+   },
+   error = function(err) {
+      print("Error printing the QC.FPKM.SCV plot - skipping")
+   })
 
-   dens <- csDensity(features, replicates=show.replicates, logMode=log.transform)
-   print.plotObject(dens, "Density", device.open) 
+   tryCatch({
+      dens <- csDensity(selected.features, replicates=show.replicates, logMode=log.transform)
+      print.plotObject(dens, "QC.Density", device.open) 
+   },
+   error = function(err) {
+      print("Error printing the QC.Density plot - skipping")
+   })
 
-   box <- csBoxplot(features, replicates=show.replicates, logMode=log.transform)
-   print.plotObject(box, "Boxplot", device.open) 
+   tryCatch({
+      box <- csBoxplot(selected.features, replicates=show.replicates, logMode=log.transform)
+      print.plotObject(box, "QC.Boxplot", device.open) 
+   },
+   error = function(err) {
+      print("Error printing the QC.Boxplot plot - skipping")
+   })
 
-   s <- csScatterMatrix(features, replicates=show.replicates, logMode=log.transform)
-   print.plotObject(s, "Scatter", device.open) 
+   tryCatch({
+      s <- csScatterMatrix(selected.features, replicates=show.replicates, logMode=log.transform)
+      print.plotObject(s, "QC.ScatterMatrix", device.open) 
+   },
+   error = function(err) {
+      print("Error printing the QC.ScatterMatrix plot - skipping")
+   })
 
-   v <- csVolcanoMatrix(features)
-   print.plotObject(v, "Volcano", device.open) 
+   tryCatch({
+      v <- csVolcanoMatrix(selected.features)
+      print.plotObject(v, "QC.VolcanoMatrix", device.open) 
+   },
+   error = function(err) {
+      print("Error printing the QC.VolcanoMatrix plot - skipping")
+   })
 
-   # The significance matrix behaves differently in that it handles the selection within the call.
-   sM <- sigMatrix(cuff, level=feature.level)
-   print.plotObject(sM, "SignificanceMatrix", device.open) 
+   # The sigMatrix is not useful with fewer than three samples
+   if (NROW(samples(cuff)) < 3) {
+      print("Skipping the QC.SignificanceMatrix plot - too few samples")
+   }
+   else {
+      tryCatch({
+         # The significance matrix behaves differently in that it handles the selection within the call.
+         sM <- sigMatrix(cuff, level=feature.level)
+         print.plotObject(sM, "QC.SignificanceMatrix", device.open)
+      },
+      error = function(err) {
+         print("Error printing the QC.SignificanceMatrix plot - skipping")
+      })
+   }
 
    # The MDSplot throws an error when trying to plot fewer than two samples/replicates.
    if ((!show.replicates && NROW(samples(cuff)) < 3) || (show.replicates && NROW(replicates(cuff)) < 3)) {
       print("Skipping the MDS plot - too few samples/replicates")
    }
    else {
-      mds <- MDSplot(features, replicates=show.replicates, logMode=log.transform)
-      print.plotObject(mds, "DimensionalityReduction.mds", device.open)
+      tryCatch({
+         mds <- MDSplot(selected.features, replicates=show.replicates, logMode=log.transform)
+         print.plotObject(mds, "QC.DimensionalityReduction.mds", device.open)
+      },
+      error = function(err) {
+         print("Error printing the QC.DimensionalityReduction.mds plot - skipping")
+      })
    }
 
-   pca <- PCAplot(features, replicates=show.replicates)
-   print.plotObject(pca, "DimensionalityReduction.pca", device.open) 
+   tryCatch({
+      pca <- PCAplot(selected.features, replicates=show.replicates)
+      print.plotObject(pca, "QC.DimensionalityReduction.pca", device.open) 
+   },
+   error = function(err) {
+      print("Error printing the QC.DimensionalityReduction.pca plot - skipping")
+   })
 
-   distHeatSamples <- csDistHeat(features, replicates=show.replicates, samples.not.genes=TRUE, logMode=log.transform)
-   print.plotObject(distHeatSamples, "JSDistanceHeatmap.Samples", device.open) 
+   tryCatch({
+      distHeatSamples <- csDistHeat(selected.features, replicates=show.replicates, samples.not.genes=TRUE, logMode=log.transform)
+      print.plotObject(distHeatSamples, "QC.JSDistanceHeatmap.Samples", device.open) 
+   },
+   error = function(err) {
+      print("Error printing the QC.JSDistanceHeatmap.Samples plot - skipping")
+   })
 
-   # Not yet: need to figure out how to pass labels
-   # s<-csScatter(features,"hESC","Fibroblasts",smooth=T)
-   # m<-MAplot(features,"hESC","Fibroblasts")
-   # mCount<-MAplot(features,"hESC","Fibroblasts",useCount=T)
+   print.dendrogram(selected.features, show.replicates, log.transform, device.open, "QC.Dendrogram")
 
-   # The dendrogram plots behave differently - apparently the print/plot call is embedded within.
-   device.open("Dendrogram")
-   dend <- csDendro(features,replicates=show.replicates,logMode=log.transform)
-   dev.off()
+   # Generate plots for all pair-wise sample comparisons
+   samples <- samples(cuff@genes)
+   count <- NROW(samples)
+   if (count == 1) {
+      # Skip these if there is only one item.  This should never happen.
+      print("Too few samples; skipping pair-wise plots") 
+   }
+   else {
+      for (i in 1:(count-1)) {
+         for (j in (i+1):count) {
+            currI <- samples[i]
+            currJ <- samples[j]
+            print.volcanoPlot(selected.features, currI, currJ, device.open, "QC.Volcano")
+            # Seems to be identical to the above even with args reversed.
+            #print.volcanoPlot(selected.features, currJ, currI, device.open, "QC.Volcano")
+            print.scatterPlot(selected.features, currI, currJ, log.transform, device.open, "QC.Scatter")
+            print.scatterPlot(selected.features, currJ, currI, log.transform, device.open, "QC.Scatter")
+            print.MAplot(selected.features, currI, currJ, log.transform, device.open, "QC.MAplot")
+            print.MAplot(selected.features, currJ, currI, log.transform, device.open, "QC.MAplot")
+         }
+      }
+   }
 }
