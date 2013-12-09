@@ -15,7 +15,7 @@ GP.CummeRbund.Geneset.Report <- function(cuffdiff.job, geneset.file, gtf.file, g
    genesetIds <- unlist(read.table(geneset.file))
    
    print("Generating plots based on the following genes:")
-   genesetIds
+   print(genesetIds)
    
    feature.selector <- get.feature.selector(feature.level)
 
