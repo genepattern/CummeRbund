@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Ant build file -->
+
+<project basedir="." default="create-zip" name="CummeRbund.SelectedGeneReport">
+	<property name="dirOffset" value="../../" />
+	<import file="${dirOffset}/commontargets.xml" />
+
+    <!-- Include the common src in the version check -->
+    <!-- This is not working properly where dirOffset is not "../" -->
+    <target name="init.svn.check">
+       <patternset id="module.svn.check">
+           <patternset refid="default.svn.check" />
+           <include name="${moduleHome}/../common/src/**" />
+       </patternset>
+       <patternset id="module.svn.check.unvers">
+           <patternset refid="default.svn.check.unvers" />
+           <include name="${moduleHome}/../common/src/**" />
+       </patternset>
+    </target>
+
+	<target depends="init" name="create-zip">
+		<antcall target="prezip" />
+		<zip destfile="${dest.dir}/${ant.project.name}.zip" whenempty="fail" defaultexcludes="true">
+            <fileset dir="src" includes="*.R" />
+            <fileset dir="../common/src" includes="*.R" />
+            <fileset dir="." includes="manifest, *.html, *.txt" excludes="test/**" />
+        </zip>
+		<antcall target="postzip" />
+	</target>
+
+</project>
