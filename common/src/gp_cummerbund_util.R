@@ -10,14 +10,29 @@
 
 check.output.format <- function(output.format) {
    if (!(output.format %in% c("pdf", "svg", "png"))) {
-      stop(paste0("Unrecognized output format ", output.format))
+      stop(paste0("Unrecognized output format '", output.format, "'"))
    }
 }
 
 check.feature.level <- function(feature.level) {
    if (!(feature.level %in% c("genes", "isoforms", "TSS", "CDS"))) {
-      stop(paste0("Unrecognized feature level ", feature.level))
+      stop(paste0("Unrecognized feature level '", feature.level, "'"))
    }
+}
+
+checkCuffVersionAbove2 <- function(cuff) {
+  # Emit a warning if the results were generated with a Cufflinks version less than 2.0
+  tryCatch({
+    print("Checking the version of Cufflinks used to generate this data...")
+    myVersionInfo <- runInfo()[2,2]
+    cuffMajorVersion <- as.integer(substring(myVersionInfo, 1, 1))
+    if (cuffMajorVersion < 2) {
+       print(paste0("The data was generated with Cufflinks ", myVersionInfo, "; Cufflinks 2+ is recommended.  Some plots may not be available."))
+    }
+  },
+  error = function(err) {
+    print("Unable to determine the Cufflinks version; Cufflinks 2+ is recommended.  Some plots may not be available.")
+  })
 }
 
 get.device.open <- function(extension) {
@@ -36,7 +51,7 @@ get.device.open <- function(extension) {
          png(paste0(filename_base, ".png"))
       })
    }
-   stop("Unhandled plot file format")
+   stop(paste0("Unhandled plot file format '", extension, "'"))
 }
 
 get.feature.selector <- function(feature.level) {
@@ -45,7 +60,7 @@ get.feature.selector <- function(feature.level) {
    if (feature.level == "isoforms") { return(isoforms) }
    if (feature.level == "TSS") { return(TSS) }
    if (feature.level == "CDS") { return(CDS) }
-   stop(paste0("Unrecognized feature level ", feature.level))
+   stop(paste0("Unrecognized feature level '", feature.level, "'"))
 }
 
 print.plotObject <- function(plotObj, filename_base, device.open) {
@@ -63,5 +78,77 @@ readCufflinks.silent <-function(cuffdiff.job, gtf.file, genome.file) {
    },
    finally = {
       sink()
+   })
+}
+
+print.volcanoPlot <- function(selected.features, x, y, device.open, filename_base) {
+   plotname <- paste0(filename_base,".",x,"_",y)
+   tryCatch({
+      v<-csVolcano(selected.features, x, y, showSignificant=TRUE)
+      print.plotObject(v, plotname, device.open)
+   },
+   error = function(err) {
+      print(paste0("Error printing the ", plotname, " plot - skipping"))
+      print(err)
+   })
+}
+
+print.scatterPlot <- function(selected.features, x, y, log.transform, device.open, filename_base) {
+   plotname <- paste0(filename_base,".",x,"_",y)
+   tryCatch({
+      s <- csScatter(selected.features, x=x, y=y, colorByStatus=TRUE, smooth=TRUE, logMode=log.transform)
+      print.plotObject(s, plotname, device.open)
+   },
+   error = function(err) {
+      print(paste0("Error printing the ", plotname, " plot - skipping"))
+      print(err)
+   })
+}
+
+print.MAplot <- function(selected.features, x, y, log.transform, device.open, filename_base) {
+   plotname <- paste0(filename_base,".",x,"_",y)
+   tryCatch({
+      m <- MAplot(selected.features, x=x, y=y, smooth=TRUE, logMode=log.transform)
+      print.plotObject(m, plotname, device.open)
+   },
+   error = function(err) {
+      print(paste0("Error printing the ", plotname, " plot - skipping"))
+      print(err)
+   })
+}
+
+print.expressonBarplot <- function(selected.features, show.replicates, log.transform, device.open, filename_base) {
+   tryCatch({
+      expBarplot<-expressionBarplot(selected.features, replicates=show.replicates, logMode=log.transform)
+      print.plotObject(expBarplot, filename_base, device.open)
+   },
+   error = function(err) {
+      print(paste0("Error printing the ", filename_base, " plot - skipping"))
+      print(err)
+   })
+}
+
+
+print.expressonPlot <- function(selected.features, show.replicates, log.transform, device.open, filename_base) {
+   tryCatch({
+      expBarplot<-expressionPlot(selected.features, replicates=show.replicates, logMode=log.transform)
+      print.plotObject(expPlot, filename_base, device.open)
+   },
+   error = function(err) {
+      print(paste0("Error printing the ", filename_base, " plot - skipping"))
+      print(err)
+   })
+}
+
+print.dendrogram <- function(selected.features, show.replicates, log.transform, device.open, filename_base) {
+   tryCatch({
+      # The dendrogram plots behave differently - apparently the print/plot call is embedded within.
+      device.open(filename_base)
+      dend <- csDendro(selected.features, replicates=show.replicates, logMode=log.transform)
+      dev.off()
+   },
+   error = function(err) {
+      print(paste0("Error printing the ", filename_base, " plot - skipping"))
+      print(err)
    })
 }
