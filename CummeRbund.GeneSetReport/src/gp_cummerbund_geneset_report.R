@@ -20,56 +20,60 @@ GP.CummeRbund.Geneset.Report <- function(cuffdiff.job, geneset.file, gtf.file, g
    feature.selector <- get.feature.selector(feature.level)
 
    cuff <- readCufflinks.silent(cuffdiff.job, gtf.file, genome.file)
-   cuff
+   checkCuffVersionAbove2(cuff)
+   print(cuff)
    
    geneset <- getGenes(cuff, genesetIds)
    geneset
 
-   features <- geneset
-   if (feature.level != "genes") { features <- feature.selector(geneset) }
+   selected.features <- geneset
+   if (feature.level != "genes") { selected.features <- feature.selector(geneset) }
 
-   ## Calls based on examples from http://compbio.mit.edu/cummeRbund/manual_2_0.html
-   heatmap <- csHeatmap(features, cluster='both', replicates=show.replicates, logMode=log.transform)
-   print.plotObject(heatmap, "Heatmap", device.open)
-
-   expBarplot<-expressionBarplot(features, replicates=show.replicates, logMode=log.transform)
-   print.plotObject(expBarplot, "ExpressionBarplot", device.open)
+   tryCatch({
+      heatmap <- csHeatmap(selected.features, cluster='both', replicates=show.replicates, logMode=log.transform)
+      print.plotObject(heatmap, "GeneSet.Heatmap", device.open)
+   },
+   error = function(err) {
+      print("Error printing the GeneSet.Heatmap plot - skipping")
+   })
    
-   expPlot<-expressionPlot(features, replicates=show.replicates, logMode=log.transform)
-   print.plotObject(expPlot, "ExpressionPlot", device.open)
-
-   # The dendrogram plots behave differently - apparently the print/plot call is embedded within.
-   device.open("Dendrogram")
-   dend <- csDendro(features, replicates=show.replicates, logMode=log.transform)
-   dev.off()
+   print.expressonBarplot(selected.features, show.replicates, log.transform, device.open, "GeneSet")
+   print.expressonPlot(selected.features, show.replicates, log.transform, device.open, "GeneSet")
+   print.dendrogram(selected.features, show.replicates, log.transform, device.open, "GeneSet")
    
-   if (!is.null(cluster.count)) {
-      ic <- csCluster(features, k=cluster.count, logMode=log.transform)
-      icp<-csClusterPlot(ic)
-      print.plotObject(icp, paste0("ClusterPlot.k_",cluster.count), device.open)
+   if (is.null(cluster.count)) {
+      print("No cluster.count specified; skipping GeneSet.ClusterPlot") 
+   }
+   else {
+      tryCatch({
+         plotname <- paste0("GeneSet.ClusterPlot.k_",cluster.count)
+         ic <- csCluster(selected.features, k=cluster.count, logMode=log.transform)
+         icp<-csClusterPlot(ic)
+         print.plotObject(icp, plotname, device.open)
+      },
+      error = function(err) {
+         print(paste0("Error printing the ", plotname, " plot - skipping"))
+      })
    }
    
    # Generate plots for all pair-wise sample comparisons
    samples <- samples(cuff@genes)
    count <- NROW(samples)
    if (count == 1) {
-      # Bail out here if there is only one item.  This should never happen
+      # Skip these if there is only one item.  This should never happen.
       print("Too few samples; skipping pair-wise plots") 
-      return() 
    }
-   
-   for (i in 1:(count-1)) {
-      for (j in (i+1):count) {
-         currI <- samples[i]
-         currJ <- samples[j]
-         v1<-csVolcano(features, x=currI, y=currJ, showSignificant=TRUE)
-         print.plotObject(v1, paste0("Volcano.",currI,"_",currJ), device.open)
-         v2<-csVolcano(features, x=currJ, y=currI, showSignificant=TRUE)
-         print.plotObject(v2, paste0("Volcano.",currJ,"_",currI), device.open)
-         s1 <- csScatter(features, x=currI, y=currJ, colorByStatus=TRUE, logMode=log.transform)
-         print.plotObject(s1, paste0("Scatter.",currI,"_",currJ), device.open)
-         s2 <- csScatter(features, x=currJ, y=currI, colorByStatus=TRUE, logMode=log.transform)
-         print.plotObject(s2, paste0("Scatter.",currJ,"_",currI), device.open)
+   else {
+      for (i in 1:(count-1)) {
+         for (j in (i+1):count) {
+            currI <- samples[i]
+            currJ <- samples[j]
+            print.volcanoPlot(selected.features, currI, currJ, device.open, "GeneSet")
+            # Seems to be identical to the above even with args reversed.
+            #print.volcanoPlot(selected.features, currJ, currI, device.open, "GeneSet")
+            print.scatterPlot(selected.features, currI, currJ, log.transform, device.open, "GeneSet")
+            print.scatterPlot(selected.features, currJ, currI, log.transform, device.open, "GeneSet")
+         }
       }
    }
 }

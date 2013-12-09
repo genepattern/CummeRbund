@@ -54,6 +54,7 @@ if (!is.null(opts$cluster.count) && opts$cluster.count < 0) {
 
 run.job <- function(cuffdiff.input, geneset.file, gtf.file, genome.file,  output.format,
                     feature.level, show.replicates, log.transform, cluster.count) {
+   print(c("Running GenePattern CummeRbund Geneset Report with data from:", basename(opts$cuffdiff.input)))
 
    if (file_test("-f", cuffdiff.input)) {
       # If the input is a file, assume it is a SQLite database when passing it to readCufflinks.
@@ -104,9 +105,7 @@ run.job <- function(cuffdiff.input, geneset.file, gtf.file, genome.file,  output
    }
 }
 
-print(c("Running GenePattern CummeRbund Geneset Report with data from:", basename(opts$cuffdiff.input)))
-
 suppressMessages(suppressWarnings(
-   run.job(opts$cuffdiff.input, opts$geneset.file, opts$gtf.file, opts$genome.file, opts$output.format,
+   run.job(opts$cuffdiff.input, opts$geneset.file, opts$ref.gtf, opts$genome.file, opts$output.format,
            opts$feature.level, show.replicates, log.transform, opts$cluster.count)
 ))
