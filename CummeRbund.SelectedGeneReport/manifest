@@ -97,9 +97,9 @@ p8_prefix_when_specified=
 p8_type=java.lang.String
 p8_value=yes;no
 
-requiredPatchLSIDs=urn\:lsid\:broadinstitute.org\:plugin\:Ant_1.8\:1,urn\:lsid\:broadinstitute.org\:plugin\:R2.15_Installer\:0.6,urn\:lsid\:broadinstitute.org\:plugin\:rdep_2.15_cummeRbund\:0.5
+requiredPatchLSIDs=urn\:lsid\:broadinstitute.org\:plugin\:Ant_1.8\:1,urn\:lsid\:broadinstitute.org\:plugin\:R2.15_Installer\:0.6,urn\:lsid\:broadinstitute.org\:plugin\:rdep_2.15_cummeRbund\:0.7
 requiredPatchURLs=http\://www.broadinstitute.org/webservices/gpModuleRepository/download/prod/patch/?file\=/Ant_1_8/broadinstitute.org\:plugin/Ant_1.8/1/Ant_1_8.zip,http\://www.broadinstitute.org/webservices/gpModuleRepository/download/dev/patch/?file\=/R2.15_Installer/broadinstitute.org\:plugin/R2.15_Installer/0.6/R2.15_Installer.zip,\
-  http\://www.broadinstitute.org/webservices/gpModuleRepository/download/dev/patch/?file\=/rdep_2.15_cummeRbund/broadinstitute.org\:plugin/rdep_2.15_cummeRbund/0.5/rdep_2.15_cummeRbund.zip
+  http\://www.broadinstitute.org/webservices/gpModuleRepository/download/dev/patch/?file\=/rdep_2.15_cummeRbund/broadinstitute.org\:plugin/rdep_2.15_cummeRbund/0.7/rdep_2.15_cummeRbund.zip
 
 #http\://iwww.broadinstitute.org/~eby/rdep_2.15_cummeRbund.zip
 
