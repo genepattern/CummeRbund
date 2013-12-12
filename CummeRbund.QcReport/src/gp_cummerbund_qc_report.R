@@ -23,11 +23,63 @@ GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome.file, output.
    tryCatch({
       feature_diff_data <- diffData(selected.features)
       sig_feature_data <- subset(feature_diff_data, (significant == 'yes'))
-      write.table(sig_feature_data, paste0('QC.sig_diffExp_', feature.level,'.txt'), sep='\t',
-                  row.names = F, col.names = T, quote = F)
+      if (nrow(sig_feature_data) > 0) {
+         write.table(sig_feature_data, paste0('QC.sig_diffExp_', feature.level,'.txt'), sep='\t',
+                     row.names = F, col.names = T, quote = F)
+      }
+      else {
+         print("Skipping differentially expressed feature table - no data found")
+      }
    },
    error = function(err) {
       print("Error printing table of the differentially expressed features - skipping")
+      print(err)
+   })
+
+   # Write out tables of the significant promoters, splicing, and relCDS data
+   tryCatch({
+      promoter_diff_data <- distValues(promoters(cuff))
+      sig_promoter_data <- subset(promoter_diff_data, (significant == 'yes')) 
+      if (nrow(sig_promoter_data) > 0) {
+         write.table(sig_promoter_data, 'QC.sig_promoter_data.txt', sep='\t',
+                     row.names = F, col.names = T, quote = F)
+      }
+      else {
+         print("Skipping significant promoter table - no data found")
+      }
+   },
+   error = function(err) {
+      print("Error printing table of the significant promoter data - skipping")
+      print(err)
+   })
+   tryCatch({
+      splicing_diff_data <- distValues(splicing(cuff))
+      sig_splicing_data <- subset(splicing_diff_data, (significant == 'yes'))
+      if (nrow(sig_promoter_data) > 0) {
+         write.table(sig_splicing_data, 'QC.sig_splicing_data.txt', sep='\t',
+                     row.names = F, col.names = T, quote = F)
+      }
+      else {
+         print("Skipping significant splicing table - no data found")
+      }
+   },
+   error = function(err) {
+      print("Error printing table of the significant splicing data - skipping")
+      print(err)
+   })
+   tryCatch({
+      relCDS_diff_data <- distValues(relCDS(cuff))
+      sig_relCDS_data <- subset(relCDS_diff_data, (significant == 'yes'))
+      if (nrow(sig_relCDS_data) > 0) {
+         write.table(sig_relCDS_data, 'QC.sig_relCDS_data.txt', sep='\t',
+                     row.names = F, col.names = T, quote = F)
+      }
+      else {
+         print("Skipping significant relCDS table - no data found")
+      }
+   },
+   error = function(err) {
+      print("Error printing table of the significant relCDS data - skipping")
       print(err)
    })
    
