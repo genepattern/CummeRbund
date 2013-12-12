@@ -8,7 +8,7 @@ taskType=RNA-seq
 os=any
 privacy=public
 description=Cuffdiff visualization package providing QC plots
-version=Improved error reporting.
+version=Added reports for significant promoter, splicing, and relCDS data.  Improved error check on diff exp feature report.
 minGenePatternVersion=
 author=Loyal Goff, MIT Computer Science and Artificial Intelligence Lab
 
