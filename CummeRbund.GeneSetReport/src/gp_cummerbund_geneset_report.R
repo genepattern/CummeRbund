@@ -20,8 +20,6 @@ GP.CummeRbund.Geneset.Report <- function(cuffdiff.job, geneset.file, gtf.file, g
    feature.selector <- get.feature.selector(feature.level)
 
    cuff <- readCufflinks.silent(cuffdiff.job, gtf.file, genome.file)
-   checkCuffVersionAbove2(cuff)
-   print(cuff)
    
    geneset <- getGenes(cuff, genesetIds)
    geneset

@@ -15,8 +15,6 @@ GP.CummeRbund.SelectedGene.Report <- function(cuffdiff.job, feature.id, find.sim
    feature.selector <- get.feature.selector(feature.level)
 
    cuff <- readCufflinks.silent(cuffdiff.job, gtf.file, genome.file)
-   checkCuffVersionAbove2(cuff)
-   print(cuff)
 
    print(paste0("Looking up the selected gene using feature ID '", feature.id, "'"))
    selected.gene <- getGene(cuff, feature.id)

@@ -15,8 +15,6 @@ GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome.file, output.
    feature.selector <- get.feature.selector(feature.level)
 
    cuff <- readCufflinks.silent(cuffdiff.job, gtf.file, genome.file)
-   checkCuffVersionAbove2(cuff)
-   print(cuff)
    selected.features <- feature.selector(cuff)
    
    # Write out a table of the differentially expressed features
@@ -205,7 +203,9 @@ GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome.file, output.
             #print.volcanoPlot(selected.features, currJ, currI, device.open, "QC")
             print.scatterPlot(selected.features, currI, currJ, log.transform, device.open, "QC")
             print.scatterPlot(selected.features, currJ, currI, log.transform, device.open, "QC")
+print(paste0(i, "sub-mark 3"))
             print.MAplot(selected.features, currI, currJ, log.transform, device.open, "QC")
+print(paste0(i, "sub-mark 4"))
             print.MAplot(selected.features, currJ, currI, log.transform, device.open, "QC")
          }
       }
