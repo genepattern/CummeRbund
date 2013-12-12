@@ -25,6 +25,7 @@ suppressMessages(suppressWarnings(
 option_list <- list(
   make_option("--cuffdiff.input", dest="cuffdiff.input"),
   make_option("--feature.id", dest="feature.id"),
+  make_option("--find.similar", dest="find.similar", type="integer", default=NULL),
   make_option("--ref.gtf", dest="ref.gtf", default=NULL),
   make_option("--genome.file", dest="genome.file", default=NULL),
   make_option("--output.format", dest="output.format"),
@@ -48,7 +49,12 @@ log.transform <- (opts$log.transform == "yes")
 check.output.format(opts$output.format)
 check.feature.level(opts$feature.level)
 
-run.job <- function(cuffdiff.input, feature.id, gtf.file, genome.file, output.format, feature.level, show.replicates, log.transform) {
+if (!is.null(opts$find.similar) && opts$find.similar < 0) {
+   stop("If provided, find.similar must be a positive integer")
+}
+
+run.job <- function(cuffdiff.input, feature.id, find.similar, gtf.file, genome.file, 
+                    output.format, feature.level, show.replicates, log.transform) {
    print(c("Running GenePattern CummeRbund Selected Gene Report on data from:", basename(cuffdiff.input)))
 
    if (file_test("-f", cuffdiff.input)) {
@@ -58,7 +64,7 @@ run.job <- function(cuffdiff.input, feature.id, gtf.file, genome.file, output.fo
       # need to create a local symlink.  We don't want to clean this up afterward.
       file.symlink(cuffdiff.input, "cuffData.db")
       
-      GP.CummeRbund.SelectedGene.Report(cuffdiff.job = getwd(), feature.id, gtf.file, genome.file, 
+      GP.CummeRbund.SelectedGene.Report(cuffdiff.job = getwd(), feature.id, find.similar, gtf.file, genome.file, 
                                         output.format, feature.level, show.replicates, log.transform)
    } 
    else {
@@ -71,7 +77,7 @@ run.job <- function(cuffdiff.input, feature.id, gtf.file, genome.file, output.fo
          # need to create a local symlink.  As above, we don't want to clean this up afterward.
          file.symlink(dbFile, "cuffData.db")
          
-         GP.CummeRbund.SelectedGene.Report(cuffdiff.job = getwd(), feature.id, gtf.file, genome.file,
+         GP.CummeRbund.SelectedGene.Report(cuffdiff.job = getwd(), feature.id, find.similar, gtf.file, genome.file,
                                            output.format, feature.level, show.replicates, log.transform)
       }
       else {
@@ -85,7 +91,7 @@ run.job <- function(cuffdiff.input, feature.id, gtf.file, genome.file, output.fo
          lapply(dir.contents, FUN = symlinker)
 
          tryCatch({
-            GP.CummeRbund.SelectedGene.Report(cuffdiff.job = input.job, feature.id, gtf.file, genome.file,
+            GP.CummeRbund.SelectedGene.Report(cuffdiff.job = input.job, feature.id, find.similar, gtf.file, genome.file,
                                               output.format, feature.level, show.replicates, log.transform)
          },
          finally = {
@@ -100,8 +106,7 @@ run.job <- function(cuffdiff.input, feature.id, gtf.file, genome.file, output.fo
    }
 }
 
-options(verbose=FALSE)
 suppressMessages(suppressWarnings(
-   run.job(opts$cuffdiff.input, opts$feature.id, opts$ref.gtf, opts$genome.file,
+   run.job(opts$cuffdiff.input, opts$feature.id, opts$find.similar, opts$ref.gtf, opts$genome.file,
             opts$output.format, opts$feature.level, show.replicates, log.transform)
 ))

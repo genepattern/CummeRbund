@@ -8,7 +8,7 @@
 ## whatsoever. Neither the Broad Institute nor MIT can be responsible for its
 ## use, misuse, or functionality.
 
-GP.CummeRbund.SelectedGene.Report <- function(cuffdiff.job, feature.id, gtf.file, genome.file,
+GP.CummeRbund.SelectedGene.Report <- function(cuffdiff.job, feature.id, find.similar, gtf.file, genome.file,
                                               output.format, feature.level, show.replicates, log.transform) {
    device.open <- get.device.open(output.format)
    
@@ -28,13 +28,20 @@ GP.CummeRbund.SelectedGene.Report <- function(cuffdiff.job, feature.id, gtf.file
    print.expressonBarplot(selected.features, show.replicates, log.transform, device.open, "SelectedGene")
    print.expressonPlot(selected.features, show.replicates, log.transform, device.open, "SelectedGene")
 
-   tryCatch({
-      mySimilar <- findSimilar(cuff, selected.gene, n=5)
-      mySimilar.expression<-expressionPlot(mySimilar, logMode=log.transformm, showErrorbars=F)
-      print.plotObject(mySimilar.expression, "SelectedGene.SimilarityExpressionPlot", device.open)
-   },
-   error = function(err) {
-      print("Error printing the SelectedGene.SimilarityExpressionPlot plot - skipping")
-      print(err)
-   })
+   if (is.null(find.similar)) {
+      print("find.similar not specified; electedGene.SimilarityExpressionPlot")
+   }
+   else {
+      tryCatch({
+         mySimilar <- findSimilar(cuff, feature.id, n=find.similar)
+         mySimilar.expressionPlot<-expressionPlot(mySimilar, logMode=log.transform, showErrorbars=F)
+         print.plotObject(mySimilar.expressionPlot, "SelectedGene.SimilarityExpressionPlot", device.open)
+         mySimilar.expressionBarplot<-expressionBarplot(mySimilar, logMode=log.transform, showErrorbars=F)
+         print.plotObject(mySimilar.expressionBarplot, "SelectedGene.SimilarityExpressionBarplot", device.open)
+      },
+      error = function(err) {
+         print("Error printing the SelectedGene.SimilarityExpressionPlot plot - skipping")
+         print(err)
+      })
+   }
 }
