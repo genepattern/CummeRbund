@@ -52,60 +52,14 @@ if (!is.null(opts$cluster.count) && opts$cluster.count < 0) {
    stop("If provided, cluster.count must be a positive integer")
 }
 
-run.job <- function(cuffdiff.input, geneset.file, gtf.file, genome.file,  output.format,
-                    feature.level, show.replicates, log.transform, cluster.count) {
-   print(c("Running GenePattern CummeRbund Geneset Report with data from:", basename(opts$cuffdiff.input)))
+print(c("Running GenePattern CummeRbund Geneset Report with data from:", opts$cuffdiff.input))
 
-   if (file_test("-f", cuffdiff.input)) {
-      # If the input is a file, assume it is a SQLite database when passing it to readCufflinks.
-      # If it is not, we'll let readCufflinks report the problem.
-
-      # need to create a local symlink.  We don't want to clean this up afterward.
-      file.symlink(cuffdiff.input, "cuffData.db")
-      
-      GP.CummeRbund.Geneset.Report(cuffdiff.job = getwd(), geneset.file, gtf.file, genome.file, output.format,
-                                   feature.level, show.replicates, log.transform, cluster.count)
-   } 
-   else {
-      # Otherwise it's a directory.  Check whether it contains a cuffData.db file from a previous
-      # CummeRbund job; if so, use that directly.  If not, we'll let readCufflinks process it. 
-      dir.contents <- list.files(cuffdiff.input)
-      if ("cuffData.db" %in% dir.contents) {
-         dbFile <- file.path(cuffdiff.input, "cuffData.db")
-         
-         # need to create a local symlink.  As above, we don't want to clean this up afterward.
-         file.symlink(dbFile, "cuffData.db")
-         
-         GP.CummeRbund.Geneset.Report(cuffdiff.job = getwd(), geneset.file, gtf.file, genome.file, output.format,
-                                      feature.level, show.replicates, log.transform, cluster.count)
-      }
-      else {
-         # We need to set up a local copy of these files (using symlinks) so that the resulting
-         # cuffData.db file is created here rather than elsewhere.
-         input.job <- "inputJob"
-         dir.create(input.job)
-         symlinker <- function(x) {
-            file.symlink(file.path(cuffdiff.input, x), file.path(input.job, x))
-         }
-         lapply(dir.contents, FUN = symlinker)
-
-         tryCatch({
-            GP.CummeRbund.Geneset.Report(cuffdiff.job = input.job, geneset.file, gtf.file, genome.file, output.format,
-                                         feature.level, show.replicates, log.transform, cluster.count)
-         },
-         finally = {
-            # Need to move the SQLite DB to the jobResults dir and clean up the symlinks
-            dbFile <- file.path(input.job, "cuffData.db")
-            if (file.exists(dbFile)) {
-               file.rename(dbFile, file.path(getwd(), "cuffData.db"))
-            }
-            unlink(input.job, recursive=TRUE)
-         })
-      }
-   }
+# Create the job.builder function for run.job
+job.builder <- function(cuffdiff.job) {
+   GP.CummeRbund.Geneset.Report(cuffdiff.job, opts$geneset.file, opts$ref.gtf, opts$genome.file, opts$output.format,
+                                opts$feature.level, show.replicates, log.transform, opts$cluster.count)
 }
 
 suppressMessages(suppressWarnings(
-   run.job(opts$cuffdiff.input, opts$geneset.file, opts$ref.gtf, opts$genome.file, opts$output.format,
-           opts$feature.level, show.replicates, log.transform, opts$cluster.count)
+   run.job(opts$cuffdiff.input, job.builder)
 ))

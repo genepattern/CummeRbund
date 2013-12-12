@@ -20,6 +20,66 @@ check.feature.level <- function(feature.level) {
    }
 }
 
+run.job <- function(cuffdiff.input, job.builder) {
+   if (file_test("-f", cuffdiff.input)) {
+      # If the input is a file, assume it is a SQLite database when passing it to readCufflinks.
+      # If it is not, we'll let readCufflinks report the problem.
+
+      # need to create a local symlink.  We don't want to clean this up afterward.
+      file.symlink(cuffdiff.input, "cuffData.db")
+      job.builder(getwd())
+   } 
+   else {
+      # Otherwise it's a directory.  Check whether it contains a cuffData.db file from a previous
+      # CummeRbund job; if so, use that directly.  If not, we'll let readCufflinks process it. 
+      dir.contents <- list.files(cuffdiff.input)
+      if ("cuffData.db" %in% dir.contents) {
+         dbFile <- file.path(cuffdiff.input, "cuffData.db")
+         
+         # need to create a local symlink.  As above, we don't want to clean this up afterward.
+         file.symlink(dbFile, "cuffData.db")
+         job.builder(getwd())
+      }
+      else {
+         # We need to set up a local copy of these files (using symlinks) so that the resulting
+         # cuffData.db file is created here rather than elsewhere.
+         input.job <- "inputJob"
+         dir.create(input.job)
+         symlinker <- function(x) {
+            file.symlink(file.path(cuffdiff.input, x), file.path(input.job, x))
+         }
+         lapply(dir.contents, FUN = symlinker)
+
+         tryCatch({
+            job.builder(input.job)
+         },
+         finally = {
+            # Need to move the SQLite DB to the jobResults dir and clean up the symlinks
+            dbFile <- file.path(input.job, "cuffData.db")
+            if (file.exists(dbFile)) {
+               file.rename(dbFile, file.path(getwd(), "cuffData.db"))
+            }
+            unlink(input.job, recursive=TRUE)
+         })
+      }
+   }
+}
+
+readCufflinks.silent <-function(cuffdiff.job, gtf.file, genome.file) {
+   # readCufflinks() is very chatty on stderr even with verbose=FALSE (seems to be due to
+   # the underlying RSQLite calls).  Make it quiet...   
+   tryCatch({
+      sink(file=stdout(), type="message")
+      cuff <- readCufflinks(cuffdiff.job, gtfFile = gtf.file, genome = genome.file, verbose=FALSE)
+      checkCuffVersionAbove2(cuff)
+      print(cuff)
+      return(cuff)
+   },
+   finally = {
+      sink()
+   })
+}
+
 checkCuffVersionAbove2 <- function(cuff) {
   # Emit a warning if the results were generated with a Cufflinks version less than 2.0
   tryCatch({
@@ -70,18 +130,6 @@ print.plotObject <- function(plotObj, filename_base, device.open) {
    device.open(filename_base)
    print(plotObj)
    dev.off()  
-}
-
-readCufflinks.silent <-function(cuffdiff.job, gtf.file, genome.file) {
-   # readCufflinks() is very chatty on stderr even with verbose=FALSE (seems to be due to
-   # the underlying RSQLite calls).  Make it quiet...   
-   tryCatch({
-      sink(file=stdout(), type="message")
-      return(readCufflinks(cuffdiff.job, gtfFile = gtf.file, genome = genome.file, verbose=FALSE))
-   },
-   finally = {
-      sink()
-   })
 }
 
 print.volcanoPlot <- function(selected.features, x, y, device.open, filename_base) {
