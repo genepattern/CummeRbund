@@ -132,68 +132,68 @@ print.plotObject <- function(plotObj, filename_base, device.open) {
    dev.off()  
 }
 
-print.volcanoPlot <- function(selected.features, x, y, device.open, filename_base) {
-   plotname <- paste0(filename_base,".Volcano.",x,"_",y)
-   tryCatch({
-      v<-csVolcano(selected.features, x, y, showSignificant=TRUE)
-      print.plotObject(v, plotname, device.open)
-   },
-   error = function(err) {
-      print(paste0("Error printing the ", plotname, " plot - skipping"))
-      print(err)
-   })
+# Wrapper functions to reduce boilerplate code in the reports
+build.XYAxisPlotter <- function(plotTypeName, plotterFunction) {
+   function(selected.features, x, y, device.open, filename_base, log.transform=TRUE) {
+      plotname <- paste0(filename_base,".",plotTypeName,".",x,"_",y)
+      tryCatch({
+         plotObj<-plotterFunction(selected.features, x, y, log.transform=TRUE)
+         print.plotObject(plotObj, plotname, device.open)
+      },
+      error = function(err) {
+         print(paste0("Error printing the ", plotname, " plot - skipping"))
+         print(err)
+      })
+   }
 }
 
-print.scatterPlot <- function(selected.features, x, y, log.transform, device.open, filename_base) {
-   plotname <- paste0(filename_base,".Scatter.",x,"_",y)
-   tryCatch({
-      s <- csScatter(selected.features, x=x, y=y, colorByStatus=TRUE, smooth=TRUE, logMode=log.transform)
-      print.plotObject(s, plotname, device.open)
-   },
-   error = function(err) {
-      print(paste0("Error printing the ", plotname, " plot - skipping"))
-      print(err)
-   })
+build.standardPlotter <- function(plotTypeName, plotterFunction) {
+   function(selected.features, device.open, filename_base, show.replicates=TRUE, log.transform=TRUE) {
+      plotname <- paste0(filename_base,".",plotTypeName)
+      tryCatch({
+         plotObj<-plotterFunction(selected.features, show.replicates, log.transform)
+         print.plotObject(plotObj, plotname, device.open)
+      },
+      error = function(err) {
+         print(paste0("Error printing the ", plotname, " plot - skipping"))
+         print(err)
+      })
+   }
 }
 
-print.MAplot <- function(selected.features, x, y, log.transform, device.open, filename_base) {
-   plotname <- paste0(filename_base,".MAplot.",x,"_",y)
-   tryCatch({
-      m <- MAplot(selected.features, x=x, y=y, smooth=TRUE, logMode=log.transform)
-      print.plotObject(m, plotname, device.open)
-   },
-   error = function(err) {
-      print(paste0("Error printing the ", plotname, " plot - skipping"))
-      print(err)
-   })
-}
+# Utility plot functions for plots used across multiple reports
+print.volcanoPlot <- build.XYAxisPlotter("Volcano",
+   function(selected.features, x, y, log.transform=TRUE) {
+      return(csVolcano(selected.features, x, y, showSignificant=TRUE))
+   }
+)
 
-print.expressonBarplot <- function(selected.features, show.replicates, log.transform, device.open, filename_base) {
-   plotname <- paste0(filename_base,".ExpressionBarplot")
-   tryCatch({
-      expBarplot<-expressionBarplot(selected.features, replicates=show.replicates, logMode=log.transform)
-      print.plotObject(expBarplot, plotname, device.open)
-   },
-   error = function(err) {
-      print(paste0("Error printing the ", plotname, " plot - skipping"))
-      print(err)
-   })
-}
+print.scatterPlot <- build.XYAxisPlotter("Scatter",
+   function(selected.features, x, y, log.transform) {
+      return(csScatter(selected.features, x, y, colorByStatus=TRUE, smooth=TRUE, logMode=log.transform))
+   }
+)
 
 
-print.expressonPlot <- function(selected.features, show.replicates, log.transform, device.open, filename_base) {
-   plotname <- paste0(filename_base,".ExpressionPlot")
-   tryCatch({
-      expPlot<-expressionPlot(selected.features, replicates=show.replicates, logMode=log.transform)
-      print.plotObject(expPlot, plotname, device.open)
-   },
-   error = function(err) {
-      print(paste0("Error printing the ", plotname, " plot - skipping"))
-      print(err)
-   })
-}
+print.MAplot <- build.XYAxisPlotter("MAplot",
+   function(selected.features, x, y, log.transform) {
+      return(MAplot(selected.features, x, y, smooth=TRUE, logMode=log.transform))
+   }
+)
 
-print.dendrogram <- function(selected.features, show.replicates, log.transform, device.open, filename_base) {
+print.expressonBarplot <- build.standardPlotter("ExpressionBarplot", 
+   function(selected.features, show.replicates, log.transform) {
+      return(expressionBarplot(selected.features, replicates=show.replicates, logMode=log.transform))
+   }
+)
+
+print.expressonPlot <- build.standardPlotter("ExpressionPlot", 
+   function(selected.features, show.replicates, log.transform) {
+      return(expressionPlot(selected.features, replicates=show.replicates, logMode=log.transform))
+   }
+)
+
+print.dendrogram <- function(selected.features, device.open, filename_base, show.replicates, log.transform) {
    plotname <- paste0(filename_base,".Dendrogram")
    tryCatch({
       # The dendrogram plots behave differently - apparently the print/plot call is embedded within.

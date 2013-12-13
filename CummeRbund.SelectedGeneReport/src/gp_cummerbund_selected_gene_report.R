@@ -23,23 +23,27 @@ GP.CummeRbund.SelectedGene.Report <- function(cuffdiff.job, feature.id, find.sim
    selected.features <- selected.gene
    if (feature.level != "genes") { selected.features <- feature.selector(selected.gene) }
 
-   print.expressonBarplot(selected.features, show.replicates, log.transform, device.open, "SelectedGene")
-   print.expressonPlot(selected.features, show.replicates, log.transform, device.open, "SelectedGene")
+   print.expressonBarplot(selected.features, device.open, "SelectedGene", show.replicates, log.transform)
+   print.expressonPlot(selected.features, device.open, "SelectedGene", show.replicates, log.transform)
 
    if (is.null(find.similar)) {
-      print("find.similar not specified; electedGene.SimilarityExpressionPlot")
+      print("find.similar not specified; skipping SelectedGene.SimilarityExpressionPlot")
    }
    else {
-      tryCatch({
-         mySimilar <- findSimilar(cuff, feature.id, n=find.similar)
-         mySimilar.expressionPlot<-expressionPlot(mySimilar, logMode=log.transform, showErrorbars=F)
-         print.plotObject(mySimilar.expressionPlot, "SelectedGene.SimilarityExpressionPlot", device.open)
-         mySimilar.expressionBarplot<-expressionBarplot(mySimilar, logMode=log.transform, showErrorbars=F)
-         print.plotObject(mySimilar.expressionBarplot, "SelectedGene.SimilarityExpressionBarplot", device.open)
-      },
-      error = function(err) {
-         print("Error printing the SelectedGene.SimilarityExpressionPlot plot - skipping")
-         print(err)
-      })
+      similar.features <- findSimilar(cuff, feature.id, n=find.similar)
+      print.similarityPlot(similar.features, device.open, "SelectedGene", log.transform=log.transform)
+      print.similarityBarplot(similar.features, device.open, "SelectedGene", log.transform=log.transform)
    }
 }
+
+print.similarityPlot <- build.standardPlotter("SimilarityExpressionPlot", 
+   function(selected.features, show.replicates=TRUE, log.transform) {
+      return(expressionPlot(selected.features, logMode=log.transform, showErrorbars=FALSE))
+   }
+)
+
+print.similarityBarplot <- build.standardPlotter("SimilarityExpressionBarplot", 
+   function(selected.features, show.replicates=TRUE, log.transform) {
+      return(expressionBarplot(selected.features, logMode=log.transform, showErrorbars=FALSE))
+   }
+)
