@@ -27,34 +27,12 @@ GP.CummeRbund.Geneset.Report <- function(cuffdiff.job, geneset.file, gtf.file, g
    selected.features <- geneset
    if (feature.level != "genes") { selected.features <- feature.selector(geneset) }
 
-   tryCatch({
-      heatmap <- csHeatmap(selected.features, cluster='both', replicates=show.replicates, logMode=log.transform)
-      print.plotObject(heatmap, "GeneSet.Heatmap", device.open)
-   },
-   error = function(err) {
-      print("Error printing the GeneSet.Heatmap plot - skipping")
-      print(err)
-   })
-   
-   print.expressonBarplot(selected.features, show.replicates, log.transform, device.open, "GeneSet")
-   print.expressonPlot(selected.features, show.replicates, log.transform, device.open, "GeneSet")
-   print.dendrogram(selected.features, show.replicates, log.transform, device.open, "GeneSet")
-   
-   if (is.null(cluster.count)) {
-      print("No cluster.count specified; skipping GeneSet.ClusterPlot") 
-   }
-   else {
-      tryCatch({
-         plotname <- paste0("GeneSet.ClusterPlot.k_",cluster.count)
-         ic <- csCluster(selected.features, k=cluster.count, logMode=log.transform)
-         icp<-csClusterPlot(ic)
-         print.plotObject(icp, plotname, device.open)
-      },
-      error = function(err) {
-         print(paste0("Error printing the ", plotname, " plot - skipping"))
-         print(err)
-      })
-   }
+   # Write out the various plots
+   print.heatmap(selected.features, device.open, "GeneSet", show.replicates, log.transform)
+   print.expressonBarplot(selected.features, device.open, "GeneSet", show.replicates, log.transform)
+   print.expressonPlot(selected.features, device.open, "GeneSet", show.replicates, log.transform)
+   print.dendrogram(selected.features, device.open, "GeneSet", show.replicates, log.transform)
+   print.clusterPlot(selected.features, device.open, cluster.count, show.replicates, log.transform)
    
    # Generate plots for all pair-wise sample comparisons
    samples <- samples(cuff@genes)
@@ -69,11 +47,35 @@ GP.CummeRbund.Geneset.Report <- function(cuffdiff.job, geneset.file, gtf.file, g
             currI <- samples[i]
             currJ <- samples[j]
             print.volcanoPlot(selected.features, currI, currJ, device.open, "GeneSet")
-            # Seems to be identical to the above even with args reversed.
+            # Plot from next line is identical to the above even with args reversed.  This is an acknowledged bug in cummeRbund. 
             #print.volcanoPlot(selected.features, currJ, currI, device.open, "GeneSet")
-            print.scatterPlot(selected.features, currI, currJ, log.transform, device.open, "GeneSet")
-            print.scatterPlot(selected.features, currJ, currI, log.transform, device.open, "GeneSet")
+            print.scatterPlot(selected.features, currI, currJ, device.open, "GeneSet", log.transform)
+            print.scatterPlot(selected.features, currJ, currI, device.open, "GeneSet", log.transform)
          }
       }
+   }
+}
+
+print.heatmap <- build.standardPlotter("Heatmap", 
+   function(selected.features, show.replicates, log.transform) {
+      return(csHeatmap(selected.features, cluster='both', replicates=show.replicates, logMode=log.transform))
+   }
+)
+
+print.clusterPlot <- function(selected.features, device.open, cluster.count, show.replicates, log.transform) {
+   if (is.null(cluster.count)) {
+      print("No cluster.count specified; skipping GeneSet.ClusterPlot") 
+   }
+   else {
+      plotname <- paste0("GeneSet.ClusterPlot.k_",cluster.count)
+      tryCatch({
+         ic <- csCluster(selected.features, k=cluster.count, logMode=log.transform)
+         icp<-csClusterPlot(ic)
+         print.plotObject(icp, plotname, device.open)
+      },
+      error = function(err) {
+         print(paste0("Error printing the ", plotname, " plot - skipping"))
+         print(err)
+      })
    }
 }
