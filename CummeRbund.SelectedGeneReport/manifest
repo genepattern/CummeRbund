@@ -1,6 +1,6 @@
 #Wed, 13 Nov 2013 15:59:49 -0500
 name=CummeRbund.SelectedGeneReport
-commandLine=<R2.15_HOME>/bin/Rscript --no-save --quiet --slave --no-restore <libdir>run_gp_cummerbund_selected_gene_report.R <libdir> <patches>/rlib/2.15_20131119/site-library --cuffdiff.input\=<cuffdiff.input> --feature.id=<feature.id> <find.similar> <reference.GTF> <genome.file> --output.format=<output.format> --feature.level=<feature.level> --show.replicates=<show.replicates> --log.transform=<log.transform>
+commandLine=<R2.15_HOME>/bin/Rscript --no-save --quiet --slave --no-restore <libdir>run_gp_cummerbund_selected_gene_report.R <libdir> <patches>/rlib/2.15_20131119/site-library --cuffdiff.input\=<cuffdiff.input> --feature.id=<feature.id> <find.similar> <reference.GTF> <genome.file> --output.format=<output.format> --feature.level=<feature.level> --report.as.aggregate=<report.as.aggregate> --log.transform=<log.transform>
 license=
 taskDoc=doc.html
 fileFormat=
@@ -8,7 +8,7 @@ taskType=RNA-seq
 os=any
 privacy=public
 description=Cuffdiff visualization package providing plots based on a single user-specified gene.
-version=Refactored job runner and plotting code for better maintainability and re-use across all modules.
+version=Renamed show.replicates to report.as.aggregate, plus other tweaks driven by documentation.
 minGenePatternVersion=
 author=Loyal Goff, MIT Computer Science and Artificial Intelligence Lab
 
@@ -24,7 +24,7 @@ p1_type=java.io.File
 p1_value=
 
 p2_default_value=
-p2_description=The gene or feature of interest.
+p2_description=The gene or feature of interest.  This can be a gene symbol (short name), gene ID, isoform_id, tss_group_id, or cds_id.
 p2_fileFormat=
 p2_name=feature.id
 p2_optional=
@@ -91,9 +91,9 @@ p7_type=java.lang.String
 p7_value=genes\=genes;isoforms\=isoforms;TSS\=transcription start site (TSS);CDS\=coding sequence (CDS)
 
 p8_default_value=yes
-p8_description=Whether to show separate plots for replicates or to show aggregate samples.
+p8_description=Controls whether reporting should be done for individual replicates or aggregate condition/sample values.  The default is to use aggregate sample values.
 p8_fileFormat=
-p8_name=show.replicates
+p8_name=report.as.aggregate
 p8_optional=
 p8_prefix_when_specified=
 p8_type=java.lang.String

@@ -1,6 +1,6 @@
 #Wed, 13 Nov 2013 15:59:49 -0500
 name=CummeRbund.QcReport
-commandLine=<R2.15_HOME>/bin/Rscript --no-save --quiet --slave --no-restore <libdir>run_gp_cummerbund_qc_report.R <libdir> <patches>/rlib/2.15_20131119/site-library --cuffdiff.input\=<cuffdiff.input> <reference.GTF> <genome.file> --output.format=<output.format> --feature.level=<feature.level> --show.replicates=<show.replicates> --log.transform=<log.transform>
+commandLine=<R2.15_HOME>/bin/Rscript --no-save --quiet --slave --no-restore <libdir>run_gp_cummerbund_qc_report.R <libdir> <patches>/rlib/2.15_20131119/site-library --cuffdiff.input\=<cuffdiff.input> <reference.GTF> <genome.file> --output.format=<output.format> --feature.level=<feature.level> --report.as.aggregate=<report.as.aggregate> --log.transform=<log.transform>
 license=
 taskDoc=doc.html
 fileFormat=
@@ -8,7 +8,7 @@ taskType=RNA-seq
 os=any
 privacy=public
 description=Cuffdiff visualization package providing QC plots
-version=Refactored job runner and plotting code for better maintainability and re-use across all modules.
+version=Renamed show.replicates to report.as.aggregate, plus other tweaks driven by documentation.
 minGenePatternVersion=
 author=Loyal Goff, MIT Computer Science and Artificial Intelligence Lab
 
@@ -72,9 +72,9 @@ p5_type=java.lang.String
 p5_value=genes\=genes;isoforms\=isoforms;TSS\=transcription start site (TSS);CDS\=coding sequence (CDS)
 
 p6_default_value=yes
-p6_description=Whether to show separate plots for replicates or to show aggregate samples.  Note that the Dispersion, FPKM.SCV, and Volcano plots always show aggregate samples
+p6_description=Controls whether reporting should be done for individual replicates or aggregate condition/sample values.  The default is to use aggregate sample values.  Note that the Dispersion, FPKM.SCV, and Volcano plots always show aggregate samples
 p6_fileFormat=
-p6_name=show.replicates
+p6_name=report.as.aggregate
 p6_optional=
 p6_prefix_when_specified=
 p6_type=java.lang.String

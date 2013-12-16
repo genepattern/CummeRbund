@@ -148,10 +148,10 @@ build.XYAxisPlotter <- function(plotTypeName, plotterFunction) {
 }
 
 build.standardPlotter <- function(plotTypeName, plotterFunction) {
-   function(selected.features, device.open, filename_base, show.replicates=TRUE, log.transform=TRUE) {
+   function(selected.features, device.open, filename_base, use.replicates=FALSE, log.transform=TRUE) {
       plotname <- paste0(filename_base,".",plotTypeName)
       tryCatch({
-         plotObj<-plotterFunction(selected.features, show.replicates, log.transform)
+         plotObj<-plotterFunction(selected.features, use.replicates=FALSE, log.transform)
          print.plotObject(plotObj, plotname, device.open)
       },
       error = function(err) {
@@ -182,23 +182,23 @@ print.MAplot <- build.XYAxisPlotter("MAplot",
 )
 
 print.expressonBarplot <- build.standardPlotter("ExpressionBarplot", 
-   function(selected.features, show.replicates, log.transform) {
-      return(expressionBarplot(selected.features, replicates=show.replicates, logMode=log.transform))
+   function(selected.features, use.replicates, log.transform) {
+      return(expressionBarplot(selected.features, replicates=use.replicates, logMode=log.transform))
    }
 )
 
 print.expressonPlot <- build.standardPlotter("ExpressionPlot", 
-   function(selected.features, show.replicates, log.transform) {
-      return(expressionPlot(selected.features, replicates=show.replicates, logMode=log.transform))
+   function(selected.features, use.replicates, log.transform) {
+      return(expressionPlot(selected.features, replicates=use.replicates, logMode=log.transform))
    }
 )
 
-print.dendrogram <- function(selected.features, device.open, filename_base, show.replicates, log.transform) {
+print.dendrogram <- function(selected.features, device.open, filename_base, use.replicates, log.transform) {
    plotname <- paste0(filename_base,".Dendrogram")
    tryCatch({
       # The dendrogram plots behave differently - apparently the print/plot call is embedded within.
       device.open(plotname)
-      dend <- csDendro(selected.features, replicates=show.replicates, logMode=log.transform)
+      dend <- csDendro(selected.features, replicates=use.replicates, logMode=log.transform)
       dev.off()
    },
    error = function(err) {

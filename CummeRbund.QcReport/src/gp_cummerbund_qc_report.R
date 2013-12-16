@@ -9,7 +9,8 @@
 ## use, misuse, or functionality.
 
 GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome.file, output.format,
-                                    feature.level, show.replicates, log.transform) {
+                                    feature.level, report.as.aggregate, log.transform) {
+   use.replicates <- !report.as.aggregate
    device.open <- get.device.open(output.format)
    
    feature.selector <- get.feature.selector(feature.level)
@@ -29,15 +30,15 @@ GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome.file, output.
    # Write out the various plots
    print.dispersionPlot(selected.features, device.open, "QC")
    print.fpkmSCVPlot(selected.features, device.open, "QC")
-   print.densityPlot(selected.features, device.open, "QC", show.replicates, log.transform)
-   print.Boxplot(selected.features, device.open, "QC", show.replicates, log.transform)
-   print.scatterMatrix(selected.features, device.open, "QC", show.replicates, log.transform)
+   print.densityPlot(selected.features, device.open, "QC", use.replicates, log.transform)
+   print.Boxplot(selected.features, device.open, "QC", use.replicates, log.transform)
+   print.scatterMatrix(selected.features, device.open, "QC", use.replicates, log.transform)
    print.volcanoMatrix(selected.features, device.open, "QC")
    print.sigMatrix(cuff, device.open, feature.level)
-   print.MDSplot(cuff, selected.features, device.open, show.replicates, log.transform)
-   print.PCAplot(selected.features, device.open, "QC", show.replicates)
-   print.DistHeat(selected.features, device.open, "QC", show.replicates, log.transform)
-   print.dendrogram(selected.features, device.open, "QC", show.replicates, log.transform)
+   print.MDSplot(cuff, selected.features, device.open, use.replicates, log.transform)
+   print.PCAplot(selected.features, device.open, "QC", use.replicates)
+   print.DistHeat(selected.features, device.open, "QC", use.replicates, log.transform)
+   print.dendrogram(selected.features, device.open, "QC", use.replicates, log.transform)
 
    # Generate plots for all pair-wise sample comparisons
    samples <- samples(cuff@genes)
@@ -81,50 +82,50 @@ write.significance.data <- function(data, accessor.function, report.name) {
 }
 
 print.dispersionPlot <- build.standardPlotter("Dispersion", 
-   function(selected.features, show.replicates, log.transform) {
+   function(selected.features, use.replicates, log.transform) {
       return(dispersionPlot(selected.features))
    }
 )
 
 print.fpkmSCVPlot <- build.standardPlotter("FPKM.SCV", 
-   function(selected.features, show.replicates, log.transform) {
+   function(selected.features, use.replicates, log.transform) {
       return(fpkmSCVPlot(selected.features))
    }
 )
 
 print.densityPlot <- build.standardPlotter("Density", 
-   function(selected.features, show.replicates, log.transform) {
-      return(csDensity(selected.features, replicates=show.replicates, logMode=log.transform))
+   function(selected.features, use.replicates, log.transform) {
+      return(csDensity(selected.features, replicates=use.replicates, logMode=log.transform))
    }
 )
 
 print.Boxplot <- build.standardPlotter("Boxplot", 
-   function(selected.features, show.replicates, log.transform) {
-      return(csBoxplot(selected.features, replicates=show.replicates, logMode=log.transform))
+   function(selected.features, use.replicates, log.transform) {
+      return(csBoxplot(selected.features, replicates=use.replicates, logMode=log.transform))
    }
 )
 
 print.scatterMatrix <- build.standardPlotter("Boxplot", 
-   function(selected.features, show.replicates, log.transform) {
-      return(csScatterMatrix(selected.features, replicates=show.replicates, logMode=log.transform))
+   function(selected.features, use.replicates, log.transform) {
+      return(csScatterMatrix(selected.features, replicates=use.replicates, logMode=log.transform))
    }
 )
 
 print.volcanoMatrix <- build.standardPlotter("VolcanoMatrix", 
-   function(selected.features, show.replicates, log.transform) {
+   function(selected.features, use.replicates, log.transform) {
       return(csVolcanoMatrix(selected.features))
    }
 )
 
 print.DistHeat <- build.standardPlotter("JSDistanceHeatmap.Samples", 
-   function(selected.features, show.replicates, log.transform) {
-      return(csDistHeat(selected.features, replicates=show.replicates, samples.not.genes=TRUE, logMode=log.transform))
+   function(selected.features, use.replicates, log.transform) {
+      return(csDistHeat(selected.features, replicates=use.replicates, samples.not.genes=TRUE, logMode=log.transform))
    }
 )
 
 print.PCAplot <- build.standardPlotter("DimensionalityReduction.pca", 
-   function(selected.features, show.replicates, log.transform) {
-      return(PCAplot(selected.features, replicates=show.replicates))
+   function(selected.features, use.replicates, log.transform) {
+      return(PCAplot(selected.features, replicates=use.replicates))
    }
 )
 
@@ -147,17 +148,17 @@ print.sigMatrix <- function(cuff, device.open, feature.level) {
 }
 
 print.MDSplot.unguarded <- build.standardPlotter("DimensionalityReduction.mds", 
-   function(selected.features, show.replicates, log.transform) {
-      return(MDSplot(selected.features, replicates=show.replicates, logMode=log.transform))
+   function(selected.features, use.replicates, log.transform) {
+      return(MDSplot(selected.features, replicates=use.replicates, logMode=log.transform))
    }
 )
 
-print.MDSplot <- function(cuff, selected.features, device.open, show.replicates, log.transform) {
+print.MDSplot <- function(cuff, selected.features, device.open, use.replicates, log.transform) {
    # The MDSplot throws an error when trying to plot fewer than two samples/replicates.
-   if ((!show.replicates && NROW(samples(cuff)) < 3) || (show.replicates && NROW(replicates(cuff)) < 3)) {
+   if ((!use.replicates && NROW(samples(cuff)) < 3) || (use.replicates && NROW(replicates(cuff)) < 3)) {
       print(paste0("Skipping the QC.DimensionalityReduction.mds plot - too few samples/replicates"))
    }
    else {
-      print.MDSplot.unguarded(selected.features, device.open, "QC", show.replicates, log.transform)
+      print.MDSplot.unguarded(selected.features, device.open, "QC", use.replicates, log.transform)
    }
 }
