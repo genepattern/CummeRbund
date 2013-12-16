@@ -30,7 +30,7 @@ option_list <- list(
   make_option("--genome.file", dest="genome.file", default=NULL),
   make_option("--output.format", dest="output.format"),
   make_option("--feature.level", dest="feature.level"),
-  make_option("--show.replicates", dest="show.replicates"),
+  make_option("--report.as.aggregate", dest="report.as.aggregate"),
   make_option("--log.transform", dest="log.transform")
   )
 
@@ -43,7 +43,7 @@ sessionInfo()
 source(file.path(libdir, "gp_cummerbund_util.R"))
 source(file.path(libdir, "gp_cummerbund_selected_gene_report.R"))
 
-show.replicates <- (opts$show.replicates == "yes")
+report.as.aggregate <- (opts$report.as.aggregate == "yes")
 log.transform <- (opts$log.transform == "yes")
 
 check.output.format(opts$output.format)
@@ -58,7 +58,7 @@ print(c("Running GenePattern CummeRbund Selected Gene Report on data from:", opt
 # Create the job.builder function for run.job
 job.builder <- function(cuffdiff.job) {
    GP.CummeRbund.SelectedGene.Report(cuffdiff.job, opts$feature.id, opts$find.similar, opts$ref.gtf, opts$genome.file,
-                                     opts$output.format, opts$feature.level, show.replicates, log.transform)
+                                     opts$output.format, opts$feature.level, report.as.aggregate, log.transform)
 }
 
 suppressMessages(suppressWarnings(

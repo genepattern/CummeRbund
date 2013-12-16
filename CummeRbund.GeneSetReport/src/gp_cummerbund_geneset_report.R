@@ -9,7 +9,8 @@
 ## use, misuse, or functionality.
 
 GP.CummeRbund.Geneset.Report <- function(cuffdiff.job, geneset.file, gtf.file, genome.file, output.format,
-                                         feature.level, show.replicates, log.transform, cluster.count) {
+                                         feature.level, report.as.aggregate, log.transform, cluster.count) {
+   use.replicates <- !report.as.aggregate
    device.open <- get.device.open(output.format)
 
    genesetIds <- unlist(read.table(geneset.file))
@@ -28,11 +29,11 @@ GP.CummeRbund.Geneset.Report <- function(cuffdiff.job, geneset.file, gtf.file, g
    if (feature.level != "genes") { selected.features <- feature.selector(geneset) }
 
    # Write out the various plots
-   print.heatmap(selected.features, device.open, "GeneSet", show.replicates, log.transform)
-   print.expressonBarplot(selected.features, device.open, "GeneSet", show.replicates, log.transform)
-   print.expressonPlot(selected.features, device.open, "GeneSet", show.replicates, log.transform)
-   print.dendrogram(selected.features, device.open, "GeneSet", show.replicates, log.transform)
-   print.clusterPlot(selected.features, device.open, cluster.count, show.replicates, log.transform)
+   print.heatmap(selected.features, device.open, "GeneSet", use.replicates, log.transform)
+   print.expressonBarplot(selected.features, device.open, "GeneSet", use.replicates, log.transform)
+   print.expressonPlot(selected.features, device.open, "GeneSet", use.replicates, log.transform)
+   print.dendrogram(selected.features, device.open, "GeneSet", use.replicates, log.transform)
+   print.clusterPlot(selected.features, device.open, cluster.count, use.replicates, log.transform)
    
    # Generate plots for all pair-wise sample comparisons
    samples <- samples(cuff@genes)
@@ -57,12 +58,12 @@ GP.CummeRbund.Geneset.Report <- function(cuffdiff.job, geneset.file, gtf.file, g
 }
 
 print.heatmap <- build.standardPlotter("Heatmap", 
-   function(selected.features, show.replicates, log.transform) {
-      return(csHeatmap(selected.features, cluster='both', replicates=show.replicates, logMode=log.transform))
+   function(selected.features, use.replicates, log.transform) {
+      return(csHeatmap(selected.features, cluster='both', replicates=use.replicates, logMode=log.transform))
    }
 )
 
-print.clusterPlot <- function(selected.features, device.open, cluster.count, show.replicates, log.transform) {
+print.clusterPlot <- function(selected.features, device.open, cluster.count, use.replicates, log.transform) {
    if (is.null(cluster.count)) {
       print("No cluster.count specified; skipping GeneSet.ClusterPlot") 
    }

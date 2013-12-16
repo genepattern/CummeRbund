@@ -28,7 +28,7 @@ option_list <- list(
   make_option("--genome.file", dest="genome.file", default=NULL),
   make_option("--output.format", dest="output.format"),
   make_option("--feature.level", dest="feature.level"),
-  make_option("--show.replicates", dest="show.replicates"),
+  make_option("--report.as.aggregate", dest="report.as.aggregate"),
   make_option("--log.transform", dest="log.transform"),
   make_option("--cluster.count", dest="cluster.count", type="integer", default=NULL)
   )
@@ -42,7 +42,7 @@ sessionInfo()
 source(file.path(libdir, "gp_cummerbund_util.R"))
 source(file.path(libdir, "gp_cummerbund_geneset_report.R"))
 
-show.replicates <- (opts$show.replicates == "yes")
+report.as.aggregate <- (opts$report.as.aggregate == "yes")
 log.transform <- (opts$log.transform == "yes")
 
 check.output.format(opts$output.format)
@@ -57,7 +57,7 @@ print(c("Running GenePattern CummeRbund Geneset Report with data from:", opts$cu
 # Create the job.builder function for run.job
 job.builder <- function(cuffdiff.job) {
    GP.CummeRbund.Geneset.Report(cuffdiff.job, opts$geneset.file, opts$ref.gtf, opts$genome.file, opts$output.format,
-                                opts$feature.level, show.replicates, log.transform, opts$cluster.count)
+                                opts$feature.level, report.as.aggregate, log.transform, opts$cluster.count)
 }
 
 suppressMessages(suppressWarnings(

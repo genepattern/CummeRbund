@@ -27,7 +27,7 @@ option_list <- list(
   make_option("--genome.file", dest="genome.file", default=NULL),
   make_option("--output.format", dest="output.format"),
   make_option("--feature.level", dest="feature.level"),
-  make_option("--show.replicates", dest="show.replicates"),
+  make_option("--report.as.aggregate", dest="report.as.aggregate"),
   make_option("--log.transform", dest="log.transform")
   )
 
@@ -43,7 +43,7 @@ source(file.path(libdir, "gp_cummerbund_qc_report.R"))
 check.output.format(opts$output.format)
 check.feature.level(opts$feature.level)
 
-show.replicates <- (opts$show.replicates == "yes")
+report.as.aggregate <- (opts$report.as.aggregate == "yes")
 log.transform <- (opts$log.transform == "yes")
 
 print(c("Running GenePattern CummeRbund QC Report on data from:", opts$cuffdiff.input))
@@ -51,7 +51,7 @@ print(c("Running GenePattern CummeRbund QC Report on data from:", opts$cuffdiff.
 # Create the job.builder function for run.job
 job.builder <- function(cuffdiff.job) {
    GP.CummeRbund.QC.Report(cuffdiff.job, opts$ref.gtf, opts$genome.file, opts$output.format,
-                           opts$feature.level, show.replicates, log.transform)
+                           opts$feature.level, report.as.aggregate, log.transform)
 }
 
 suppressMessages(suppressWarnings(

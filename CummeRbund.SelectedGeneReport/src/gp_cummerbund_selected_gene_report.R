@@ -9,7 +9,8 @@
 ## use, misuse, or functionality.
 
 GP.CummeRbund.SelectedGene.Report <- function(cuffdiff.job, feature.id, find.similar, gtf.file, genome.file,
-                                              output.format, feature.level, show.replicates, log.transform) {
+                                              output.format, feature.level, report.as.aggregate, log.transform) {
+   use.replicates <- !report.as.aggregate
    device.open <- get.device.open(output.format)
    
    feature.selector <- get.feature.selector(feature.level)
@@ -23,8 +24,8 @@ GP.CummeRbund.SelectedGene.Report <- function(cuffdiff.job, feature.id, find.sim
    selected.features <- selected.gene
    if (feature.level != "genes") { selected.features <- feature.selector(selected.gene) }
 
-   print.expressonBarplot(selected.features, device.open, "SelectedGene", show.replicates, log.transform)
-   print.expressonPlot(selected.features, device.open, "SelectedGene", show.replicates, log.transform)
+   print.expressonBarplot(selected.features, device.open, "SelectedGene", use.replicates, log.transform)
+   print.expressonPlot(selected.features, device.open, "SelectedGene", use.replicates, log.transform)
 
    if (is.null(find.similar)) {
       print("find.similar not specified; skipping SelectedGene.SimilarityExpressionPlot")
@@ -37,13 +38,13 @@ GP.CummeRbund.SelectedGene.Report <- function(cuffdiff.job, feature.id, find.sim
 }
 
 print.similarityPlot <- build.standardPlotter("SimilarityExpressionPlot", 
-   function(selected.features, show.replicates=TRUE, log.transform) {
+   function(selected.features, use.replicates, log.transform) {
       return(expressionPlot(selected.features, logMode=log.transform, showErrorbars=FALSE))
    }
 )
 
 print.similarityBarplot <- build.standardPlotter("SimilarityExpressionBarplot", 
-   function(selected.features, show.replicates=TRUE, log.transform) {
+   function(selected.features, use.replicates, log.transform) {
       return(expressionBarplot(selected.features, logMode=log.transform, showErrorbars=FALSE))
    }
 )
