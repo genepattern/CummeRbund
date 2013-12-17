@@ -8,7 +8,7 @@ taskType=RNA-seq
 os=any
 privacy=public
 description=Cuffdiff visualization package providing QC plots
-version=Renamed show.replicates to report.as.aggregate, plus other tweaks driven by documentation.
+version=Renamed show.replicates to report.as.aggregate, plus other tweaks driven by documentation.  Fixed a bug with the ScatterMatrix filename.  Fixed a bug with use of replicates in some plots.
 minGenePatternVersion=
 author=Loyal Goff, MIT Computer Science and Artificial Intelligence Lab
 
@@ -72,7 +72,7 @@ p5_type=java.lang.String
 p5_value=genes\=genes;isoforms\=isoforms;TSS\=transcription start site (TSS);CDS\=coding sequence (CDS)
 
 p6_default_value=yes
-p6_description=Controls whether reporting should be done for individual replicates or aggregate condition/sample values.  The default is to use aggregate sample values.  Note that the Dispersion, FPKM.SCV, and Volcano plots always show aggregate samples
+p6_description=Controls whether reporting should be done for individual replicates or aggregate condition/sample values.  The default is to use aggregate sample values.  Controls whether reporting should be done for individual replicates or aggregate condition/sample values.  The default is to use aggregate sample values.  Note that the Dispersion, FPKM.SCV, MA, individual Scatter plots and all Volcano plots always show aggregate samples.
 p6_fileFormat=
 p6_name=report.as.aggregate
 p6_optional=

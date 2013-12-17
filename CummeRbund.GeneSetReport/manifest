@@ -8,7 +8,7 @@ taskType=RNA-seq
 os=any
 privacy=public
 description=Cuffdiff visualization package providing plots based on a user-provided list of genes. 
-version=Renamed show.replicates to report.as.aggregate, plus other tweaks driven by documentation.
+version=Renamed show.replicates to report.as.aggregate, plus other tweaks driven by documentation.  Fixed a bug with use of replicates in some plots.
 minGenePatternVersion=
 author=Loyal Goff, MIT Computer Science and Artificial Intelligence Lab
 
@@ -73,7 +73,7 @@ p5_type=java.lang.String
 p5_value=pdf;svg;png
 
 p6_default_value=genes
-p6_description=Feature level for the report.  The Heatmap, Volcano, Expression Plot and Expression Barplot will always be drawn at the "genes" level.
+p6_description=Feature level for the report.
 p6_fileFormat=
 p6_name=feature.level
 p6_optional=
