@@ -8,7 +8,7 @@ taskType=RNA-seq
 os=any
 privacy=public
 description=Cuffdiff visualization package providing plots based on a single user-specified gene.
-version=Renamed show.replicates to report.as.aggregate, plus other tweaks driven by documentation.
+version=Renamed show.replicates to report.as.aggregate, plus other tweaks driven by documentation.  Fixed a bug with use of replicates in some plots.
 minGenePatternVersion=
 author=Loyal Goff, MIT Computer Science and Artificial Intelligence Lab
 
@@ -82,7 +82,7 @@ p6_type=java.lang.String
 p6_value=pdf;svg;png
 
 p7_default_value=genes
-p7_description=Feature level for the report
+p7_description=Feature level for the report.  Note that the Similarity plots will always be generated at the "genes" level.
 p7_fileFormat=
 p7_name=feature.level
 p7_optional=
@@ -91,7 +91,7 @@ p7_type=java.lang.String
 p7_value=genes\=genes;isoforms\=isoforms;TSS\=transcription start site (TSS);CDS\=coding sequence (CDS)
 
 p8_default_value=yes
-p8_description=Controls whether reporting should be done for individual replicates or aggregate condition/sample values.  The default is to use aggregate sample values.
+p8_description=Controls whether reporting should be done for individual replicates or aggregate condition/sample values.  The default is to use aggregate sample values.  Note that the Similarity plots always show aggregate samples.
 p8_fileFormat=
 p8_name=report.as.aggregate
 p8_optional=

@@ -11,6 +11,7 @@
 GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome.file, output.format,
                                     feature.level, report.as.aggregate, log.transform) {
    use.replicates <- !report.as.aggregate
+   
    device.open <- get.device.open(output.format)
    
    feature.selector <- get.feature.selector(feature.level)
@@ -105,7 +106,7 @@ print.Boxplot <- build.standardPlotter("Boxplot",
    }
 )
 
-print.scatterMatrix <- build.standardPlotter("Boxplot", 
+print.scatterMatrix <- build.standardPlotter("ScatterMatrix", 
    function(selected.features, use.replicates, log.transform) {
       return(csScatterMatrix(selected.features, replicates=use.replicates, logMode=log.transform))
    }

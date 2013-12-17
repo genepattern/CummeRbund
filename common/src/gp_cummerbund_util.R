@@ -151,7 +151,7 @@ build.standardPlotter <- function(plotTypeName, plotterFunction) {
    function(selected.features, device.open, filename_base, use.replicates=FALSE, log.transform=TRUE) {
       plotname <- paste0(filename_base,".",plotTypeName)
       tryCatch({
-         plotObj<-plotterFunction(selected.features, use.replicates=FALSE, log.transform)
+         plotObj<-plotterFunction(selected.features, use.replicates, log.transform)
          print.plotObject(plotObj, plotname, device.open)
       },
       error = function(err) {
@@ -173,7 +173,6 @@ print.scatterPlot <- build.XYAxisPlotter("Scatter",
       return(csScatter(selected.features, x, y, colorByStatus=TRUE, smooth=TRUE, logMode=log.transform))
    }
 )
-
 
 print.MAplot <- build.XYAxisPlotter("MAplot",
    function(selected.features, x, y, log.transform) {
