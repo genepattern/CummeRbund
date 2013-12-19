@@ -25,7 +25,7 @@ option_list <- list(
   make_option("--cuffdiff.input", dest="cuffdiff.input"),
   make_option("--geneset.file", dest="geneset.file"),
   make_option("--ref.gtf", dest="ref.gtf", default=NULL),
-  make_option("--genome.file", dest="genome.file", default=NULL),
+  make_option("--genome", dest="genome", default=NULL),
   make_option("--output.format", dest="output.format"),
   make_option("--feature.level", dest="feature.level"),
   make_option("--report.as.aggregate", dest="report.as.aggregate"),
@@ -47,6 +47,7 @@ log.transform <- (opts$log.transform == "yes")
 
 check.output.format(opts$output.format)
 check.feature.level(opts$feature.level)
+genome <- get.genome.from.params(opts$ref.gtf, opts$genome)
 
 if (!is.null(opts$cluster.count) && opts$cluster.count < 0) {
    stop("If provided, cluster.count must be a positive integer")
@@ -56,7 +57,7 @@ print(c("Running GenePattern CummeRbund Geneset Report with data from:", opts$cu
 
 # Create the job.builder function for run.job
 job.builder <- function(cuffdiff.job) {
-   GP.CummeRbund.Geneset.Report(cuffdiff.job, opts$geneset.file, opts$ref.gtf, opts$genome.file, opts$output.format,
+   GP.CummeRbund.Geneset.Report(cuffdiff.job, opts$geneset.file, opts$ref.gtf, genome, opts$output.format,
                                 opts$feature.level, report.as.aggregate, log.transform, opts$cluster.count)
 }
 

@@ -27,7 +27,7 @@ option_list <- list(
   make_option("--feature.id", dest="feature.id"),
   make_option("--find.similar", dest="find.similar", type="integer", default=NULL),
   make_option("--ref.gtf", dest="ref.gtf", default=NULL),
-  make_option("--genome.file", dest="genome.file", default=NULL),
+  make_option("--genome", dest="genome", default=NULL),
   make_option("--output.format", dest="output.format"),
   make_option("--feature.level", dest="feature.level"),
   make_option("--report.as.aggregate", dest="report.as.aggregate"),
@@ -48,6 +48,7 @@ log.transform <- (opts$log.transform == "yes")
 
 check.output.format(opts$output.format)
 check.feature.level(opts$feature.level)
+genome <- get.genome.from.params(opts$ref.gtf, opts$genome)
 
 if (!is.null(opts$find.similar) && opts$find.similar < 0) {
    stop("If provided, find.similar must be a positive integer")
@@ -55,9 +56,16 @@ if (!is.null(opts$find.similar) && opts$find.similar < 0) {
 
 print(c("Running GenePattern CummeRbund Selected Gene Report on data from:", opts$cuffdiff.input))
 
+# Move the following to the util file.
+# We 
+# Probably need to simply generate the genome arg based on the GTF file name unless the user provides one:
+# if (is.null(genome) || grepl('^\\s*$', genome))
+#    genome <- sub('\\..+$', '', basename(opts$ref.gtf))
+# } 
+
 # Create the job.builder function for run.job
 job.builder <- function(cuffdiff.job) {
-   GP.CummeRbund.SelectedGene.Report(cuffdiff.job, opts$feature.id, opts$find.similar, opts$ref.gtf, opts$genome.file,
+   GP.CummeRbund.SelectedGene.Report(cuffdiff.job, opts$feature.id, opts$find.similar, opts$ref.gtf, genome,
                                      opts$output.format, opts$feature.level, report.as.aggregate, log.transform)
 }
 

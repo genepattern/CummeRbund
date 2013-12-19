@@ -20,6 +20,31 @@ check.feature.level <- function(feature.level) {
    }
 }
 
+get.genome.from.params <- function(ref.gtf, genome) {
+   have.gtf <- (!is.null(ref.gtf) && !grepl('^\\s*$', ref.gtf))
+   have.genome <- (!is.null(genome) && !grepl('^\\s*$', genome))
+   
+   if (have.gtf) {
+      if (have.genome) {
+         g <- genome 
+      }
+      else {
+         # Infer from ref.gtf by chopping off the '.gtf' extension.  We don't try to do
+         # anything else more sophisticated if it doesn't match that pattern; use as-is.
+         print("No genome provided; inferring from ref.gtf")
+         g <- sub('\\.gtf$', '', basename(ref.gtf))
+      }
+      print(paste0("Using genome name: '", g, "'"))
+      return(g)
+   }
+   else {
+      if (have.genome) {
+         print("No ref.gtf provided; the genome setting will also be ignored")
+      }
+      return(NULL)
+   }   
+}
+
 run.job <- function(cuffdiff.input, job.builder) {
    if (file_test("-f", cuffdiff.input)) {
       # If the input is a file, assume it is a SQLite database when passing it to readCufflinks.
@@ -65,12 +90,12 @@ run.job <- function(cuffdiff.input, job.builder) {
    }
 }
 
-readCufflinks.silent <-function(cuffdiff.job, gtf.file, genome.file) {
+readCufflinks.silent <-function(cuffdiff.job, gtf.file, genome) {
    # readCufflinks() is very chatty on stderr even with verbose=FALSE (seems to be due to
    # the underlying RSQLite calls).  Make it quiet...   
    tryCatch({
       sink(file=stdout(), type="message")
-      cuff <- readCufflinks(cuffdiff.job, gtfFile = gtf.file, genome = genome.file, verbose=FALSE)
+      cuff <- readCufflinks(cuffdiff.job, gtfFile=gtf.file, genome=genome, verbose=FALSE)
       checkCuffVersionAbove2(cuff)
       print(cuff)
       return(cuff)
