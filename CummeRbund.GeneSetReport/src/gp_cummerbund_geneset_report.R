@@ -69,6 +69,7 @@ print.clusterPlot <- function(selected.features, device.open, cluster.count, use
    }
    else {
       plotname <- paste0("GeneSet.ClusterPlot.k_",cluster.count)
+      ic <- NULL
       tryCatch({
          ic <- csCluster(selected.features, k=cluster.count, logMode=log.transform)
          icp<-csClusterPlot(ic)
@@ -78,5 +79,16 @@ print.clusterPlot <- function(selected.features, device.open, cluster.count, use
          print(paste0("Error printing the ", plotname, " plot - skipping"))
          print(err)
       })
+      if (!is.null(ic)) {
+         report.name <- "GeneSet.ClusterContents.txt"
+         tryCatch({
+            print(ic$cluster)
+            write.table(ic$cluster, report.name, sep='\t', row.names = T, col.names = F, quote = F)
+         },
+         error = function(err) {
+            print(paste0("Error printing the ", report.name, " report - skipping"))
+            print(err)
+         })
+      }
    }
 }
