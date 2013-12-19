@@ -8,7 +8,7 @@ taskType=RNA-seq
 os=any
 privacy=public
 description=Cuffdiff visualization package providing plots based on a user-provided list of genes. 
-version=Dropped the genome.file param in favor of a simple string param - on closer review, I found this is supposed to be a label instead of a file.  Corrected some description text based on doc edits.
+version=Added a report of the cluster contents, listing which cluster each gene was placed in.
 minGenePatternVersion=
 author=Loyal Goff, MIT Computer Science and Artificial Intelligence Lab
 
