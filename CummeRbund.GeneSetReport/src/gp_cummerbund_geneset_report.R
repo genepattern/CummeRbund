@@ -8,7 +8,7 @@
 ## whatsoever. Neither the Broad Institute nor MIT can be responsible for its
 ## use, misuse, or functionality.
 
-GP.CummeRbund.Geneset.Report <- function(cuffdiff.job, geneset.file, gtf.file, genome.file, output.format,
+GP.CummeRbund.Geneset.Report <- function(cuffdiff.job, geneset.file, gtf.file, genome, output.format,
                                          feature.level, report.as.aggregate, log.transform, cluster.count) {
    use.replicates <- !report.as.aggregate
    device.open <- get.device.open(output.format)
@@ -20,7 +20,7 @@ GP.CummeRbund.Geneset.Report <- function(cuffdiff.job, geneset.file, gtf.file, g
    
    feature.selector <- get.feature.selector(feature.level)
 
-   cuff <- readCufflinks.silent(cuffdiff.job, gtf.file, genome.file)
+   cuff <- readCufflinks.silent(cuffdiff.job, gtf.file, genome)
    
    geneset <- getGenes(cuff, genesetIds)
    geneset

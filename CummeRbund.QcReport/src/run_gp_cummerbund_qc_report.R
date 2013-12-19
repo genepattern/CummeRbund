@@ -24,7 +24,7 @@ suppressMessages(suppressWarnings(
 option_list <- list(
   make_option("--cuffdiff.input", dest="cuffdiff.input"),
   make_option("--ref.gtf", dest="ref.gtf", default=NULL),
-  make_option("--genome.file", dest="genome.file", default=NULL),
+  make_option("--genome", dest="genome", default=NULL),
   make_option("--output.format", dest="output.format"),
   make_option("--feature.level", dest="feature.level"),
   make_option("--report.as.aggregate", dest="report.as.aggregate"),
@@ -42,6 +42,7 @@ source(file.path(libdir, "gp_cummerbund_qc_report.R"))
 
 check.output.format(opts$output.format)
 check.feature.level(opts$feature.level)
+genome <- get.genome.from.params(opts$ref.gtf, opts$genome)
 
 report.as.aggregate <- (opts$report.as.aggregate == "yes")
 log.transform <- (opts$log.transform == "yes")
@@ -50,7 +51,7 @@ print(c("Running GenePattern CummeRbund QC Report on data from:", opts$cuffdiff.
 
 # Create the job.builder function for run.job
 job.builder <- function(cuffdiff.job) {
-   GP.CummeRbund.QC.Report(cuffdiff.job, opts$ref.gtf, opts$genome.file, opts$output.format,
+   GP.CummeRbund.QC.Report(cuffdiff.job, opts$ref.gtf, genome, opts$output.format,
                            opts$feature.level, report.as.aggregate, log.transform)
 }
 

@@ -8,7 +8,7 @@
 ## whatsoever. Neither the Broad Institute nor MIT can be responsible for its
 ## use, misuse, or functionality.
 
-GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome.file, output.format,
+GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome, output.format,
                                     feature.level, report.as.aggregate, log.transform) {
    use.replicates <- !report.as.aggregate
    
@@ -16,7 +16,7 @@ GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome.file, output.
    
    feature.selector <- get.feature.selector(feature.level)
 
-   cuff <- readCufflinks.silent(cuffdiff.job, gtf.file, genome.file)
+   cuff <- readCufflinks.silent(cuffdiff.job, gtf.file, genome)
    selected.features <- feature.selector(cuff)
    
    # Write out a table of the differentially expressed features

@@ -1,6 +1,6 @@
 #Wed, 13 Nov 2013 15:59:49 -0500
 name=CummeRbund.SelectedGeneReport
-commandLine=<R2.15_HOME>/bin/Rscript --no-save --quiet --slave --no-restore <libdir>run_gp_cummerbund_selected_gene_report.R <libdir> <patches>/rlib/2.15_20131119/site-library --cuffdiff.input\=<cuffdiff.input> --feature.id=<feature.id> <find.similar> <reference.GTF> <genome.file> --output.format=<output.format> --feature.level=<feature.level> --report.as.aggregate=<report.as.aggregate> --log.transform=<log.transform>
+commandLine=<R2.15_HOME>/bin/Rscript --no-save --quiet --slave --no-restore <libdir>run_gp_cummerbund_selected_gene_report.R <libdir> <patches>/rlib/2.15_20131119/site-library --cuffdiff.input\=<cuffdiff.input> --feature.id=<feature.id> <find.similar> <reference.GTF> <genome> --output.format=<output.format> --feature.level=<feature.level> --report.as.aggregate=<report.as.aggregate> --log.transform=<log.transform>
 license=
 taskDoc=doc.html
 fileFormat=
@@ -8,12 +8,12 @@ taskType=RNA-seq
 os=any
 privacy=public
 description=Cuffdiff visualization package providing plots based on a single user-specified gene.
-version=Renamed show.replicates to report.as.aggregate, plus other tweaks driven by documentation.  Fixed a bug with use of replicates in some plots.
+version=Dropped the genome.file param in favor of a simple string param - on closer review, I found this is supposed to be a label instead of a file.  Corrected some description text based on doc edits.
 minGenePatternVersion=
 author=Loyal Goff, MIT Computer Science and Artificial Intelligence Lab
 
 p1_default_value=
-p1_description=A Cuffdiff job, a previous CummeRbund job, or a cuffData.db file from a previous CummeRbund job
+p1_description=A Cuffdiff job, a previous CummeRbund job, or a cuffData.db file from a previous CummeRbund job.
 p1_fileFormat=directory;db
 p1_MODE=IN
 p1_name=cuffdiff.input
@@ -47,7 +47,7 @@ p4_TYPE=FILE
 p4_choiceDir=ftp\://gpftp.broadinstitute.org/module_support_files/annotation/gtf/
 p4_choiceDirFilter=*.gtf;*.GTF
 p4_default_value=
-p4_description=An optional reference annotation GTF. The input assemblies are merged together with the reference GTF and included in the final output. Cuffmerge will use this to attach gene names and other metadata to the merged catalog.
+p4_description=An optional but highly recommended reference annotation GTF. This should be the same reference used in the original Cuffdiff job.  If ref.gtf is specified then genome must be specified as well.
 p4_fileFormat=gtf
 p4_flag=--ref.gtf\=
 p4_name=reference.GTF
@@ -57,19 +57,15 @@ p4_prefix_when_specified=--ref.gtf\=
 p4_type=java.io.File
 p4_value=
 
-p5_MODE=IN
-p5_TYPE=FILE
-p5_choiceDir=ftp\://gpftp.broadinstitute.org/module_support_files/sequence/whole_genome/
-p5_choiceDirFilter=*.fa;*.fasta;*.FA;*.FASTA
 p5_default_value=
-p5_description=A file containing the genomic DNA sequences for the reference.  This should be a multi-FASTA file with all contigs present.
-p5_fileFormat=fa;fasta
-p5_flag=-genome.file\=
-p5_name=genome.file
+p5_description=The name of the genome used in the original Cuffdiff job (e.g. 'hg19, 'mm9').  You should not need to change this unless you are providing your own reference GTF.  If ref.gtf is specified then genome must be specified as well.
+p5_fileFormat=
+p5_flag=--genome\=
+p5_name=genome
 p5_optional=on
-p5_prefix=--genome.file\=
-p5_prefix_when_specified=--genome.file\=
-p5_type=java.io.File
+p5_prefix=--genome\=
+p5_prefix_when_specified=--genome\=
+p5_type=java.lang.String
 p5_value=
 
 p6_default_value=pdf
