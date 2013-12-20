@@ -8,7 +8,7 @@ taskType=RNA-seq
 os=any
 privacy=public
 description=Cuffdiff visualization package providing plots based on a user-provided list of genes. 
-version=Added a report of the cluster contents, listing which cluster each gene was placed in.
+version=Minor changes due to doc updates
 minGenePatternVersion=
 author=Loyal Goff, MIT Computer Science and Artificial Intelligence Lab
 
@@ -96,7 +96,7 @@ p8_type=java.lang.String
 p8_value=yes;no
 
 p9_default_value=
-p9_description=An optional count for the K-Means clustering plot.  If blank, this plot will be skipped.
+p9_description=An optional count for the K-Means clustering plot; the clustering algorithm will assign genes (or lower-level features) to this number of clusters. If blank, this plot will be skipped.
 p9_fileFormat=
 p9_flag=--cluster.count\=
 p9_name=cluster.count
