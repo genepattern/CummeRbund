@@ -7,8 +7,8 @@ fileFormat=
 taskType=RNA-seq
 os=any
 privacy=public
-description=Cuffdiff visualization package providing QC plots
-version=Dropped the genome.file param in favor of a simple string param - on closer review, I found this is supposed to be a label instead of a file.  Corrected some description text based on doc edits.
+description=Cuffdiff visualization package providing plots and tables related to QC and Global Stats
+version=Minor changes due to doc updates
 minGenePatternVersion=
 author=Loyal Goff, MIT Computer Science and Artificial Intelligence Lab
 
