@@ -8,7 +8,7 @@ taskType=RNA-seq
 os=any
 privacy=public
 description=Cuffdiff visualization package providing plots based on a user-provided list of genes. 
-version=Minor changes due to doc updates
+version=Minor parameter description fixes based on doc review.
 minGenePatternVersion=
 author=Loyal Goff, MIT Computer Science and Artificial Intelligence Lab
 
@@ -38,7 +38,7 @@ p3_TYPE=FILE
 p3_choiceDir=ftp\://gpftp.broadinstitute.org/module_support_files/annotation/gtf/
 p3_choiceDirFilter=*.gtf;*.GTF
 p3_default_value=
-p3_description=An optional but highly recommended reference annotation GTF. This should be the same reference used in the original Cuffdiff job  If ref.gtf is specified then genome must be specified as well.
+p3_description=An optional but highly recommended reference annotation GTF. This should be the same reference used in the original Cuffdiff job.
 p3_fileFormat=gtf
 p3_flag=--ref.gtf\=
 p3_name=reference.GTF
@@ -49,7 +49,7 @@ p3_type=java.io.File
 p3_value=
 
 p4_default_value=
-p4_description=The name of the genome used in the original Cuffdiff job (e.g. 'hg19, 'mm9').  You should not need to change this unless you are providing your own reference GTF.  If ref.gtf is specified then genome must be specified as well.
+p4_description=The name of the genome used in the original Cuffdiff job (e.g. 'hg19, 'mm9').  You should not need to change this unless you are providing your own reference GTF.
 p4_fileFormat=
 p4_flag=--genome\=
 p4_name=genome
