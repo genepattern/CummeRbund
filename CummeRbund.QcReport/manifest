@@ -8,7 +8,7 @@ taskType=RNA-seq
 os=any
 privacy=public
 description=Cuffdiff visualization package providing plots and tables related to QC and Global Stats
-version=Minor parameter description fixes based on doc review.
+version=Fixed a minor bug in error handling for significance data reports
 minGenePatternVersion=
 author=Loyal Goff, MIT Computer Science and Artificial Intelligence Lab
 
