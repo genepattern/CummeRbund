@@ -33,9 +33,6 @@ GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome, output.forma
    print.fpkmSCVPlot(selected.features, device.open, "QC")
    print.densityPlot(selected.features, device.open, "QC", use.replicates, log.transform)
    print.Boxplot(selected.features, device.open, "QC", use.replicates, log.transform)
-   print.scatterMatrix(selected.features, device.open, "QC", use.replicates, log.transform)
-   print.volcanoMatrix(selected.features, device.open, "QC")
-   print.sigMatrix(cuff, device.open, feature.level)
    print.MDSplot(cuff, selected.features, device.open, use.replicates, log.transform)
    print.PCAplot(selected.features, device.open, "QC", use.replicates)
    print.DistHeat(selected.features, device.open, "QC", use.replicates, log.transform)
@@ -62,6 +59,27 @@ GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome, output.forma
             print.MAplot(selected.features, currJ, currI, device.open, "QC", log.transform)
          }
       }
+   }
+
+   # Generate matrix comparison plots.  These include all pair-wise comparisons and so require
+   # resources geometric in the size of the input (number of samples/replicates).  To guard
+   # against resource over-runs, we do not plot these for more than 7 samples/replicates
+   # (matrix of 36 comparisons in total)
+   matrixCompareLimit <- 7
+   if (count > matrixCompareLimit) {
+      print("Too many samples; skipping QC.VolcanoMatrix and QC.SignificanceMatrix.")
+   }
+   else {
+      print.volcanoMatrix(selected.features, device.open, "QC")
+      print.sigMatrix(cuff, device.open, feature.level)
+   }
+
+   if (use.replicates) { count <- NROW(replicates(cuff@genes)) }
+   if (count > matrixCompareLimit) {
+      print("Too many samples/replicates; skipping pair-wise QC.ScatterMatrix.") 
+   }
+   else {
+      print.scatterMatrix(selected.features, device.open, "QC", use.replicates, log.transform)
    }
 }
 
