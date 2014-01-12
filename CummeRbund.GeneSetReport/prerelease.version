@@ -1,3 +1,5 @@
+#updated after building 0.10
+#Sun, 12 Jan 2014 13:07:40 -0500
 #updated after building 0.9
 #Thu, 02 Jan 2014 17:24:49 +0900
 #updated after building 0.8
@@ -16,4 +18,4 @@
 #Mon, 09 Dec 2013 13:06:38 +0900
 #updated after building 0.1
 #Tue, 03 Dec 2013 13:07:02 +0900
-prerelease.number=10
+prerelease.number=11
