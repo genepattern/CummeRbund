@@ -50,8 +50,9 @@ run.job <- function(cuffdiff.input, job.builder) {
       # If the input is a file, assume it is a SQLite database when passing it to readCufflinks.
       # If it is not, we'll let readCufflinks report the problem.
 
-      # need to create a local symlink.  We don't want to clean this up afterward.
-      file.symlink(cuffdiff.input, "cuffData.db")
+      # If it's not in the job results directory, we need to create a local symlink.  We don't want to clean this up afterward.
+      dir.contents <- list.files(getwd())
+      if (!("cuffData.db" %in% dir.contents)) { file.symlink(cuffdiff.input, "cuffData.db") }
       job.builder(getwd())
    } 
    else {

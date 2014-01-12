@@ -8,7 +8,7 @@ taskType=RNA-seq
 os=any
 privacy=public
 description=Cuffdiff visualization package providing plots based on a single user-specified gene.
-version=Minor parameter description fixes based on doc review.
+version=Fixed a local symlink bug: the module would fail when a cuffData.db file is passed directly as an input param.
 minGenePatternVersion=
 author=Loyal Goff, MIT Computer Science and Artificial Intelligence Lab
 
