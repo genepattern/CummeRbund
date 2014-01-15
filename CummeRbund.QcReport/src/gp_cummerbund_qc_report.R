@@ -91,7 +91,7 @@ write.significance.data <- function(data, accessor.function, report.name) {
          write.table(sig_data, report.name, sep='\t', row.names = F, col.names = T, quote = F)
       }
       else {
-         print(paste0("Skipping ", report.name, " - no data found"))
+         print(paste0("Skipping ", report.name, " - no data found meeting significance threshold"))
       }
    },
    error = function(err) {
