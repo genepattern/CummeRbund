@@ -21,6 +21,9 @@ suppressMessages(suppressWarnings(
    library(cummeRbund)
 ))
 
+# Based on info from Loyal Goff, the ref.gtf and genome parameters are unused at this time.
+# There is reason to believe that these might be brought back, however, so they have only
+# been removed from the manifest and not from the R code.
 option_list <- list(
   make_option("--cuffdiff.input", dest="cuffdiff.input"),
   make_option("--geneset.file", dest="geneset.file"),
