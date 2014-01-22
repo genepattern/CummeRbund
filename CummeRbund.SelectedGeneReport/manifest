@@ -1,6 +1,6 @@
 #Wed, 13 Nov 2013 15:59:49 -0500
 name=CummeRbund.SelectedGeneReport
-commandLine=<R2.15_HOME>/bin/Rscript --no-save --quiet --slave --no-restore <libdir>run_gp_cummerbund_selected_gene_report.R <libdir> <patches>/rlib/2.15_20131119/site-library --cuffdiff.input\=<cuffdiff.input> --feature.id=<feature.id> <find.similar> <reference.GTF> <genome> --output.format=<output.format> --feature.level=<feature.level> --report.as.aggregate=<report.as.aggregate> --log.transform=<log.transform>
+commandLine=<R2.15_HOME>/bin/Rscript --no-save --quiet --slave --no-restore <libdir>run_gp_cummerbund_selected_gene_report.R <libdir> <patches>/rlib/2.15_20131119/site-library --cuffdiff.input\=<cuffdiff.input> --feature.id=<feature.id> <find.similar> --output.format=<output.format> --feature.level=<feature.level> --report.as.aggregate=<report.as.aggregate> --log.transform=<log.transform>
 license=
 taskDoc=doc.html
 fileFormat=
@@ -8,7 +8,7 @@ taskType=RNA-seq
 os=any
 privacy=public
 description=Cuffdiff visualization package providing plots based on a single user-specified gene.
-version=Fixed a local symlink bug: the module would fail when a cuffData.db file is passed directly as an input param.
+version=Removed the ref.GTF and genome parameters.
 minGenePatternVersion=
 author=Loyal Goff, MIT Computer Science and Artificial Intelligence Lab
 
@@ -42,67 +42,41 @@ p3_prefix_when_specified=--find.similar\=
 p3_type=java.lang.Integer
 p3_value=
 
-p4_MODE=IN
-p4_TYPE=FILE
-p4_choiceDir=ftp\://gpftp.broadinstitute.org/module_support_files/annotation/gtf/
-p4_choiceDirFilter=*.gtf;*.GTF
-p4_default_value=
-p4_description=An optional but highly recommended reference annotation GTF. This should be the same reference used in the original Cuffdiff job.
-p4_fileFormat=gtf
-p4_flag=--ref.gtf\=
-p4_name=reference.GTF
-p4_optional=on
-p4_prefix=--ref.gtf\=
-p4_prefix_when_specified=--ref.gtf\=
-p4_type=java.io.File
-p4_value=
+p4_default_value=pdf
+p4_description=The output file format.
+p4_fileFormat=
+p4_name=output.format
+p4_optional=
+p4_prefix_when_specified=
+p4_type=java.lang.String
+p4_value=pdf;svg;png
 
-p5_default_value=
-p5_description=The name of the genome used in the original Cuffdiff job (e.g. 'hg19, 'mm9').  You should not need to change this unless you are providing your own reference GTF.
+p5_default_value=genes
+p5_description=Feature level for the report.  Note that the Similarity plots will always be generated at the "genes" level.
 p5_fileFormat=
-p5_flag=--genome\=
-p5_name=genome
-p5_optional=on
-p5_prefix=--genome\=
-p5_prefix_when_specified=--genome\=
+p5_name=feature.level
+p5_optional=
+p5_prefix_when_specified=
 p5_type=java.lang.String
-p5_value=
+p5_value=genes\=genes;isoforms\=isoforms;TSS\=transcription start site (TSS);CDS\=coding sequence (CDS)
 
-p6_default_value=pdf
-p6_description=The output file format.
+p6_default_value=yes
+p6_description=Controls whether reporting should be done for individual replicates or aggregate condition/sample values.  The default is to use aggregate sample values.  Note that the Similarity plots always show aggregate samples.
 p6_fileFormat=
-p6_name=output.format
+p6_name=report.as.aggregate
 p6_optional=
 p6_prefix_when_specified=
 p6_type=java.lang.String
-p6_value=pdf;svg;png
+p6_value=yes;no
 
-p7_default_value=genes
-p7_description=Feature level for the report.  Note that the Similarity plots will always be generated at the "genes" level.
+p7_default_value=yes
+p7_description=Whether or not to log transform the FPKM values.
 p7_fileFormat=
-p7_name=feature.level
+p7_name=log.transform
 p7_optional=
 p7_prefix_when_specified=
 p7_type=java.lang.String
-p7_value=genes\=genes;isoforms\=isoforms;TSS\=transcription start site (TSS);CDS\=coding sequence (CDS)
-
-p8_default_value=yes
-p8_description=Controls whether reporting should be done for individual replicates or aggregate condition/sample values.  The default is to use aggregate sample values.  Note that the Similarity plots always show aggregate samples.
-p8_fileFormat=
-p8_name=report.as.aggregate
-p8_optional=
-p8_prefix_when_specified=
-p8_type=java.lang.String
-p8_value=yes;no
-
-p9_default_value=yes
-p9_description=Whether or not to log transform the FPKM values.
-p9_fileFormat=
-p9_name=log.transform
-p9_optional=
-p9_prefix_when_specified=
-p9_type=java.lang.String
-p9_value=yes;no
+p7_value=yes;no
 
 requiredPatchLSIDs=urn\:lsid\:broadinstitute.org\:plugin\:Ant_1.8\:1,urn\:lsid\:broadinstitute.org\:plugin\:R2.15_Installer\:0.6,urn\:lsid\:broadinstitute.org\:plugin\:rdep_2.15_cummeRbund\:0.7
 requiredPatchURLs=http\://www.broadinstitute.org/webservices/gpModuleRepository/download/prod/patch/?file\=/Ant_1_8/broadinstitute.org\:plugin/Ant_1.8/1/Ant_1_8.zip,http\://www.broadinstitute.org/webservices/gpModuleRepository/download/dev/patch/?file\=/R2.15_Installer/broadinstitute.org\:plugin/R2.15_Installer/0.6/R2.15_Installer.zip,\

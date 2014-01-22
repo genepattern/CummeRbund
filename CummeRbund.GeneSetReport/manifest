@@ -1,6 +1,6 @@
 #Wed, 13 Nov 2013 15:59:49 -0500
 name=CummeRbund.GeneSetReport
-commandLine=<R2.15_HOME>/bin/Rscript --no-save --quiet --slave --no-restore <libdir>run_gp_cummerbund_geneset_report.R <libdir> <patches>/rlib/2.15_20131119/site-library --cuffdiff.input\=<cuffdiff.input> --geneset.file=<geneset.file> <reference.GTF> <genome> --output.format=<output.format> --feature.level=<feature.level> --report.as.aggregate=<report.as.aggregate> --log.transform=<log.transform> <cluster.count>
+commandLine=<R2.15_HOME>/bin/Rscript --no-save --quiet --slave --no-restore <libdir>run_gp_cummerbund_geneset_report.R <libdir> <patches>/rlib/2.15_20131119/site-library --cuffdiff.input\=<cuffdiff.input> --geneset.file=<geneset.file> --output.format=<output.format> --feature.level=<feature.level> --report.as.aggregate=<report.as.aggregate> --log.transform=<log.transform> <cluster.count>
 license=
 taskDoc=doc.html
 fileFormat=
@@ -8,7 +8,7 @@ taskType=RNA-seq
 os=any
 privacy=public
 description=Cuffdiff visualization package providing plots based on a user-provided list of genes. 
-version=Fixed a local symlink bug: the module would fail when a cuffData.db file is passed directly as an input param.
+version=Removed the ref.GTF and genome parameters.
 minGenePatternVersion=
 author=Loyal Goff, MIT Computer Science and Artificial Intelligence Lab
 
@@ -33,78 +33,52 @@ p2_optional=
 p2_type=java.io.File
 p2_value=
 
-p3_MODE=IN
-p3_TYPE=FILE
-p3_choiceDir=ftp\://gpftp.broadinstitute.org/module_support_files/annotation/gtf/
-p3_choiceDirFilter=*.gtf;*.GTF
-p3_default_value=
-p3_description=An optional but highly recommended reference annotation GTF. This should be the same reference used in the original Cuffdiff job.
-p3_fileFormat=gtf
-p3_flag=--ref.gtf\=
-p3_name=reference.GTF
-p3_optional=on
-p3_prefix=--ref.gtf\=
-p3_prefix_when_specified=--ref.gtf\=
-p3_type=java.io.File
-p3_value=
+p3_default_value=pdf
+p3_description=The output file format.
+p3_fileFormat=
+p3_name=output.format
+p3_optional=
+p3_prefix_when_specified=
+p3_type=java.lang.String
+p3_value=pdf;svg;png
 
-p4_default_value=
-p4_description=The name of the genome used in the original Cuffdiff job (e.g. 'hg19, 'mm9').  You should not need to change this unless you are providing your own reference GTF.
+p4_default_value=genes
+p4_description=Feature level for the report.
 p4_fileFormat=
-p4_flag=--genome\=
-p4_name=genome
-p4_optional=on
-p4_prefix=--genome\=
-p4_prefix_when_specified=--genome\=
+p4_name=feature.level
+p4_optional=
+p4_prefix_when_specified=
 p4_type=java.lang.String
-p4_value=
+p4_value=genes\=genes;isoforms\=isoforms;TSS\=transcription start site (TSS);CDS\=coding sequence (CDS)
 
-p5_default_value=pdf
-p5_description=The output file format.
+p5_default_value=yes
+p5_description=Controls whether reporting should be done for individual replicates or aggregate condition/sample values.  The default is to use aggregate sample values.  Note that the Volcano plot always shows aggregate samples.
 p5_fileFormat=
-p5_name=output.format
+p5_name=report.as.aggregate
 p5_optional=
 p5_prefix_when_specified=
 p5_type=java.lang.String
-p5_value=pdf;svg;png
+p5_value=yes;no
 
-p6_default_value=genes
-p6_description=Feature level for the report.
+p6_default_value=yes
+p6_description=Whether or not to log transform the FPKM values.  Note that the FPKM values are always log transformed for the Volcano plots and that the Scatter plot will use a log2 rather than log10 transformation.  For the Expression Plot and Expression Barplot, this directs that the y-axis will be drawn on a log10 scale.
 p6_fileFormat=
-p6_name=feature.level
+p6_name=log.transform
 p6_optional=
 p6_prefix_when_specified=
 p6_type=java.lang.String
-p6_value=genes\=genes;isoforms\=isoforms;TSS\=transcription start site (TSS);CDS\=coding sequence (CDS)
+p6_value=yes;no
 
-p7_default_value=yes
-p7_description=Controls whether reporting should be done for individual replicates or aggregate condition/sample values.  The default is to use aggregate sample values.  Note that the Volcano plot always shows aggregate samples.
+p7_default_value=
+p7_description=An optional count for the K-Means clustering plot; the clustering algorithm will assign genes (or lower-level features) to this number of clusters. If blank, this plot will be skipped.
 p7_fileFormat=
-p7_name=report.as.aggregate
-p7_optional=
-p7_prefix_when_specified=
-p7_type=java.lang.String
-p7_value=yes;no
-
-p8_default_value=yes
-p8_description=Whether or not to log transform the FPKM values.  Note that the FPKM values are always log transformed for the Volcano plots and that the Scatter plot will use a log2 rather than log10 transformation.  For the Expression Plot and Expression Barplot, this directs that the y-axis will be drawn on a log10 scale.
-p8_fileFormat=
-p8_name=log.transform
-p8_optional=
-p8_prefix_when_specified=
-p8_type=java.lang.String
-p8_value=yes;no
-
-p9_default_value=
-p9_description=An optional count for the K-Means clustering plot; the clustering algorithm will assign genes (or lower-level features) to this number of clusters. If blank, this plot will be skipped.
-p9_fileFormat=
-p9_flag=--cluster.count\=
-p9_name=cluster.count
-p9_optional=on
-p9_prefix=--cluster.count\=
-p9_prefix_when_specified=--cluster.count\=
-p9_type=java.lang.Integer
-p9_value=
+p7_flag=--cluster.count\=
+p7_name=cluster.count
+p7_optional=on
+p7_prefix=--cluster.count\=
+p7_prefix_when_specified=--cluster.count\=
+p7_type=java.lang.Integer
+p7_value=
 
 requiredPatchLSIDs=urn\:lsid\:broadinstitute.org\:plugin\:Ant_1.8\:1,urn\:lsid\:broadinstitute.org\:plugin\:R2.15_Installer\:0.6,urn\:lsid\:broadinstitute.org\:plugin\:rdep_2.15_cummeRbund\:0.7
 requiredPatchURLs=http\://www.broadinstitute.org/webservices/gpModuleRepository/download/prod/patch/?file\=/Ant_1_8/broadinstitute.org\:plugin/Ant_1.8/1/Ant_1_8.zip,http\://www.broadinstitute.org/webservices/gpModuleRepository/download/dev/patch/?file\=/R2.15_Installer/broadinstitute.org\:plugin/R2.15_Installer/0.6/R2.15_Installer.zip,\
