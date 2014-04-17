@@ -50,9 +50,9 @@ run.job <- function(cuffdiff.input, job.builder) {
       # If the input is a file, assume it is a SQLite database when passing it to readCufflinks.
       # If it is not, we'll let readCufflinks report the problem.
 
-      # If it's not in the job results directory, we need to create a local symlink.  We don't want to clean this up afterward.
+      # If it's not in the job results directory, we need to create a local copy.  We don't want to clean this up afterward.
       dir.contents <- list.files(getwd())
-      if (!("cuffData.db" %in% dir.contents)) { file.symlink(cuffdiff.input, "cuffData.db") }
+      if (!("cuffData.db" %in% dir.contents)) { gp.file.local.copy(cuffdiff.input, "cuffData.db") }
       job.builder(getwd())
    } 
    else {
@@ -62,25 +62,25 @@ run.job <- function(cuffdiff.input, job.builder) {
       if ("cuffData.db" %in% dir.contents) {
          dbFile <- file.path(cuffdiff.input, "cuffData.db")
          
-         # need to create a local symlink.  As above, we don't want to clean this up afterward.
-         file.symlink(dbFile, "cuffData.db")
+         # need to create a local copy.  As above, we don't want to clean this up afterward.
+         gp.file.local.copy(dbFile, "cuffData.db")
          job.builder(getwd())
       }
       else {
-         # We need to set up a local copy of these files (using symlinks) so that the resulting
+         # We need to set up a local copy of these files so that the resulting
          # cuffData.db file is created here rather than elsewhere.
          input.job <- "inputJob"
          dir.create(input.job)
-         symlinker <- function(x) {
-            file.symlink(file.path(cuffdiff.input, x), file.path(input.job, x))
+         local.copy.fun <- function(x) {
+            gp.file.local.copy(file.path(cuffdiff.input, x), file.path(input.job, x))
          }
-         lapply(dir.contents, FUN = symlinker)
+         lapply(dir.contents, FUN = local.copy.fun)
 
          tryCatch({
             job.builder(input.job)
          },
          finally = {
-            # Need to move the SQLite DB to the jobResults dir and clean up the symlinks
+            # Need to move the SQLite DB to the jobResults dir and clean up the local copy
             dbFile <- file.path(input.job, "cuffData.db")
             if (file.exists(dbFile)) {
                file.rename(dbFile, file.path(getwd(), "cuffData.db"))
@@ -89,6 +89,14 @@ run.job <- function(cuffdiff.input, job.builder) {
          })
       }
    }
+}
+
+# This function sets up a local copy of the "from" file at the "to" location.  To do this, it will
+# first try to create a hard link then fall back to file.copy, with a hard failure if both of these fail.
+gp.file.local.copy <- function(from, to) {
+   retVal <- file.link(from, to)
+   if (!retVal) { retVal <- file.copy(from, to) }
+   if (!retVal) { stop(paste0("Unable to make a local copy of '", from, "' in location '", to, "'")) }
 }
 
 readCufflinks.silent <-function(cuffdiff.job, gtf.file, genome) {
@@ -230,4 +238,29 @@ print.dendrogram <- function(selected.features, device.open, filename_base, use.
       print(paste0("Error printing the ", plotname, " plot - skipping"))
       print(err)
    })
+}
+
+
+# potential sample subsetting code, pulled from csVolcano method...
+subset <- function(object, x, y, features=FALSE) {
+
+    # Is diffData the right way to go about this?
+    dat<-diffData(object=object,features=features)
+    # ... and if so, why does it not instead use:
+    #dat<-diffData(object=object, x, y, features=features)
+    #... since that is supposed to do the subsetting
+
+    #subset dat for samples of interest
+    mySamples<-c(x,y)
+    dat<-dat[(dat$sample_1 %in% mySamples & dat$sample_2 %in% mySamples),]
+    dat$significant <- 'no'
+    dat$significant[dat$q_value<=alpha]<-'yes'
+    s1<-unique(dat$sample_1)
+    s2<-unique(dat$sample_2)
+
+    # However, this procedure just gives me a data.frame object instead 
+    # of a CuffData object, so it's not directly usable with the various
+    # built-in plot methods (csVolcano, etc).  We don't want to have to
+    # rebuild all of those methods, so we need a way to get the above
+    # info as a CuffData object.
 }

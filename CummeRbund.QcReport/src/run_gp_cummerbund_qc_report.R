@@ -16,7 +16,9 @@ site.library <- args[2]
 cat("\nLibrary dir: ",site.library)
 .libPaths(site.library)
 
-suppressPackageStartupMessages(library(optparse))
+suppressMessages(suppressWarnings(
+   library(optparse)
+))
 suppressMessages(suppressWarnings(
    library(cummeRbund)
 ))
