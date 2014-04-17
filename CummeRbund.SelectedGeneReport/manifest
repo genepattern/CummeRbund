@@ -78,16 +78,16 @@ p7_prefix_when_specified=
 p7_type=java.lang.String
 p7_value=yes;no
 
-requiredPatchLSIDs=urn\:lsid\:broadinstitute.org\:plugin\:Ant_1.8\:1,urn\:lsid\:broadinstitute.org\:plugin\:R2.15_Installer\:0.6,urn\:lsid\:broadinstitute.org\:plugin\:rdep_2.15_cummeRbund\:0.7
-requiredPatchURLs=http\://www.broadinstitute.org/webservices/gpModuleRepository/download/prod/patch/?file\=/Ant_1_8/broadinstitute.org\:plugin/Ant_1.8/1/Ant_1_8.zip,http\://www.broadinstitute.org/webservices/gpModuleRepository/download/dev/patch/?file\=/R2.15_Installer/broadinstitute.org\:plugin/R2.15_Installer/0.6/R2.15_Installer.zip,\
-  http\://www.broadinstitute.org/webservices/gpModuleRepository/download/dev/patch/?file\=/rdep_2.15_cummeRbund/broadinstitute.org\:plugin/rdep_2.15_cummeRbund/0.7/rdep_2.15_cummeRbund.zip
+requiredPatchLSIDs=urn\:lsid\:broadinstitute.org\:plugin\:Ant_1.8\:1,\
+  urn\:lsid\:broadinstitute.org\:plugin\:R2.15_Installer\:1,\
+  urn\:lsid\:broadinstitute.org\:plugin\:rdep_2.15_cummeRbund\:0.7
+requiredPatchURLs=http\://www.broadinstitute.org/webservices/gpModuleRepository/download/prod/patch/?file\=/Ant_1_8/broadinstitute.org\:plugin/Ant_1.8/1/Ant_1_8.zip,\
+   http\://www.broadinstitute.org/webservices/gpModuleRepository/download/prod/patch/?file\=/R2.15_Installer/broadinstitute.org\:plugin/R2.15_Installer/1/R2.15_Installer.zip,\
+   http\://www.broadinstitute.org/webservices/gpModuleRepository/download/dev/patch/?file\=/rdep_2.15_cummeRbund/broadinstitute.org\:plugin/rdep_2.15_cummeRbund/0.7/rdep_2.15_cummeRbund.zip
 
 #http\://iwww.broadinstitute.org/~eby/rdep_2.15_cummeRbund.zip
 
-# The following should be the final LSID & URL for R2.15_Installer when it's done.  Remove this comment and place the values above.
-#  urn\:lsid\:broadinstitute.org\:plugin\:R2.15_Installer\:1,\
-#  http\://www.broadinstitute.org/webservices/gpModuleRepository/download/prod/patch/?file\=/R2.15_Installer/broadinstitute.org\:plugin/R2.15_Installer/1/R2.15_Installer.zip,\
-# ... and for cummeRbund:
+# The following should be the final LSID & URL for cummeRbund rdep when it's done.  Remove this comment and place the values above.
 #  urn:lsid:broadinstitute.org:plugin:rdep_2.15_cummeRbund:1
 #  http\://www.broadinstitute.org/webservices/gpModuleRepository/download/prod/patch/?file\=/rdep_2.15_cummeRbund/broadinstitute.org\:plugin/rdep_2.15_cummeRbund/1/rdep_2.15_cummeRbund.zip
 
