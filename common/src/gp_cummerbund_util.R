@@ -132,6 +132,29 @@ checkCuffVersionAbove2 <- function(cuff) {
   })
 }
 
+get.selected.conditions <- function(selected.conditions.param) {
+   if (is.null(selected.conditions.param) || grepl('^\\s*$', selected.conditions.param)) {
+      return(c())
+   }
+
+   selected.conditions <- unlist(strsplit(selected.conditions.param, ','))
+   lapply(selected.conditions, function(i) { i<-gsub("^\\s+|\\s+$", "", i) })   
+   return(selected.conditions)
+}
+
+check.selected.conditions <- function(selected.conditions, cuff) {
+   if (is.null(selected.conditions) || NROW(selected.conditions) == 0) { return }
+
+   # Check that selected.conditions are valid before proceeding
+   all.conditions <- samples(cuff@genes)
+   if (!all(selected.conditions %in% all.conditions)) {
+      stop(paste0("Unrecognized condition '", i))
+   }
+
+   print("Limited to conditions:")
+   print(selected.conditions)
+}
+
 get.device.open <- function(extension) {
    if (extension == "pdf") {
       return(function(filename_base) {
@@ -168,10 +191,10 @@ print.plotObject <- function(plotObj, filename_base, device.open) {
 
 # Wrapper functions to reduce boilerplate code in the reports
 build.XYAxisPlotter <- function(plotTypeName, plotterFunction) {
-   function(selected.features, x, y, device.open, filename_base, log.transform=TRUE) {
+   function(selected.features, x, y, device.open, filename_base, use.replicates=FALSE, log.transform=TRUE) {
       plotname <- paste0(filename_base,".",plotTypeName,".",x,"_",y)
       tryCatch({
-         plotObj<-plotterFunction(selected.features, x, y, log.transform=TRUE)
+         plotObj<-plotterFunction(selected.features, x, y, use.replicates, log.transform)
          print.plotObject(plotObj, plotname, device.open)
       },
       error = function(err) {
@@ -197,19 +220,19 @@ build.standardPlotter <- function(plotTypeName, plotterFunction) {
 
 # Utility plot functions for plots used across multiple reports
 print.volcanoPlot <- build.XYAxisPlotter("Volcano",
-   function(selected.features, x, y, log.transform=TRUE) {
+   function(selected.features, x, y, use.replicates=FALSE, log.transform=TRUE) {
       return(csVolcano(selected.features, x, y, showSignificant=TRUE))
    }
 )
 
 print.scatterPlot <- build.XYAxisPlotter("Scatter",
-   function(selected.features, x, y, log.transform) {
+   function(selected.features, x, y, use.replicates=FALSE, log.transform) {
       return(csScatter(selected.features, x, y, colorByStatus=TRUE, smooth=TRUE, logMode=log.transform))
    }
 )
 
 print.MAplot <- build.XYAxisPlotter("MAplot",
-   function(selected.features, x, y, log.transform) {
+   function(selected.features, x, y, use.replicates=FALSE, log.transform) {
       return(MAplot(selected.features, x, y, smooth=TRUE, logMode=log.transform))
    }
 )
@@ -238,29 +261,4 @@ print.dendrogram <- function(selected.features, device.open, filename_base, use.
       print(paste0("Error printing the ", plotname, " plot - skipping"))
       print(err)
    })
-}
-
-
-# potential sample subsetting code, pulled from csVolcano method...
-subset <- function(object, x, y, features=FALSE) {
-
-    # Is diffData the right way to go about this?
-    dat<-diffData(object=object,features=features)
-    # ... and if so, why does it not instead use:
-    #dat<-diffData(object=object, x, y, features=features)
-    #... since that is supposed to do the subsetting
-
-    #subset dat for samples of interest
-    mySamples<-c(x,y)
-    dat<-dat[(dat$sample_1 %in% mySamples & dat$sample_2 %in% mySamples),]
-    dat$significant <- 'no'
-    dat$significant[dat$q_value<=alpha]<-'yes'
-    s1<-unique(dat$sample_1)
-    s2<-unique(dat$sample_2)
-
-    # However, this procedure just gives me a data.frame object instead 
-    # of a CuffData object, so it's not directly usable with the various
-    # built-in plot methods (csVolcano, etc).  We don't want to have to
-    # rebuild all of those methods, so we need a way to get the above
-    # info as a CuffData object.
 }

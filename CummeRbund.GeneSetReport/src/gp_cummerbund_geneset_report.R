@@ -8,8 +8,8 @@
 ## whatsoever. Neither the Broad Institute nor MIT can be responsible for its
 ## use, misuse, or functionality.
 
-GP.CummeRbund.Geneset.Report <- function(cuffdiff.job, geneset.file, gtf.file, genome, output.format,
-                                         feature.level, report.as.aggregate, log.transform, cluster.count) {
+GP.CummeRbund.Geneset.Report <- function(cuffdiff.job, geneset.file, selected.conditions, gtf.file, genome,
+                                         output.format, feature.level, report.as.aggregate, log.transform) {
    use.replicates <- !report.as.aggregate
    device.open <- get.device.open(output.format)
 
@@ -17,12 +17,20 @@ GP.CummeRbund.Geneset.Report <- function(cuffdiff.job, geneset.file, gtf.file, g
    
    print("Generating plots based on the following genes:")
    print(genesetIds)
-   
+
    feature.selector <- get.feature.selector(feature.level)
 
    cuff <- readCufflinks.silent(cuffdiff.job, gtf.file, genome)
    
-   geneset <- getGenes(cuff, genesetIds)
+   conditions.count <- NROW(selected.conditions)
+   if (conditions.count == 0) {
+      selected.conditions <- NULL
+   }
+   else {
+      check.selected.conditions(selected.conditions, cuff)
+   }
+   
+   geneset <- getGenes(cuff, genesetIds, sampleIdList=selected.conditions)
    geneset
 
    selected.features <- geneset
@@ -33,20 +41,19 @@ GP.CummeRbund.Geneset.Report <- function(cuffdiff.job, geneset.file, gtf.file, g
    print.expressonBarplot(selected.features, device.open, "GeneSet", use.replicates, log.transform)
    print.expressonPlot(selected.features, device.open, "GeneSet", use.replicates, log.transform)
    print.dendrogram(selected.features, device.open, "GeneSet", use.replicates, log.transform)
-   print.clusterPlot(selected.features, device.open, cluster.count, use.replicates, log.transform)
    
-   # Generate plots for all pair-wise sample comparisons
-   samples <- samples(cuff@genes)
-   count <- NROW(samples)
-   if (count == 1) {
-      # Skip these if there is only one item.  This should never happen.
-      print("Too few samples; skipping pair-wise plots") 
+   # Generate plots for pairwise sample comparisons
+   # This is skipped if no conditions were specified in selected.conditions due to the overhead and
+   # potential large number of files generated.  
+   if (conditions.count < 1) {
+      # Skip these if there is not at least one pair
+      print("Too few conditions; skipping pairwise plots") 
    }
    else {
-      for (i in 1:(count-1)) {
-         for (j in (i+1):count) {
-            currI <- samples[i]
-            currJ <- samples[j]
+      for (i in 1:(conditions.count-1)) {
+         for (j in (i+1):conditions.count) {
+            currI <- selected.conditions[i]
+            currJ <- selected.conditions[j]
             print.volcanoPlot(selected.features, currI, currJ, device.open, "GeneSet")
             # Plot from next line is identical to the above even with args reversed.  This is an acknowledged bug in cummeRbund. 
             #print.volcanoPlot(selected.features, currJ, currI, device.open, "GeneSet")
@@ -59,36 +66,6 @@ GP.CummeRbund.Geneset.Report <- function(cuffdiff.job, geneset.file, gtf.file, g
 
 print.heatmap <- build.standardPlotter("Heatmap", 
    function(selected.features, use.replicates, log.transform) {
-      return(csHeatmap(selected.features, cluster='both', replicates=use.replicates, logMode=log.transform))
+      return(csHeatmap(selected.features, clustering='both', replicates=use.replicates, logMode=log.transform))
    }
 )
-
-print.clusterPlot <- function(selected.features, device.open, cluster.count, use.replicates, log.transform) {
-   if (is.null(cluster.count)) {
-      print("No cluster.count specified; skipping GeneSet.ClusterPlot") 
-   }
-   else {
-      plotname <- paste0("GeneSet.ClusterPlot.k_",cluster.count)
-      ic <- NULL
-      tryCatch({
-         ic <- csCluster(selected.features, k=cluster.count, logMode=log.transform)
-         icp<-csClusterPlot(ic)
-         print.plotObject(icp, plotname, device.open)
-      },
-      error = function(err) {
-         print(paste0("Error printing the ", plotname, " plot - skipping"))
-         print(err)
-      })
-      if (!is.null(ic)) {
-         report.name <- "GeneSet.ClusterContents.txt"
-         tryCatch({
-            print(ic$cluster)
-            write.table(ic$cluster, report.name, sep='\t', row.names = T, col.names = F, quote = F)
-         },
-         error = function(err) {
-            print(paste0("Error printing the ", report.name, " report - skipping"))
-            print(err)
-         })
-      }
-   }
-}

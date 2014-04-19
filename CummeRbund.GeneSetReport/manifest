@@ -1,6 +1,6 @@
 #Wed, 13 Nov 2013 15:59:49 -0500
 name=CummeRbund.GeneSetReport
-commandLine=<R2.15_HOME>/bin/Rscript --no-save --quiet --slave --no-restore <libdir>run_gp_cummerbund_geneset_report.R <libdir> <patches>/rlib/2.15_20131119/site-library --cuffdiff.input\=<cuffdiff.input> --geneset.file=<geneset.file> --output.format=<output.format> --feature.level=<feature.level> --report.as.aggregate=<report.as.aggregate> --log.transform=<log.transform> <cluster.count>
+commandLine=<R2.15_HOME>/bin/Rscript --no-save --quiet --slave --no-restore <libdir>run_gp_cummerbund_geneset_report.R <libdir> <patches>/rlib/2.15_20131119/site-library --cuffdiff.input\=<cuffdiff.input> --geneset.file=<geneset.file> <selected.conditions> --output.format=<output.format> --feature.level=<feature.level> --report.as.aggregate=<report.as.aggregate> --log.transform=<log.transform>
 license=
 taskDoc=doc.html
 fileFormat=
@@ -8,9 +8,9 @@ taskType=RNA-seq
 os=any
 privacy=public
 description=Cuffdiff visualization package providing plots based on a user-provided list of genes. 
-version=Removed the ref.GTF and genome parameters.
+version=Added parameter to limit the plotting to selected.conditions.   Pairwise comparison plots disabled unless selected.conditions are present.
 minGenePatternVersion=
-author=Loyal Goff, MIT Computer Science and Artificial Intelligence Lab
+author=Loyal Goff, MIT Computer Science and Artificial Intelligence Lab; David Eby, Broad Institute
 
 p1_default_value=
 p1_description=A Cuffdiff job, a previous CummeRbund job, or a cuffData.db file from a previous CummeRbund job.
@@ -23,14 +23,13 @@ p1_TYPE=FILE
 p1_type=java.io.File
 p1_value=
 
-p2_MODE=IN
-p2_TYPE=FILE
 p2_default_value=
-p2_description=A text file containing the list of genes for this report, one per line.  Each of these can be represented by a gene symbol (short name), gene ID, isoform_id, tss_group_id, or cds_id.
-p2_fileFormat=txt
-p2_name=geneset.file
-p2_optional=
-p2_type=java.io.File
+p2_description=Specifies the conditions (samples) to be used in the plots.  This should be a comma-separated list of conditions, using the same names as in the upstream Cuffdiff job; leave this blank to use all conditions.  If blank, no pairwise comparison plots will be generated.
+p2_fileFormat=
+p2_name=selected.conditions
+p2_optional=on
+p2_prefix_when_specified=--selected.conditions\=
+p2_type=java.lang.String
 p2_value=
 
 p3_default_value=pdf
@@ -68,17 +67,6 @@ p6_optional=
 p6_prefix_when_specified=
 p6_type=java.lang.String
 p6_value=yes;no
-
-p7_default_value=
-p7_description=An optional count for the K-Means clustering plot; the clustering algorithm will assign genes (or lower-level features) to this number of clusters. If blank, this plot will be skipped.
-p7_fileFormat=
-p7_flag=--cluster.count\=
-p7_name=cluster.count
-p7_optional=on
-p7_prefix=--cluster.count\=
-p7_prefix_when_specified=--cluster.count\=
-p7_type=java.lang.Integer
-p7_value=
 
 requiredPatchLSIDs=urn\:lsid\:broadinstitute.org\:plugin\:Ant_1.8\:1,\
   urn\:lsid\:broadinstitute.org\:plugin\:R2.15_Installer\:1,\
