@@ -1,6 +1,6 @@
 #Wed, 13 Nov 2013 15:59:49 -0500
 name=CummeRbund.SelectedGeneReport
-commandLine=<R2.15_HOME>/bin/Rscript --no-save --quiet --slave --no-restore <libdir>run_gp_cummerbund_selected_gene_report.R <libdir> <patches>/rlib/2.15_20131119/site-library --cuffdiff.input\=<cuffdiff.input> --feature.id=<feature.id> <find.similar> --output.format=<output.format> --feature.level=<feature.level> --report.as.aggregate=<report.as.aggregate> --log.transform=<log.transform>
+commandLine=<R2.15_HOME>/bin/Rscript --no-save --quiet --slave --no-restore <libdir>run_gp_cummerbund_selected_gene_report.R <libdir> <patches>/rlib/2.15_20131119/site-library --cuffdiff.input\=<cuffdiff.input> --feature.id=<feature.id> <selected.conditions> <find.similar> --output.format=<output.format> --feature.level=<feature.level> --report.as.aggregate=<report.as.aggregate> --log.transform=<log.transform>
 license=
 taskDoc=doc.html
 fileFormat=
@@ -8,9 +8,9 @@ taskType=RNA-seq
 os=any
 privacy=public
 description=Cuffdiff visualization package providing plots based on a single user-specified gene.
-version=Removed the ref.GTF and genome parameters.
+version=Added parameter to limit the plotting to selected.conditions.
 minGenePatternVersion=
-author=Loyal Goff, MIT Computer Science and Artificial Intelligence Lab
+author=Loyal Goff, MIT Computer Science and Artificial Intelligence Lab; David Eby, Broad Institute
 
 p1_default_value=
 p1_description=A Cuffdiff job, a previous CummeRbund job, or a cuffData.db file from a previous CummeRbund job.
@@ -31,52 +31,61 @@ p2_optional=
 p2_type=java.lang.String
 p2_value=
 
-p3_default_value=10
-p3_description=Optionally, find and plot the top genes (up to this count) with an expression profile most similar to the given gene of interest.  If blank, this will be skipped.    
+p3_default_value=
+p3_description=Specifies the conditions (samples) to be used in the plots.  This should be a comma-separated list of conditions, using the same names as in the upstream Cuffdiff job; leave this blank to use all conditions.  The Similarity plots will always operate across all conditions.
 p3_fileFormat=
-p3_flag=--find.similar\=
-p3_name=find.similar
+p3_name=selected.conditions
 p3_optional=on
-p3_prefix=--find.similar\=
-p3_prefix_when_specified=--find.similar\=
-p3_type=java.lang.Integer
+p3_prefix_when_specified=--selected.conditions\=
+p3_type=java.lang.String
 p3_value=
 
-p4_default_value=pdf
-p4_description=The output file format.
+p4_default_value=10
+p4_description=Optionally, find and plot the top genes (up to this count) with an expression profile most similar to the given gene of interest.  If blank, this will be skipped.    
 p4_fileFormat=
-p4_name=output.format
-p4_optional=
-p4_prefix_when_specified=
-p4_type=java.lang.String
-p4_value=pdf;svg;png
+p4_flag=--find.similar\=
+p4_name=find.similar
+p4_optional=on
+p4_prefix=--find.similar\=
+p4_prefix_when_specified=--find.similar\=
+p4_type=java.lang.Integer
+p4_value=
 
-p5_default_value=genes
-p5_description=Feature level for the report.  Note that the Similarity plots will always be generated at the "genes" level.
+p5_default_value=pdf
+p5_description=The output file format.
 p5_fileFormat=
-p5_name=feature.level
+p5_name=output.format
 p5_optional=
 p5_prefix_when_specified=
 p5_type=java.lang.String
-p5_value=genes\=genes;isoforms\=isoforms;TSS\=transcription start site (TSS);CDS\=coding sequence (CDS)
+p5_value=pdf;svg;png
 
-p6_default_value=yes
-p6_description=Controls whether reporting should be done for individual replicates or aggregate condition/sample values.  The default is to use aggregate sample values.  Note that the Similarity plots always show aggregate samples.
+p6_default_value=genes
+p6_description=Feature level for the report.  Note that the Similarity plots will always be generated at the "genes" level.
 p6_fileFormat=
-p6_name=report.as.aggregate
+p6_name=feature.level
 p6_optional=
 p6_prefix_when_specified=
 p6_type=java.lang.String
-p6_value=yes;no
+p6_value=genes\=genes;isoforms\=isoforms;TSS\=transcription start site (TSS);CDS\=coding sequence (CDS)
 
 p7_default_value=yes
-p7_description=Whether or not to log transform the FPKM values.
+p7_description=Controls whether reporting should be done for individual replicates or aggregate condition/sample values.  The default is to use aggregate sample values.  Note that the Similarity plots always show aggregate samples.
 p7_fileFormat=
-p7_name=log.transform
+p7_name=report.as.aggregate
 p7_optional=
 p7_prefix_when_specified=
 p7_type=java.lang.String
 p7_value=yes;no
+
+p8_default_value=yes
+p8_description=Whether or not to log transform the FPKM values.
+p8_fileFormat=
+p8_name=log.transform
+p8_optional=
+p8_prefix_when_specified=
+p8_type=java.lang.String
+p8_value=yes;no
 
 requiredPatchLSIDs=urn\:lsid\:broadinstitute.org\:plugin\:Ant_1.8\:1,\
   urn\:lsid\:broadinstitute.org\:plugin\:R2.15_Installer\:1,\

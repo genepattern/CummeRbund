@@ -16,8 +16,12 @@ site.library <- args[2]
 cat("\nLibrary dir: ",site.library)
 .libPaths(site.library)
 
-suppressPackageStartupMessages(library(optparse))
-suppressPackageStartupMessages(library(tools))
+suppressMessages(suppressWarnings(
+   library(optparse))
+))
+suppressMessages(suppressWarnings(
+   library(tools)
+))
 suppressMessages(suppressWarnings(
    library(cummeRbund)
 ))
@@ -28,6 +32,7 @@ suppressMessages(suppressWarnings(
 option_list <- list(
   make_option("--cuffdiff.input", dest="cuffdiff.input"),
   make_option("--feature.id", dest="feature.id"),
+  make_option("--selected.conditions", dest="selected.conditions", default=NULL),
   make_option("--find.similar", dest="find.similar", type="integer", default=NULL),
   make_option("--ref.gtf", dest="ref.gtf", default=NULL),
   make_option("--genome", dest="genome", default=NULL),
@@ -53,6 +58,8 @@ check.output.format(opts$output.format)
 check.feature.level(opts$feature.level)
 genome <- get.genome.from.params(opts$ref.gtf, opts$genome)
 
+selected.conditions <- get.selected.conditions(opts$selected.conditions)
+
 if (!is.null(opts$find.similar) && opts$find.similar < 0) {
    stop("If provided, find.similar must be a positive integer")
 }
@@ -68,8 +75,8 @@ print(c("Running GenePattern CummeRbund Selected Gene Report on data from:", opt
 
 # Create the job.builder function for run.job
 job.builder <- function(cuffdiff.job) {
-   GP.CummeRbund.SelectedGene.Report(cuffdiff.job, opts$feature.id, opts$find.similar, opts$ref.gtf, genome,
-                                     opts$output.format, opts$feature.level, report.as.aggregate, log.transform)
+   GP.CummeRbund.SelectedGene.Report(cuffdiff.job, opts$feature.id, selected.conditions, opts$find.similar, opts$ref.gtf,
+                                     genome, opts$output.format, opts$feature.level, report.as.aggregate, log.transform)
 }
 
 suppressMessages(suppressWarnings(
