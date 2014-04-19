@@ -33,7 +33,9 @@ option_list <- list(
   make_option("--output.format", dest="output.format"),
   make_option("--feature.level", dest="feature.level"),
   make_option("--report.as.aggregate", dest="report.as.aggregate"),
-  make_option("--log.transform", dest="log.transform")
+  make_option("--log.transform", dest="log.transform"),
+  make_option("--pca.x", dest="pca.x"),
+  make_option("--pca.y", dest="pca.y")
   )
 
 opt <- parse_args(OptionParser(option_list=option_list), positional_arguments=TRUE, args=args)
@@ -47,6 +49,12 @@ source(file.path(libdir, "gp_cummerbund_qc_report.R"))
 
 check.output.format(opts$output.format)
 check.feature.level(opts$feature.level)
+check.pca.axis.selection(opts$pca.x)
+check.pca.axis.selection(opts$pca.y)
+if (opts$pca.x == opts$pca.y) {
+   stop("pca.x must differ from pca.y")
+}
+
 genome <- get.genome.from.params(opts$ref.gtf, opts$genome)
 
 report.as.aggregate <- (opts$report.as.aggregate == "yes")
@@ -57,7 +65,8 @@ print(c("Running GenePattern CummeRbund QC Report on data from:", opts$cuffdiff.
 # Create the job.builder function for run.job
 job.builder <- function(cuffdiff.job) {
    GP.CummeRbund.QC.Report(cuffdiff.job, opts$ref.gtf, genome, opts$output.format,
-                           opts$feature.level, report.as.aggregate, log.transform)
+                           opts$feature.level, report.as.aggregate, log.transform,
+                           opts$pca.x, opts$pca.y)
 }
 
 suppressMessages(suppressWarnings(
