@@ -1,6 +1,6 @@
 #Wed, 13 Nov 2013 15:59:49 -0500
 name=CummeRbund.QcReport
-commandLine=<R2.15_HOME>/bin/Rscript --no-save --quiet --slave --no-restore <libdir>run_gp_cummerbund_qc_report.R <libdir> <patches>/rlib/2.15_20131119/site-library --cuffdiff.input\=<cuffdiff.input> --output.format=<output.format> --feature.level=<feature.level> --report.as.aggregate=<report.as.aggregate> --log.transform=<log.transform>
+commandLine=<R2.15_HOME>/bin/Rscript --no-save --quiet --slave --no-restore <libdir>run_gp_cummerbund_qc_report.R <libdir> <patches>/rlib/2.15_20131119/site-library --cuffdiff.input\=<cuffdiff.input> --output.format=<output.format> --feature.level=<feature.level> --report.as.aggregate=<report.as.aggregate> --log.transform=<log.transform> --pca.x=<pca.x> --pca.y=<pca.y>
 license=
 taskDoc=doc.html
 fileFormat=
@@ -8,9 +8,9 @@ taskType=RNA-seq
 os=any
 privacy=public
 description=Cuffdiff visualization package providing plots and tables related to QC and Global Stats
-version=Removed the ref.GTF and genome parameters.
+version=Removed the pairwise comparison plots - will go into a new module - and added PCA axis selectors.
 minGenePatternVersion=
-author=Loyal Goff, MIT Computer Science and Artificial Intelligence Lab
+author=Loyal Goff, MIT Computer Science and Artificial Intelligence Lab; David Eby, Broad Institute
 
 p1_default_value=
 p1_description=A Cuffdiff job, a previous CummeRbund job, or a cuffData.db file from a previous CummeRbund job.
@@ -58,6 +58,24 @@ p5_optional=
 p5_prefix_when_specified=
 p5_type=java.lang.String
 p5_value=yes;no
+
+p6_default_value=PC2
+p6_description=Indicates which principal component is to be presented on the x-axis of the PCA plot.  Must differ from pca.y.
+p6_fileFormat=
+p6_name=pca.x
+p6_optional=
+p6_prefix_when_specified=
+p6_type=java.lang.String
+p6_value=PC1;PC2;PC3;PC4;PC5;PC6
+
+p7_default_value=PC3
+p7_description=Indicates which principal component is to be presented on the y-axis of the PCA plot.  Must differ from pca.x.
+p7_fileFormat=
+p7_name=pca.y
+p7_optional=
+p7_prefix_when_specified=
+p7_type=java.lang.String
+p7_value=PC1;PC2;PC3;PC4;PC5;PC6
 
 requiredPatchLSIDs=urn\:lsid\:broadinstitute.org\:plugin\:Ant_1.8\:1,\
   urn\:lsid\:broadinstitute.org\:plugin\:R2.15_Installer\:1,\

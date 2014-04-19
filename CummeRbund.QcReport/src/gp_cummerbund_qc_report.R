@@ -9,7 +9,8 @@
 ## use, misuse, or functionality.
 
 GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome, output.format,
-                                    feature.level, report.as.aggregate, log.transform) {
+                                    feature.level, report.as.aggregate, log.transform,
+                                    pca.x, pca.y) {
    use.replicates <- !report.as.aggregate
    
    device.open <- get.device.open(output.format)
@@ -20,13 +21,13 @@ GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome, output.forma
    selected.features <- feature.selector(cuff)
    
    # Write out a table of the differentially expressed features
-   write.significance.data(selected.features, diffData, 
+   write.significance.data(diffData(selected.features), 
                            paste0('QC.sig_diffExp_', feature.level,'.txt'))
 
    # Write out tables of the significant promoters, splicing, and relCDS data
-   write.significance.data(promoters(cuff), distValues, 'QC.sig_promoter_data.txt')
-   write.significance.data(splicing(cuff), distValues, 'QC.sig_splicing_data.txt')
-   write.significance.data(relCDS(cuff), distValues, 'QC.sig_relCDS_data.txt')
+   write.significance.data(distValues(promoters(cuff)), 'QC.sig_promoter_data.txt')
+   write.significance.data(distValues(splicing(cuff)), 'QC.sig_splicing_data.txt')
+   write.significance.data(distValues(relCDS(cuff)), 'QC.sig_relCDS_data.txt')
 
    # Write out the various plots
    print.dispersionPlot(selected.features, device.open, "QC")
@@ -34,59 +35,14 @@ GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome, output.forma
    print.densityPlot(selected.features, device.open, "QC", use.replicates, log.transform)
    print.Boxplot(selected.features, device.open, "QC", use.replicates, log.transform)
    print.MDSplot(cuff, selected.features, device.open, use.replicates, log.transform)
-   print.PCAplot(selected.features, device.open, "QC", use.replicates)
+   print.PCAplot(selected.features, pca.x, pca.y, device.open, "QC", use.replicates, log.transform)
    print.DistHeat(selected.features, device.open, "QC", use.replicates, log.transform)
    print.dendrogram(selected.features, device.open, "QC", use.replicates, log.transform)
-
-   # Generate plots for all pair-wise sample comparisons
-   samples <- samples(cuff@genes)
-   count <- NROW(samples)
-   if (count == 1) {
-      # Skip these if there is only one item.  This should never happen.
-      print("Too few samples; skipping pair-wise plots") 
-   }
-   else {
-      for (i in 1:(count-1)) {
-         for (j in (i+1):count) {
-            currI <- samples[i]
-            currJ <- samples[j]
-            print.volcanoPlot(selected.features, currI, currJ, device.open, "QC")
-            # Plot from next line is identical to the above even with args reversed.  This is an acknowledged bug in cummeRbund. 
-            #print.volcanoPlot(selected.features, currJ, currI, device.open, "QC")
-            print.scatterPlot(selected.features, currI, currJ, device.open, "QC", log.transform)
-            print.scatterPlot(selected.features, currJ, currI, device.open, "QC", log.transform)
-            print.MAplot(selected.features, currI, currJ, device.open, "QC", log.transform)
-            print.MAplot(selected.features, currJ, currI, device.open, "QC", log.transform)
-         }
-      }
-   }
-
-   # Generate matrix comparison plots.  These include all pair-wise comparisons and so require
-   # resources geometric in the size of the input (number of samples/replicates).  To guard
-   # against resource over-runs, we do not plot these for more than 7 samples/replicates
-   # (matrix of 36 comparisons in total)
-   matrixCompareLimit <- 7
-   if (count > matrixCompareLimit) {
-      print("Too many samples; skipping QC.VolcanoMatrix and QC.SignificanceMatrix.")
-   }
-   else {
-      print.volcanoMatrix(selected.features, device.open, "QC")
-      print.sigMatrix(cuff, device.open, feature.level)
-   }
-
-   if (use.replicates) { count <- NROW(replicates(cuff@genes)) }
-   if (count > matrixCompareLimit) {
-      print("Too many samples/replicates; skipping pair-wise QC.ScatterMatrix.") 
-   }
-   else {
-      print.scatterMatrix(selected.features, device.open, "QC", use.replicates, log.transform)
-   }
 }
 
-write.significance.data <- function(data, accessor.function, report.name) {
+write.significance.data <- function(data, report.name) {
    tryCatch({
-      feature_data <- accessor.function(data)
-      sig_data <- subset(feature_data, (significant == 'yes'))
+      sig_data <- subset(data, (significant == 'yes'))
       if (nrow(sig_data) > 0) {
          write.table(sig_data, report.name, sep='\t', row.names = F, col.names = T, quote = F)
       }
@@ -124,27 +80,15 @@ print.Boxplot <- build.standardPlotter("Boxplot",
    }
 )
 
-print.scatterMatrix <- build.standardPlotter("ScatterMatrix", 
-   function(selected.features, use.replicates, log.transform) {
-      return(csScatterMatrix(selected.features, replicates=use.replicates, logMode=log.transform))
-   }
-)
-
-print.volcanoMatrix <- build.standardPlotter("VolcanoMatrix", 
-   function(selected.features, use.replicates, log.transform) {
-      return(csVolcanoMatrix(selected.features))
-   }
-)
-
 print.DistHeat <- build.standardPlotter("JSDistanceHeatmap.Samples", 
    function(selected.features, use.replicates, log.transform) {
       return(csDistHeat(selected.features, replicates=use.replicates, samples.not.genes=TRUE, logMode=log.transform))
    }
 )
 
-print.PCAplot <- build.standardPlotter("DimensionalityReduction.pca", 
-   function(selected.features, use.replicates, log.transform) {
-      return(PCAplot(selected.features, replicates=use.replicates))
+print.PCAplot <- build.XYAxisPlotter("DimensionalityReduction.pca", 
+   function(selected.features, x, y, use.replicates, log.transform) {
+      return(PCAplot(selected.features, x, y, replicates=use.replicates))
    }
 )
 
@@ -179,5 +123,11 @@ print.MDSplot <- function(cuff, selected.features, device.open, use.replicates, 
    }
    else {
       print.MDSplot.unguarded(selected.features, device.open, "QC", use.replicates, log.transform)
+   }
+}
+
+check.pca.axis.selection <- function(axis_selection) {
+   if (!grepl('^PC\\d*$', axis_selection)) {
+      stop(paste0("Unrecognized PCA component axis selector '", axis_selection, "'.  Must be of the form PC1, PC2, PC3, etc."))
    }
 }
