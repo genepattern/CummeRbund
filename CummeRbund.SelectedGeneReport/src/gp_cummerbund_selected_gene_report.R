@@ -8,8 +8,8 @@
 ## whatsoever. Neither the Broad Institute nor MIT can be responsible for its
 ## use, misuse, or functionality.
 
-GP.CummeRbund.SelectedGene.Report <- function(cuffdiff.job, feature.id, find.similar, gtf.file, genome,
-                                              output.format, feature.level, report.as.aggregate, log.transform) {
+GP.CummeRbund.SelectedGene.Report <- function(cuffdiff.job, feature.id, selected.conditions, find.similar, gtf.file,
+                                              genome, output.format, feature.level, report.as.aggregate, log.transform) {
    use.replicates <- !report.as.aggregate
    device.open <- get.device.open(output.format)
    
@@ -17,8 +17,16 @@ GP.CummeRbund.SelectedGene.Report <- function(cuffdiff.job, feature.id, find.sim
 
    cuff <- readCufflinks.silent(cuffdiff.job, gtf.file, genome)
 
+   conditions.count <- NROW(selected.conditions)
+   if (conditions.count == 0) {
+      selected.conditions <- NULL
+   }
+   else {
+      check.selected.conditions(selected.conditions, cuff)
+   }
+
    print(paste0("Looking up the selected gene using feature ID '", feature.id, "'"))
-   selected.gene <- getGene(cuff, feature.id)
+   selected.gene <- getGene(cuff, feature.id, sampleIdList=selected.conditions)
    print(selected.gene)
 
    selected.features <- selected.gene
