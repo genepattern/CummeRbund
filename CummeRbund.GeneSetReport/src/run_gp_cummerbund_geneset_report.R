@@ -16,7 +16,9 @@ site.library <- args[2]
 cat("\nLibrary dir: ",site.library)
 .libPaths(site.library)
 
-suppressPackageStartupMessages(library(optparse))
+suppressMessages(suppressWarnings(
+   library(optparse))
+))
 suppressMessages(suppressWarnings(
    library(cummeRbund)
 ))
@@ -27,13 +29,13 @@ suppressMessages(suppressWarnings(
 option_list <- list(
   make_option("--cuffdiff.input", dest="cuffdiff.input"),
   make_option("--geneset.file", dest="geneset.file"),
+  make_option("--selected.conditions", dest="selected.conditions", default=NULL),
   make_option("--ref.gtf", dest="ref.gtf", default=NULL),
   make_option("--genome", dest="genome", default=NULL),
   make_option("--output.format", dest="output.format"),
   make_option("--feature.level", dest="feature.level"),
   make_option("--report.as.aggregate", dest="report.as.aggregate"),
-  make_option("--log.transform", dest="log.transform"),
-  make_option("--cluster.count", dest="cluster.count", type="integer", default=NULL)
+  make_option("--log.transform", dest="log.transform")
   )
 
 opt <- parse_args(OptionParser(option_list=option_list), positional_arguments=TRUE, args=args)
@@ -52,16 +54,14 @@ check.output.format(opts$output.format)
 check.feature.level(opts$feature.level)
 genome <- get.genome.from.params(opts$ref.gtf, opts$genome)
 
-if (!is.null(opts$cluster.count) && opts$cluster.count < 0) {
-   stop("If provided, cluster.count must be a positive integer")
-}
+selected.conditions <- get.selected.conditions(opts$selected.conditions)
 
 print(c("Running GenePattern CummeRbund Geneset Report with data from:", opts$cuffdiff.input))
 
 # Create the job.builder function for run.job
 job.builder <- function(cuffdiff.job) {
-   GP.CummeRbund.Geneset.Report(cuffdiff.job, opts$geneset.file, opts$ref.gtf, genome, opts$output.format,
-                                opts$feature.level, report.as.aggregate, log.transform, opts$cluster.count)
+   GP.CummeRbund.Geneset.Report(cuffdiff.job, opts$geneset.file, selected.conditions, opts$ref.gtf, genome,
+                                opts$output.format, opts$feature.level, report.as.aggregate, log.transform)
 }
 
 suppressMessages(suppressWarnings(
