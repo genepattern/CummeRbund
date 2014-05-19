@@ -8,7 +8,7 @@ taskType=RNA-seq
 os=any
 privacy=public
 description=Cuffdiff visualization package providing plots and tables related to QC and Global Stats
-version=Removed the pairwise comparison plots - will go into a new module - and added PCA axis selectors.
+version=Updated the dependency installer version. Improved error reporting.
 minGenePatternVersion=
 author=Loyal Goff, MIT Computer Science and Artificial Intelligence Lab; David Eby, Broad Institute
 
@@ -66,7 +66,7 @@ p6_name=pca.x
 p6_optional=
 p6_prefix_when_specified=
 p6_type=java.lang.String
-p6_value=PC1;PC2;PC3;PC4;PC5;PC6
+p6_value=PC1\=first principal component;PC2\=second principal component;PC3\=third principal component;PC4\=fourth principal component;PC5\=fifth principal component;PC6\=sixth principal component
 
 p7_default_value=PC3
 p7_description=Indicates which principal component is to be presented on the y-axis of the PCA plot.  Must differ from pca.x.
@@ -75,14 +75,14 @@ p7_name=pca.y
 p7_optional=
 p7_prefix_when_specified=
 p7_type=java.lang.String
-p7_value=PC1;PC2;PC3;PC4;PC5;PC6
+p7_value=PC1\=first principal component;PC2\=second principal component;PC3\=third principal component;PC4\=fourth principal component;PC5\=fifth principal component;PC6\=sixth principal component
 
 requiredPatchLSIDs=urn\:lsid\:broadinstitute.org\:plugin\:Ant_1.8\:1,\
-  urn\:lsid\:broadinstitute.org\:plugin\:R2.15_Installer\:1,\
-  urn\:lsid\:broadinstitute.org\:plugin\:rdep_2.15_cummeRbund\:0.7
+  urn\:lsid\:broadinstitute.org\:plugin\:R2.15_Installer\:0.6,\
+  urn\:lsid\:broadinstitute.org\:plugin\:rdep_2.15_cummeRbund\:0.6
 requiredPatchURLs=http\://www.broadinstitute.org/webservices/gpModuleRepository/download/prod/patch/?file\=/Ant_1_8/broadinstitute.org\:plugin/Ant_1.8/1/Ant_1_8.zip,\
-   http\://www.broadinstitute.org/webservices/gpModuleRepository/download/prod/patch/?file\=/R2.15_Installer/broadinstitute.org\:plugin/R2.15_Installer/1/R2.15_Installer.zip,\
-   http\://www.broadinstitute.org/webservices/gpModuleRepository/download/dev/patch/?file\=/rdep_2.15_cummeRbund/broadinstitute.org\:plugin/rdep_2.15_cummeRbund/0.7/rdep_2.15_cummeRbund.zip
+   http\://www.broadinstitute.org/webservices/gpModuleRepository/download/dev/patch/?file\=/R2.15_Installer/broadinstitute.org\:plugin/R2.15_Installer/0.6/R2.15_Installer.zip,\
+   http\://www.broadinstitute.org/webservices/gpModuleRepository/download/dev/patch/?file\=/rdep_2.15_cummeRbund/broadinstitute.org\:plugin/rdep_2.15_cummeRbund/0.8/rdep_2.15_cummeRbund.zip
 
 #   http\://iwww.broadinstitute.org/~eby/rdep_2.15_cummeRbund.zip
 
