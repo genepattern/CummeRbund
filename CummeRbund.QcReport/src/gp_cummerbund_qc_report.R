@@ -52,7 +52,7 @@ write.significance.data <- function(data, report.name) {
    },
    error = function(err) {
       print(paste0("Error printing ", report.name, " - skipping"))
-      print(err)
+      print(conditionMessage(err))
    })
 }
 
@@ -105,7 +105,7 @@ print.sigMatrix <- function(cuff, device.open, feature.level) {
       },
       error = function(err) {
          print(paste0("Error printing the ", plotname, " plot - skipping"))
-         print(err)
+         print(conditionMessage(err))
       })
    }
 }

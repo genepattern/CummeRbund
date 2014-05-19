@@ -138,7 +138,7 @@ get.selected.conditions <- function(selected.conditions.param) {
    }
 
    selected.conditions <- unlist(strsplit(selected.conditions.param, ','))
-   lapply(selected.conditions, function(i) { i<-gsub("^\\s+|\\s+$", "", i) })   
+   selected.conditions <- sapply(selected.conditions, function(i) { i<-gsub("^\\s+|\\s+$", "", i) }, USE.NAMES=FALSE)  
    return(selected.conditions)
 }
 
@@ -148,7 +148,7 @@ check.selected.conditions <- function(selected.conditions, cuff) {
    # Check that selected.conditions are valid before proceeding
    all.conditions <- samples(cuff@genes)
    if (!all(selected.conditions %in% all.conditions)) {
-      stop(paste0("Unrecognized condition '", i))
+      stop(paste("Unrecognized condition:'", selected.conditions))
    }
 
    print("Limited to conditions:")
@@ -199,7 +199,7 @@ build.XYAxisPlotter <- function(plotTypeName, plotterFunction) {
       },
       error = function(err) {
          print(paste0("Error printing the ", plotname, " plot - skipping"))
-         print(err)
+         print(conditionMessage(err))
       })
    }
 }
@@ -213,7 +213,7 @@ build.standardPlotter <- function(plotTypeName, plotterFunction) {
       },
       error = function(err) {
          print(paste0("Error printing the ", plotname, " plot - skipping"))
-         print(err)
+         print(conditionMessage(err))
       })
    }
 }
@@ -259,6 +259,6 @@ print.dendrogram <- function(selected.features, device.open, filename_base, use.
    },
    error = function(err) {
       print(paste0("Error printing the ", plotname, " plot - skipping"))
-      print(err)
+      print(conditionMessage(err))
    })
 }

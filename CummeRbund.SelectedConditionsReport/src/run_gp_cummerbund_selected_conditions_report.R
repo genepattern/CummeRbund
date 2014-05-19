@@ -17,7 +17,7 @@ cat("\nLibrary dir: ",site.library)
 .libPaths(site.library)
 
 suppressMessages(suppressWarnings(
-   library(optparse))
+   library(optparse)
 ))
 suppressMessages(suppressWarnings(
    library(cummeRbund)
