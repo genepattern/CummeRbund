@@ -13,7 +13,7 @@ GP.CummeRbund.Geneset.Report <- function(cuffdiff.job, geneset.file, selected.co
    use.replicates <- !report.as.aggregate
    device.open <- get.device.open(output.format)
 
-   genesetIds <- unlist(read.table(geneset.file))
+   genesetIds <- scan(geneset.file, what="character", sep="\n", quiet=TRUE)
    
    print("Generating plots based on the following genes:")
    print(genesetIds)
@@ -45,7 +45,7 @@ GP.CummeRbund.Geneset.Report <- function(cuffdiff.job, geneset.file, selected.co
    # Generate plots for pairwise sample comparisons
    # This is skipped if no conditions were specified in selected.conditions due to the overhead and
    # potential large number of files generated.  
-   if (conditions.count < 1) {
+   if (conditions.count < 2) {
       # Skip these if there is not at least one pair
       print("Too few conditions; skipping pairwise plots") 
    }

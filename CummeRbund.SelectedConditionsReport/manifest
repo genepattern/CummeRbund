@@ -8,7 +8,7 @@ taskType=RNA-seq
 os=any
 privacy=public
 description=Cuffdiff visualization package providing plots based on a user-provided list of conditions. 
-version= 
+version=Fixed a bug in handling conditions list.
 minGenePatternVersion=
 author=Loyal Goff, MIT Computer Science and Artificial Intelligence Lab; David Eby, Broad Institute
 

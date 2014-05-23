@@ -40,7 +40,7 @@ GP.CummeRbund.SelectedConditions.Report <- function(cuffdiff.job, selected.condi
    # Generate plots for pairwise sample comparisons
    # This is skipped if no conditions were specified in selected.conditions due to the overhead and
    # potential large number of files generated.  
-   if (conditions.count < 1) {
+   if (conditions.count < 2) {
       # Skip these if there is not at least one pair
       print("Too few conditions; skipping pairwise plots") 
    }
