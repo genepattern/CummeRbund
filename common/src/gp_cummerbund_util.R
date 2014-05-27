@@ -148,7 +148,7 @@ check.selected.conditions <- function(selected.conditions, cuff) {
    # Check that selected.conditions are valid before proceeding
    all.conditions <- samples(cuff@genes)
    if (!all(selected.conditions %in% all.conditions)) {
-      stop(paste("Unrecognized condition:'", selected.conditions))
+      stop(paste("Unrecognized condition: ", selected.conditions, "\n"))
    }
 
    print("Limited to conditions:")
