@@ -43,7 +43,7 @@ GP.CummeRbund.Geneset.Report <- function(cuffdiff.job, geneset.file, selected.co
    print.dendrogram(selected.features, device.open, "GeneSet", use.replicates, log.transform)
    
    # Generate plots for pairwise sample comparisons
-   # This is skipped if no conditions were specified in selected.conditions due to the overhead and
+   # This is skipped if there was not at least one pair of conditions specified due to the overhead and
    # potential large number of files generated.  
    if (conditions.count < 2) {
       # Skip these if there is not at least one pair
