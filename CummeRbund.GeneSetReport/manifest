@@ -91,5 +91,5 @@ requiredPatchURLs=http\://www.broadinstitute.org/webservices/gpModuleRepository/
 #  urn:lsid:broadinstitute.org:plugin:rdep_2.15_cummeRbund:1
 #  http\://www.broadinstitute.org/webservices/gpModuleRepository/download/prod/patch/?file\=/rdep_2.15_cummeRbund/broadinstitute.org\:plugin/rdep_2.15_cummeRbund/1/rdep_2.15_cummeRbund.zip
 
-LSID=urn\:lsid\:broad.mit.edu\:cancer.software.genepattern.module.analysis\:00326\:999999999
+LSID=urn\:lsid\:broad.mit.edu\:cancer.software.genepattern.module.analysis\:00335\:999999999
 publicationDate=11/13/2013 15\:59 
