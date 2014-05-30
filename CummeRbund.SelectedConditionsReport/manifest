@@ -1,6 +1,6 @@
 #Wed, 13 Nov 2013 15:59:49 -0500
 name=CummeRbund.SelectedConditionsReport
-commandLine=<R2.15_HOME>/bin/Rscript --no-save --quiet --slave --no-restore <libdir>run_gp_cummerbund_selected_conditions_report.R <libdir> <patches>/rlib/2.15_20131119/site-library --cuffdiff.input\=<cuffdiff.input> --geneset.file=<geneset.file> <selected.conditions> --output.format=<output.format> --feature.level=<feature.level> --report.as.aggregate=<report.as.aggregate> --log.transform=<log.transform>
+commandLine=<R2.15_HOME>/bin/Rscript --no-save --quiet --slave --no-restore <libdir>run_gp_cummerbund_selected_conditions_report.R <libdir> <patches>/rlib/2.15_20131119/site-library --cuffdiff.input\=<cuffdiff.input> <selected.conditions> --output.format=<output.format> --feature.level=<feature.level> --report.as.aggregate=<report.as.aggregate> --log.transform=<log.transform>
 license=
 taskDoc=doc.html
 fileFormat=
@@ -8,7 +8,7 @@ taskType=RNA-seq
 os=any
 privacy=public
 description=Cuffdiff visualization package providing plots based on a user-provided list of conditions. 
-version=Fixed a bug in handling conditions list.
+version=Removed some plots of dubious value.  Fixed a bug in handling conditions list.  Changed to require at least two conditions.  Removed geneset param as it was not used.  Overall simplification of code.
 minGenePatternVersion=
 author=Loyal Goff, MIT Computer Science and Artificial Intelligence Lab; David Eby, Broad Institute
 
@@ -23,60 +23,50 @@ p1_TYPE=FILE
 p1_type=java.io.File
 p1_value=
 
-p2_MODE=IN
-p2_TYPE=FILE
 p2_default_value=
-p2_description=A text file containing the list of genes for this report, one per line.  Each of these can be represented by a gene symbol (short name), gene ID, isoform_id, tss_group_id, or cds_id.
-p2_fileFormat=txt
-p2_name=geneset.file
-p2_optional=
-p2_type=java.io.File
+p2_description=Specifies the conditions (samples) to be used in the plots.  This should be a comma-separated list of conditions, using the same names as in the upstream Cuffdiff job; leave this blank to use all conditions.  If blank, no pairwise comparison plots will be generated.
+p2_fileFormat=
+p2_name=selected.conditions
+p2_optional=on
+p2_prefix_when_specified=--selected.conditions\=
+p2_type=java.lang.String
 p2_value=
 
-p3_default_value=
-p3_description=Specifies the conditions (samples) to be used in the plots.  This should be a comma-separated list of conditions, using the same names as in the upstream Cuffdiff job; leave this blank to use all conditions.  If blank, no pairwise comparison plots will be generated.
+p3_default_value=pdf
+p3_description=The output file format.
 p3_fileFormat=
-p3_name=selected.conditions
-p3_optional=on
-p3_prefix_when_specified=--selected.conditions\=
+p3_name=output.format
+p3_optional=
+p3_prefix_when_specified=
 p3_type=java.lang.String
-p3_value=
+p3_value=pdf;svg;png
 
-p4_default_value=pdf
-p4_description=The output file format.
+p4_default_value=genes
+p4_description=Feature level for the report.
 p4_fileFormat=
-p4_name=output.format
+p4_name=feature.level
 p4_optional=
 p4_prefix_when_specified=
 p4_type=java.lang.String
-p4_value=pdf;svg;png
+p4_value=genes\=genes;isoforms\=isoforms;TSS\=transcription start site (TSS);CDS\=coding sequence (CDS)
 
-p5_default_value=genes
-p5_description=Feature level for the report.
+p5_default_value=yes
+p5_description=Controls whether reporting should be done for individual replicates or aggregate condition/sample values.  The default is to use aggregate sample values.  Note that the Volcano plot always shows aggregate samples.
 p5_fileFormat=
-p5_name=feature.level
+p5_name=report.as.aggregate
 p5_optional=
 p5_prefix_when_specified=
 p5_type=java.lang.String
-p5_value=genes\=genes;isoforms\=isoforms;TSS\=transcription start site (TSS);CDS\=coding sequence (CDS)
+p5_value=yes;no
 
 p6_default_value=yes
-p6_description=Controls whether reporting should be done for individual replicates or aggregate condition/sample values.  The default is to use aggregate sample values.  Note that the Volcano plot always shows aggregate samples.
+p6_description=Whether or not to log transform the FPKM values.  Note that the FPKM values are always log transformed for the Volcano plots and that the Scatter plot will use a log2 rather than log10 transformation.  For the Expression Plot and Expression Barplot, this directs that the y-axis will be drawn on a log10 scale.
 p6_fileFormat=
-p6_name=report.as.aggregate
+p6_name=log.transform
 p6_optional=
 p6_prefix_when_specified=
 p6_type=java.lang.String
 p6_value=yes;no
-
-p7_default_value=yes
-p7_description=Whether or not to log transform the FPKM values.  Note that the FPKM values are always log transformed for the Volcano plots and that the Scatter plot will use a log2 rather than log10 transformation.  For the Expression Plot and Expression Barplot, this directs that the y-axis will be drawn on a log10 scale.
-p7_fileFormat=
-p7_name=log.transform
-p7_optional=
-p7_prefix_when_specified=
-p7_type=java.lang.String
-p7_value=yes;no
 
 requiredPatchLSIDs=urn\:lsid\:broadinstitute.org\:plugin\:Ant_1.8\:1,\
   urn\:lsid\:broadinstitute.org\:plugin\:R2.15_Installer\:1,\
