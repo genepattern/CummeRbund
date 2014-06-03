@@ -1,0 +1,36 @@
+#
+# Test more than two samples
+#
+module: CummeRbund.QcReport
+params: 
+    cuffdiff.input: "cuffData_multCond_dir/cuffData.db"
+    output.format: "svg"
+    feature.level: "genes"
+    report.as.aggregate: "yes"
+    log.transform: "yes"
+    pca.x: "PC2"
+    pca.y: "PC3"
+assertions:
+    files:
+        "QC.Boxplot.svg":
+            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.QcReport/v1/output/param_settings/more_samples_test/QC.Boxplot.svg
+        "QC.Dendrogram.svg":
+            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.QcReport/v1/output/param_settings/more_samples_test/QC.Dendrogram.svg
+        "QC.Density.svg":
+            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.QcReport/v1/output/param_settings/more_samples_test/QC.Density.svg
+        "QC.DimensionalityReduction.mds.svg":
+            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.QcReport/v1/output/param_settings/more_samples_test/QC.DimensionalityReduction.mds.svg
+        "QC.DimensionalityReduction.pca.PC2_PC3.svg":
+            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.QcReport/v1/output/param_settings/more_samples_test/QC.DimensionalityReduction.pca.PC2_PC3.svg
+        "QC.Dispersion.svg":
+            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.QcReport/v1/output/param_settings/more_samples_test/QC.Dispersion.svg
+        "QC.JSDistanceHeatmap.Samples.svg":
+            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.QcReport/v1/output/param_settings/more_samples_test/QC.JSDistanceHeatmap.Samples.svg
+        "QC.sig_diffExp_genes.txt":
+            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.QcReport/v1/output/param_settings/more_samples_test/QC.sig_diffExp_genes.txt
+        "stdout.txt": !!null
+        "cuffData.db": !!null
+            
+#            diffCmd: ../diffIgnoreGpTraces.sh
+#            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.QcReport/v1/output/param_settings/more_samples_test/stdout.txt
+            

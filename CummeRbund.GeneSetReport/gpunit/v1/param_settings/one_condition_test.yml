@@ -1,0 +1,23 @@
+#
+# Test selecting a single condition
+#
+module: CummeRbund.GeneSetReport
+params: 
+    cuffdiff.input: "cuffData_multCond_dir/cuffData.db"
+    geneset.file: "mm9_geneset.txt"
+    selected.conditions: "s1"
+    output.format: "svg"
+    feature.level: "genes"
+    report.as.aggregate: "yes"
+    log.transform: "yes"
+assertions:
+    files:
+        "GeneSet.ExpressionBarplot.svg":
+            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/one_condition_test/GeneSet.ExpressionBarplot.svg
+        "GeneSet.ExpressionPlot.svg":
+            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/one_condition_test/GeneSet.ExpressionPlot.svg
+        "stdout.txt":
+            diffCmd: ../diffIgnoreGpTraces.sh
+            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/one_condition_test/stdout.txt
+        "cuffData.db": !!null
+            
