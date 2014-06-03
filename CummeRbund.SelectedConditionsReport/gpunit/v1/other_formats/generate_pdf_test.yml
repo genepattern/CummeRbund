@@ -1,0 +1,23 @@
+#
+# Test pdf generation
+#
+module: CummeRbund.SelectedConditionsReport
+params: 
+    cuffdiff.input: "cuffData_dir/cuffData.db"
+    selected.conditions: "c1,c2"
+    output.format: "pdf"
+    feature.level: "genes"
+    report.as.aggregate: "yes"
+    log.transform: "yes"
+assertions:
+    # Mostly just checking that these files exist as diff doesn't work well on PDFs
+    files:
+        "SelectedConditions.MAplot.c1_c2.pdf": !!null
+        "SelectedConditions.MAplot.c2_c1.pdf": !!null
+        "SelectedConditions.Scatter.c1_c2.pdf": !!null
+        "SelectedConditions.Scatter.c2_c1.pdf": !!null
+        "SelectedConditions.Volcano.c1_c2.pdf": !!null
+        "cuffData.db": !!null
+        "stdout.txt":
+            diffCmd: ../diffIgnoreGpTraces.sh
+            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedConditionsReport/v1/output/other_formats/generate_pdf_test/stdout.txt

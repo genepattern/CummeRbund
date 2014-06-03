@@ -1,0 +1,26 @@
+#
+# Test reporting at tss level
+#
+module: CummeRbund.GeneSetReport
+params: 
+    cuffdiff.input: "cuffData_dir/cuffData.db"
+    geneset.file: "dros_geneset.txt"
+    selected.conditions: ""
+    output.format: "svg"
+    feature.level: "TSS"
+    report.as.aggregate: "yes"
+    log.transform: "yes"
+assertions:
+    files:
+        "GeneSet.Dendrogram.svg":
+            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/tss_level_test/GeneSet.Dendrogram.svg
+        "GeneSet.ExpressionBarplot.svg":
+            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/tss_level_test/GeneSet.ExpressionBarplot.svg
+        "GeneSet.ExpressionPlot.svg":
+            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/tss_level_test/GeneSet.ExpressionPlot.svg
+        "GeneSet.Heatmap.svg":
+            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/tss_level_test/GeneSet.Heatmap.svg
+        "stdout.txt":
+            diffCmd: ../diffIgnoreGpTraces.sh
+            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/tss_level_test/stdout.txt
+        "cuffData.db": !!null

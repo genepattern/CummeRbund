@@ -1,0 +1,26 @@
+#
+# Test without log transform
+#
+module: CummeRbund.SelectedGeneReport
+params: 
+    cuffdiff.input: "cuffData_dir/cuffData.db"
+    feature.id: "galectin"
+    selected.conditions: ""
+    output.format: "svg"
+    feature.level: "genes"
+    report.as.aggregate: "yes"
+    log.transform: "no"
+assertions:
+    files:
+        "SelectedGene.ExpressionBarplot.svg":
+            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedGeneReport/v1/output/param_settings/no_log_transform_test/SelectedGene.ExpressionBarplot.svg
+        "SelectedGene.ExpressionPlot.svg":
+            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedGeneReport/v1/output/param_settings/no_log_transform_test/SelectedGene.ExpressionPlot.svg
+        "SelectedGene.SimilarityExpressionBarplot.svg":
+            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedGeneReport/v1/output/param_settings/no_log_transform_test/SelectedGene.SimilarityExpressionBarplot.svg
+        "SelectedGene.SimilarityExpressionPlot.svg":
+            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedGeneReport/v1/output/param_settings/no_log_transform_test/SelectedGene.SimilarityExpressionPlot.svg
+        "stdout.txt":
+            diffCmd: ../diffIgnoreGpTraces.sh
+            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedGeneReport/v1/output/param_settings/no_log_transform_test/stdout.txt
+        "cuffData.db": !!null

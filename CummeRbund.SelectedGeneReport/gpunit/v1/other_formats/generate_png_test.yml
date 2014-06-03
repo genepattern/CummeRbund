@@ -1,0 +1,23 @@
+#
+# Test png generation
+#
+module: CummeRbund.SelectedGeneReport
+params: 
+    cuffdiff.input: "cuffData_dir/cuffData.db"
+    feature.id: "galectin"
+    selected.conditions: ""
+    output.format: "png"
+    feature.level: "genes"
+    report.as.aggregate: "yes"
+    log.transform: "yes"
+assertions:
+    # Mostly just checking that these files exist as diff doesn't work well on PNGs
+    files:
+        "SelectedGene.ExpressionBarplot.png": !!null
+        "SelectedGene.ExpressionPlot.png": !!null
+        "SelectedGene.SimilarityExpressionBarplot.png": !!null
+        "SelectedGene.SimilarityExpressionPlot.png": !!null
+        "cuffData.db": !!null
+        "stdout.txt":
+            diffCmd: ../diffIgnoreGpTraces.sh
+            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedGeneReport/v1/output/other_formats/generate_png_test/stdout.txt

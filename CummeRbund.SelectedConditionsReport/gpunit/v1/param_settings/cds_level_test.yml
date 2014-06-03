@@ -1,0 +1,27 @@
+#
+# Test reporting at CDS level
+#
+module: CummeRbund.SelectedConditionsReport
+params: 
+    cuffdiff.input: "cuffData_dir/cuffData.db"
+    selected.conditions: "c1,c2"
+    output.format: "svg"
+    feature.level: "CDS"
+    report.as.aggregate: "yes"
+    log.transform: "yes"
+assertions:
+    files:
+        "SelectedConditions.MAplot.c1_c2.svg":
+            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedConditionsReport/v1/output/param_settings/cds_level_test/SelectedConditions.MAplot.c1_c2.svg
+        "SelectedConditions.MAplot.c2_c1.svg":
+            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedConditionsReport/v1/output/param_settings/cds_level_test/SelectedConditions.MAplot.c2_c1.svg
+        "SelectedConditions.Scatter.c1_c2.svg":
+            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedConditionsReport/v1/output/param_settings/cds_level_test/SelectedConditions.Scatter.c1_c2.svg
+        "SelectedConditions.Scatter.c2_c1.svg":
+            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedConditionsReport/v1/output/param_settings/cds_level_test/SelectedConditions.Scatter.c2_c1.svg
+        "SelectedConditions.Volcano.c1_c2.svg":
+            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedConditionsReport/v1/output/param_settings/cds_level_test/SelectedConditions.Volcano.c1_c2.svg
+        "stdout.txt":
+            diffCmd: ../diffIgnoreGpTraces.sh
+            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedConditionsReport/v1/output/param_settings/cds_level_test/stdout.txt
+        "cuffData.db": !!null

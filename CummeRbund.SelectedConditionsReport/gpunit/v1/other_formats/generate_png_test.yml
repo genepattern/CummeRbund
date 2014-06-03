@@ -1,0 +1,23 @@
+#
+# Test png generation
+#
+module: CummeRbund.SelectedConditionsReport
+params: 
+    cuffdiff.input: "cuffData_dir/cuffData.db"
+    selected.conditions: "c1,c2"
+    output.format: "png"
+    feature.level: "genes"
+    report.as.aggregate: "yes"
+    log.transform: "yes"
+assertions:
+    # Mostly just checking that these files exist as diff doesn't work well on PNGs
+    files:
+        "SelectedConditions.MAplot.c1_c2.png": !!null
+        "SelectedConditions.MAplot.c2_c1.png": !!null
+        "SelectedConditions.Scatter.c1_c2.png": !!null
+        "SelectedConditions.Scatter.c2_c1.png": !!null
+        "SelectedConditions.Volcano.c1_c2.png": !!null
+        "cuffData.db": !!null
+        "stdout.txt":
+            diffCmd: ../diffIgnoreGpTraces.sh
+            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedConditionsReport/v1/output/other_formats/generate_png_test/stdout.txt

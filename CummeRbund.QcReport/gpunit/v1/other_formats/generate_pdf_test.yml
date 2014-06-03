@@ -1,0 +1,30 @@
+#
+# Test pdf generation
+#
+module: CummeRbund.QcReport
+params: 
+    cuffdiff.input: "cuffData_dir/cuffData.db"
+    output.format: "pdf"
+    feature.level: "genes"
+    report.as.aggregate: "yes"
+    log.transform: "yes"
+    pca.x: "PC2"
+    pca.y: "PC3"
+assertions:
+    # Mostly just checking that these files exist as diff doesn't work well on PDFs
+    files:
+        "QC.sig_diffExp_genes.txt": !!null
+        "QC.sig_promoter_data.txt": !!null
+        "QC.sig_relCDS_data.txt": !!null
+        "QC.sig_splicing_data.txt": !!null
+        "QC.Boxplot.pdf": !!null
+        "QC.Dendrogram.pdf": !!null
+        "QC.Density.pdf": !!null
+        "QC.Dispersion.pdf": !!null
+        "QC.FPKM.SCV.pdf": !!null
+        "QC.JSDistanceHeatmap.Samples.pdf": !!null
+        "cuffData.db": !!null
+        "stdout.txt": !!null
+#            diffCmd: ../diffIgnoreGpTraces.sh
+#            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.QcReport/v1/output/other_formats/generate_pdf_test/stdout.txt
+            
