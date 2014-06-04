@@ -78,13 +78,11 @@ p7_type=java.lang.String
 p7_value=PC1\=first principal component;PC2\=second principal component;PC3\=third principal component;PC4\=fourth principal component;PC5\=fifth principal component;PC6\=sixth principal component
 
 requiredPatchLSIDs=urn\:lsid\:broadinstitute.org\:plugin\:Ant_1.8\:1,\
-  urn\:lsid\:broadinstitute.org\:plugin\:R2.15_Installer\:0.6,\
-  urn\:lsid\:broadinstitute.org\:plugin\:rdep_2.15_cummeRbund\:0.6
+  urn\:lsid\:broadinstitute.org\:plugin\:R2.15_Installer\:1,\
+  urn\:lsid\:broadinstitute.org\:plugin\:rdep_2.15_cummeRbund\:0.8
 requiredPatchURLs=http\://www.broadinstitute.org/webservices/gpModuleRepository/download/prod/patch/?file\=/Ant_1_8/broadinstitute.org\:plugin/Ant_1.8/1/Ant_1_8.zip,\
-   http\://www.broadinstitute.org/webservices/gpModuleRepository/download/dev/patch/?file\=/R2.15_Installer/broadinstitute.org\:plugin/R2.15_Installer/0.6/R2.15_Installer.zip,\
+   http\://www.broadinstitute.org/webservices/gpModuleRepository/download/prod/patch/?file\=/R2.15_Installer/broadinstitute.org\:plugin/R2.15_Installer/1/R2.15_Installer.zip,\
    http\://www.broadinstitute.org/webservices/gpModuleRepository/download/dev/patch/?file\=/rdep_2.15_cummeRbund/broadinstitute.org\:plugin/rdep_2.15_cummeRbund/0.8/rdep_2.15_cummeRbund.zip
-
-#   http\://iwww.broadinstitute.org/~eby/rdep_2.15_cummeRbund.zip
 
 # The following should be the final LSID & URL for cummeRbund rdep when it's done.  Remove this comment and place the values above.
 #  urn:lsid:broadinstitute.org:plugin:rdep_2.15_cummeRbund:1
