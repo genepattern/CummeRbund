@@ -1,3 +1,5 @@
+#updated after building 0.5
+#Thu, 05 Jun 2014 14:28:57 -0400
 #updated after building 0.4
 #Thu, 05 Jun 2014 10:04:47 -0400
 #updated after building 0.3
@@ -6,4 +8,4 @@
 #Fri, 23 May 2014 14:05:02 -0400
 #updated after building 0.1
 #Fri, 23 May 2014 13:51:12 -0400
-prerelease.number=5
+prerelease.number=6
