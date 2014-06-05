@@ -12,9 +12,6 @@ params:
 assertions:
     jobStatus: failure
     files:
-        "stdout.txt":
-            diffCmd: ../diffIgnoreGpTraces.sh
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedConditionsReport/v1/output/param_settings/one_condition_test/stdout.txt
         "stderr.txt":
             diffCmd: ../diffIgnoreGpTraces.sh
             diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedConditionsReport/v1/output/param_settings/one_condition_test/stderr.txt

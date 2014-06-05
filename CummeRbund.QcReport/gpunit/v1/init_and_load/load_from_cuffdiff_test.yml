@@ -13,20 +13,13 @@ params:
     pca.y: "PC3"
 assertions:
     # Note: the output directory is for a different test.  We are checking that the results are the same regardless of the loading method
-    # Must check against a dedicated stdout, however.
     files:
-        "QC.Boxplot.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.QcReport/v1/output/init_and_load/init_from_cuffdiff_test/QC.Boxplot.svg
-        "QC.Dendrogram.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.QcReport/v1/output/init_and_load/init_from_cuffdiff_test/QC.Dendrogram.svg
-        "QC.Density.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.QcReport/v1/output/init_and_load/init_from_cuffdiff_test/QC.Density.svg
-        "QC.Dispersion.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.QcReport/v1/output/init_and_load/init_from_cuffdiff_test/QC.Dispersion.svg
-        "QC.FPKM.SCV.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.QcReport/v1/output/init_and_load/init_from_cuffdiff_test/QC.FPKM.SCV.svg
-        "QC.JSDistanceHeatmap.Samples.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.QcReport/v1/output/init_and_load/init_from_cuffdiff_test/QC.JSDistanceHeatmap.Samples.svg
+        "QC.Boxplot.svg": !!null
+        "QC.Dendrogram.svg": !!null
+        "QC.Density.svg": !!null
+        "QC.Dispersion.svg": !!null
+        "QC.FPKM.SCV.svg": !!null
+        "QC.JSDistanceHeatmap.Samples.svg": !!null
         "QC.sig_diffExp_genes.txt":
             diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.QcReport/v1/output/init_and_load/init_from_cuffdiff_test/QC.sig_diffExp_genes.txt
         "QC.sig_promoter_data.txt":
@@ -37,7 +30,3 @@ assertions:
             diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.QcReport/v1/output/init_and_load/init_from_cuffdiff_test/QC.sig_splicing_data.txt
         "stdout.txt": !!null
         "cuffData.db": !!null
-            
-#            diffCmd: ../diffIgnoreGpTraces.sh
-#            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.QcReport/v1/output/init_and_load/load_from_cuffdiff_test/stdout.txt
-            

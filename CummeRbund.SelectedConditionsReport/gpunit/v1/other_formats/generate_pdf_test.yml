@@ -10,14 +10,11 @@ params:
     report.as.aggregate: "yes"
     log.transform: "yes"
 assertions:
-    # Mostly just checking that these files exist as diff doesn't work well on PDFs
     files:
         "SelectedConditions.MAplot.c1_c2.pdf": !!null
         "SelectedConditions.MAplot.c2_c1.pdf": !!null
         "SelectedConditions.Scatter.c1_c2.pdf": !!null
         "SelectedConditions.Scatter.c2_c1.pdf": !!null
         "SelectedConditions.Volcano.c1_c2.pdf": !!null
+        "stdout.txt": !!null
         "cuffData.db": !!null
-        "stdout.txt":
-            diffCmd: ../diffIgnoreGpTraces.sh
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedConditionsReport/v1/output/other_formats/generate_pdf_test/stdout.txt

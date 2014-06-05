@@ -12,20 +12,10 @@ params:
     report.as.aggregate: "yes"
     log.transform: "yes"
 assertions:
-    # Note: the output directory is for a different test.  We are checking that the results are the same regardless of the loading method
-    # Must check against a dedicated stdout, however.
     files:
-        "SelectedGene.ExpressionBarplot.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedGeneReport/v1/output/init_and_load/init_from_cuffdiff_test/SelectedGene.ExpressionBarplot.svg
-        "SelectedGene.ExpressionPlot.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedGeneReport/v1/output/init_and_load/init_from_cuffdiff_test/SelectedGene.ExpressionPlot.svg
-        "SelectedGene.SimilarityExpressionBarplot.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedGeneReport/v1/output/init_and_load/init_from_cuffdiff_test/SelectedGene.SimilarityExpressionBarplot.svg
-        "SelectedGene.SimilarityExpressionPlot.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedGeneReport/v1/output/init_and_load/init_from_cuffdiff_test/SelectedGene.SimilarityExpressionPlot.svg
-        "stdout.txt":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedGeneReport/v1/output/init_and_load/init_from_cuffdiff_test/stdout.txt
-        "stdout.txt":
-            diffCmd: ../diffIgnoreGpTraces.sh
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedGeneReport/v1/output/init_and_load/load_from_cuffdiff_test/stdout.txt
+        "SelectedGene.ExpressionBarplot.svg": !!null
+        "SelectedGene.ExpressionPlot.svg": !!null
+        "SelectedGene.SimilarityExpressionBarplot.svg": !!null
+        "SelectedGene.SimilarityExpressionPlot.svg": !!null
+        "stdout.txt": !!null
         "cuffData.db": !!null

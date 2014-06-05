@@ -11,13 +11,10 @@ params:
     report.as.aggregate: "yes"
     log.transform: "yes"
 assertions:
-    # Mostly just checking that these files exist as diff doesn't work well on PDFs
     files:
         "GeneSet.Dendrogram.pdf": !!null
         "GeneSet.ExpressionBarplot.pdf": !!null
         "GeneSet.ExpressionPlot.pdf": !!null
         "GeneSet.Heatmap.pdf": !!null
         "cuffData.db": !!null
-        "stdout.txt":
-            diffCmd: ../diffIgnoreGpTraces.sh
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/other_formats/generate_pdf_test/stdout.txt
+        "stdout.txt": !!null

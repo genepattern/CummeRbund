@@ -12,15 +12,9 @@ params:
     log.transform: "no"
 assertions:
     files:
-        "SelectedGene.ExpressionBarplot.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedGeneReport/v1/output/param_settings/no_log_transform_test/SelectedGene.ExpressionBarplot.svg
-        "SelectedGene.ExpressionPlot.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedGeneReport/v1/output/param_settings/no_log_transform_test/SelectedGene.ExpressionPlot.svg
-        "SelectedGene.SimilarityExpressionBarplot.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedGeneReport/v1/output/param_settings/no_log_transform_test/SelectedGene.SimilarityExpressionBarplot.svg
-        "SelectedGene.SimilarityExpressionPlot.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedGeneReport/v1/output/param_settings/no_log_transform_test/SelectedGene.SimilarityExpressionPlot.svg
-        "stdout.txt":
-            diffCmd: ../diffIgnoreGpTraces.sh
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedGeneReport/v1/output/param_settings/no_log_transform_test/stdout.txt
+        "SelectedGene.ExpressionBarplot.svg": !!null
+        "SelectedGene.ExpressionPlot.svg": !!null
+        "SelectedGene.SimilarityExpressionBarplot.svg": !!null
+        "SelectedGene.SimilarityExpressionPlot.svg": !!null
+        "stdout.txt": !!null
         "cuffData.db": !!null

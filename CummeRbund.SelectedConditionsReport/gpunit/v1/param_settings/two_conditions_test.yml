@@ -11,18 +11,10 @@ params:
     log.transform: "yes"
 assertions:
     files:
-        "SelectedConditions.MAplot.p1_s1.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedConditionsReport/v1/output/param_settings/two_conditions_test/SelectedConditions.MAplot.p1_s1.svg
-        "SelectedConditions.MAplot.s1_p1.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedConditionsReport/v1/output/param_settings/two_conditions_test/SelectedConditions.MAplot.s1_p1.svg
-        "SelectedConditions.Scatter.p1_s1.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedConditionsReport/v1/output/param_settings/two_conditions_test/SelectedConditions.Scatter.p1_s1.svg
-        "SelectedConditions.Scatter.s1_p1.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedConditionsReport/v1/output/param_settings/two_conditions_test/SelectedConditions.Scatter.s1_p1.svg
-        "SelectedConditions.Volcano.s1_p1.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedConditionsReport/v1/output/param_settings/two_conditions_test/SelectedConditions.Volcano.s1_p1.svg
-        "stdout.txt":
-            diffCmd: ../diffIgnoreGpTraces.sh
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedConditionsReport/v1/output/param_settings/two_conditions_test/stdout.txt
+        "SelectedConditions.MAplot.p1_s1.svg": !!null
+        "SelectedConditions.MAplot.s1_p1.svg": !!null
+        "SelectedConditions.Scatter.p1_s1.svg": !!null
+        "SelectedConditions.Volcano.s1_p1.svg": !!null
+        "SelectedConditions.Scatter.s1_p1.svg": !!null
+        "stdout.txt": !!null
         "cuffData.db": !!null
-            

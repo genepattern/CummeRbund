@@ -11,20 +11,21 @@ params:
     pca.x: "PC2"
     pca.y: "PC3"
 assertions:
-    # Mostly just checking that these files exist as diff doesn't work well on PNGs
+    # Note: the output directory is for a different test.  We are checking that the results are the same regardless of the output format
     files:
-        "QC.sig_diffExp_genes.txt": !!null
-        "QC.sig_promoter_data.txt": !!null
-        "QC.sig_relCDS_data.txt": !!null
-        "QC.sig_splicing_data.txt": !!null
         "QC.Boxplot.png": !!null
         "QC.Dendrogram.png": !!null
         "QC.Density.png": !!null
         "QC.Dispersion.png": !!null
         "QC.FPKM.SCV.png": !!null
         "QC.JSDistanceHeatmap.Samples.png": !!null
+        "QC.sig_diffExp_genes.txt":
+            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.QcReport/v1/output/init_and_load/init_from_cuffdiff_test/QC.sig_diffExp_genes.txt
+        "QC.sig_promoter_data.txt":
+            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.QcReport/v1/output/init_and_load/init_from_cuffdiff_test/QC.sig_promoter_data.txt
+        "QC.sig_relCDS_data.txt":
+            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.QcReport/v1/output/init_and_load/init_from_cuffdiff_test/QC.sig_relCDS_data.txt
+        "QC.sig_splicing_data.txt":
+            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.QcReport/v1/output/init_and_load/init_from_cuffdiff_test/QC.sig_splicing_data.txt
         "cuffData.db": !!null
         "stdout.txt": !!null
-#            diffCmd: ../diffIgnoreGpTraces.sh
-#            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.QcReport/v1/output/other_formats/generate_png_test/stdout.txt
-            

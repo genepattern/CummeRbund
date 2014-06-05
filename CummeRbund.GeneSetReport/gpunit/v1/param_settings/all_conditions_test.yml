@@ -12,111 +12,57 @@ params:
     log.transform: "yes"
 assertions:
     files:
-        "GeneSet.Dendrogram.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Dendrogram.svg
-        "GeneSet.ExpressionBarplot.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.ExpressionBarplot.svg
-        "GeneSet.ExpressionPlot.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.ExpressionPlot.svg
-        "GeneSet.Dendrogram.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Dendrogram.svg
-        "GeneSet.ExpressionBarplot.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.ExpressionBarplot.svg
-        "GeneSet.ExpressionPlot.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.ExpressionPlot.svg
-        "GeneSet.Heatmap.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Heatmap.svg
-        "GeneSet.Scatter.p1_p2.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Scatter.p1_p2.svg
-        "GeneSet.Scatter.p1_p3.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Scatter.p1_p3.svg
-        "GeneSet.Scatter.p1_s1.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Scatter.p1_s1.svg
-        "GeneSet.Scatter.p1_s2.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Scatter.p1_s2.svg
-        "GeneSet.Scatter.p1_s3.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Scatter.p1_s3.svg
-        "GeneSet.Scatter.p2_p1.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Scatter.p2_p1.svg
-        "GeneSet.Scatter.p2_p3.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Scatter.p2_p3.svg
-        "GeneSet.Scatter.p2_s1.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Scatter.p2_s1.svg
-        "GeneSet.Scatter.p2_s2.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Scatter.p2_s2.svg
-        "GeneSet.Scatter.p2_s3.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Scatter.p2_s3.svg
-        "GeneSet.Scatter.p3_p1.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Scatter.p3_p1.svg
-        "GeneSet.Scatter.p3_p2.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Scatter.p3_p2.svg
-        "GeneSet.Scatter.p3_s1.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Scatter.p3_s1.svg
-        "GeneSet.Scatter.p3_s2.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Scatter.p3_s2.svg
-        "GeneSet.Scatter.p3_s3.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Scatter.p3_s3.svg
-        "GeneSet.Scatter.s1_p1.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Scatter.s1_p1.svg
-        "GeneSet.Scatter.s1_p2.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Scatter.s1_p2.svg
-        "GeneSet.Scatter.s1_p3.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Scatter.s1_p3.svg
-        "GeneSet.Scatter.s1_s2.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Scatter.s1_s2.svg
-        "GeneSet.Scatter.s1_s3.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Scatter.s1_s3.svg
-        "GeneSet.Scatter.s2_p1.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Scatter.s2_p1.svg
-        "GeneSet.Scatter.s2_p2.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Scatter.s2_p2.svg
-        "GeneSet.Scatter.s2_p3.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Scatter.s2_p3.svg
-        "GeneSet.Scatter.s2_s1.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Scatter.s2_s1.svg
-        "GeneSet.Scatter.s2_s3.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Scatter.s2_s3.svg
-        "GeneSet.Scatter.s3_p1.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Scatter.s3_p1.svg
-        "GeneSet.Scatter.s3_p2.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Scatter.s3_p2.svg
-        "GeneSet.Scatter.s3_p3.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Scatter.s3_p3.svg
-        "GeneSet.Scatter.s3_s1.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Scatter.s3_s1.svg
-        "GeneSet.Scatter.s3_s2.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Scatter.s3_s2.svg
-        "GeneSet.Volcano.p1_p2.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Volcano.p1_p2.svg
-        "GeneSet.Volcano.p1_p3.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Volcano.p1_p3.svg
-        "GeneSet.Volcano.p2_p3.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Volcano.p2_p3.svg
-        "GeneSet.Volcano.s1_p1.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Volcano.s1_p1.svg
-        "GeneSet.Volcano.s1_p2.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Volcano.s1_p2.svg
-        "GeneSet.Volcano.s1_p3.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Volcano.s1_p3.svg
-        "GeneSet.Volcano.s1_s2.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Volcano.s1_s2.svg
-        "GeneSet.Volcano.s1_s3.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Volcano.s1_s3.svg
-        "GeneSet.Volcano.s2_p1.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Volcano.s2_p1.svg
-        "GeneSet.Volcano.s2_p2.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Volcano.s2_p2.svg
-        "GeneSet.Volcano.s2_p3.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Volcano.s2_p3.svg
-        "GeneSet.Volcano.s2_s3.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Volcano.s2_s3.svg
-        "GeneSet.Volcano.s3_p1.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Volcano.s3_p1.svg
-        "GeneSet.Volcano.s3_p2.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Volcano.s3_p2.svg
-        "GeneSet.Volcano.s3_p3.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/GeneSet.Volcano.s3_p3.svg
-        "stdout.txt":
-            diffCmd: ../diffIgnoreGpTraces.sh
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/all_conditions_test/stdout.txt
+        "GeneSet.Dendrogram.svg": !!null
+        "GeneSet.ExpressionBarplot.svg": !!null
+        "GeneSet.ExpressionPlot.svg": !!null
+        "GeneSet.Dendrogram.svg": !!null
+        "GeneSet.ExpressionBarplot.svg": !!null
+        "GeneSet.ExpressionPlot.svg": !!null
+        "GeneSet.Heatmap.svg": !!null
+        "GeneSet.Scatter.p1_p2.svg": !!null
+        "GeneSet.Scatter.p1_p3.svg": !!null
+        "GeneSet.Scatter.p1_s1.svg": !!null
+        "GeneSet.Scatter.p1_s2.svg": !!null
+        "GeneSet.Scatter.p1_s3.svg": !!null
+        "GeneSet.Scatter.p2_p1.svg": !!null
+        "GeneSet.Scatter.p2_p3.svg": !!null
+        "GeneSet.Scatter.p2_s1.svg": !!null
+        "GeneSet.Scatter.p2_s2.svg": !!null
+        "GeneSet.Scatter.p2_s3.svg": !!null
+        "GeneSet.Scatter.p3_p1.svg": !!null
+        "GeneSet.Scatter.p3_p2.svg": !!null
+        "GeneSet.Scatter.p3_s1.svg": !!null
+        "GeneSet.Scatter.p3_s2.svg": !!null
+        "GeneSet.Scatter.p3_s3.svg": !!null
+        "GeneSet.Scatter.s1_p1.svg": !!null
+        "GeneSet.Scatter.s1_p2.svg": !!null
+        "GeneSet.Scatter.s1_p3.svg": !!null
+        "GeneSet.Scatter.s1_s2.svg": !!null
+        "GeneSet.Scatter.s1_s3.svg": !!null
+        "GeneSet.Scatter.s2_p1.svg": !!null
+        "GeneSet.Scatter.s2_p2.svg": !!null
+        "GeneSet.Scatter.s2_p3.svg": !!null
+        "GeneSet.Scatter.s2_s1.svg": !!null
+        "GeneSet.Scatter.s2_s3.svg": !!null
+        "GeneSet.Scatter.s3_p1.svg": !!null
+        "GeneSet.Scatter.s3_p2.svg": !!null
+        "GeneSet.Scatter.s3_p3.svg": !!null
+        "GeneSet.Scatter.s3_s1.svg": !!null
+        "GeneSet.Scatter.s3_s2.svg": !!null
+        "GeneSet.Volcano.p1_p2.svg": !!null
+        "GeneSet.Volcano.p1_p3.svg": !!null
+        "GeneSet.Volcano.p2_p3.svg": !!null
+        "GeneSet.Volcano.s1_p1.svg": !!null
+        "GeneSet.Volcano.s1_p2.svg": !!null
+        "GeneSet.Volcano.s1_p3.svg": !!null
+        "GeneSet.Volcano.s1_s2.svg": !!null
+        "GeneSet.Volcano.s1_s3.svg": !!null
+        "GeneSet.Volcano.s2_p1.svg": !!null
+        "GeneSet.Volcano.s2_p2.svg": !!null
+        "GeneSet.Volcano.s2_p3.svg": !!null
+        "GeneSet.Volcano.s2_s3.svg": !!null
+        "GeneSet.Volcano.s3_p1.svg": !!null
+        "GeneSet.Volcano.s3_p2.svg": !!null
+        "GeneSet.Volcano.s3_p3.svg": !!null
+        "stdout.txt": !!null
         "cuffData.db": !!null
