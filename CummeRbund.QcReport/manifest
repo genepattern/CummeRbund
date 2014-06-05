@@ -8,7 +8,7 @@ taskType=RNA-seq
 os=any
 privacy=public
 description=Cuffdiff visualization package providing plots and tables related to QC and Global Stats
-version=Updated the dependency installer version. Improved error reporting.
+version=Improved error reporting. Updated dependency installer to fix issue with pre-installed out-of-date packages
 minGenePatternVersion=
 author=Loyal Goff, MIT Computer Science and Artificial Intelligence Lab; David Eby, Broad Institute
 
@@ -42,7 +42,7 @@ p3_type=java.lang.String
 p3_value=genes\=genes;isoforms\=isoforms;TSS\=transcription start site (TSS);CDS\=coding sequence (CDS)
 
 p4_default_value=yes
-p4_description=Controls whether reporting should be done for individual replicates or aggregate condition/sample values.  The default is to use aggregate sample values.  Controls whether reporting should be done for individual replicates or aggregate condition/sample values.  The default is to use aggregate sample values.  Note that the Dispersion, FPKM.SCV, MA, individual Scatter plots and all Volcano plots always show aggregate samples.
+p4_description=Controls whether reporting should be done for individual replicates or aggregate condition/sample values.  The default is to use aggregate sample values.  Controls whether reporting should be done for individual replicates or aggregate condition/sample values.  The default is to use aggregate sample values.  Note that the Dispersion, FPKM.SCV, and MA plots always show aggregate samples.
 p4_fileFormat=
 p4_name=report.as.aggregate
 p4_optional=
@@ -51,7 +51,7 @@ p4_type=java.lang.String
 p4_value=yes;no
 
 p5_default_value=yes
-p5_description=Whether or not to log transform FPKM values.  Note that the FPKM values are always log transformed for the FPKM.SCV and Volcano plots, and that the Scatter plot will use a log2 rather than log10 transformation.  Log transformation does not apply to the Dispersion, MDS, PCA, and Significance Matrix plots.
+p5_description=Whether or not to log transform FPKM values.  Note that the FPKM values are always log transformed for the FPKM.SCV plot.  Log transformation does not apply to the Dispersion, MDS, and PCA plots.
 p5_fileFormat=
 p5_name=log.transform
 p5_optional=
@@ -79,10 +79,10 @@ p7_value=PC1\=first principal component;PC2\=second principal component;PC3\=thi
 
 requiredPatchLSIDs=urn\:lsid\:broadinstitute.org\:plugin\:Ant_1.8\:1,\
   urn\:lsid\:broadinstitute.org\:plugin\:R2.15_Installer\:1,\
-  urn\:lsid\:broadinstitute.org\:plugin\:rdep_2.15_cummeRbund\:0.8
+  urn\:lsid\:broadinstitute.org\:plugin\:rdep_2.15_cummeRbund\:0.9
 requiredPatchURLs=http\://www.broadinstitute.org/webservices/gpModuleRepository/download/prod/patch/?file\=/Ant_1_8/broadinstitute.org\:plugin/Ant_1.8/1/Ant_1_8.zip,\
    http\://www.broadinstitute.org/webservices/gpModuleRepository/download/prod/patch/?file\=/R2.15_Installer/broadinstitute.org\:plugin/R2.15_Installer/1/R2.15_Installer.zip,\
-   http\://www.broadinstitute.org/webservices/gpModuleRepository/download/dev/patch/?file\=/rdep_2.15_cummeRbund/broadinstitute.org\:plugin/rdep_2.15_cummeRbund/0.8/rdep_2.15_cummeRbund.zip
+   http\://www.broadinstitute.org/webservices/gpModuleRepository/download/dev/patch/?file\=/rdep_2.15_cummeRbund/broadinstitute.org\:plugin/rdep_2.15_cummeRbund/0.9/rdep_2.15_cummeRbund.zip
 
 # The following should be the final LSID & URL for cummeRbund rdep when it's done.  Remove this comment and place the values above.
 #  urn:lsid:broadinstitute.org:plugin:rdep_2.15_cummeRbund:1
