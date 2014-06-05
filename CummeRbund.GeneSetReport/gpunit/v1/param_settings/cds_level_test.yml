@@ -12,16 +12,10 @@ params:
     log.transform: "yes"
 assertions:
     files:
-        "GeneSet.Dendrogram.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/cds_level_test/GeneSet.Dendrogram.svg
-        "GeneSet.ExpressionBarplot.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/cds_level_test/GeneSet.ExpressionBarplot.svg
-        "GeneSet.ExpressionPlot.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/cds_level_test/GeneSet.ExpressionPlot.svg
-        "GeneSet.Heatmap.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/cds_level_test/GeneSet.Heatmap.svg
-        "stdout.txt":
-            diffCmd: ../diffIgnoreGpTraces.sh
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/cds_level_test/stdout.txt
+        "GeneSet.Dendrogram.svg": !!null
+        "GeneSet.ExpressionBarplot.svg": !!null
+        "GeneSet.ExpressionPlot.svg": !!null
+        "GeneSet.Heatmap.svg": !!null
+        "stdout.txt": !!null
         "cuffData.db": !!null
             

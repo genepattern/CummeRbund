@@ -11,17 +11,10 @@ params:
     log.transform: "yes"
 assertions:
     files:
-        "SelectedConditions.MAplot.c1_c2.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedConditionsReport/v1/output/init_and_load/init_from_cuffdiff_test/SelectedConditions.MAplot.c1_c2.svg
-        "SelectedConditions.MAplot.c2_c1.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedConditionsReport/v1/output/init_and_load/init_from_cuffdiff_test/SelectedConditions.MAplot.c2_c1.svg
-        "SelectedConditions.Scatter.c1_c2.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedConditionsReport/v1/output/init_and_load/init_from_cuffdiff_test/SelectedConditions.Scatter.c1_c2.svg
-        "SelectedConditions.Scatter.c2_c1.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedConditionsReport/v1/output/init_and_load/init_from_cuffdiff_test/SelectedConditions.Scatter.c2_c1.svg
-        "SelectedConditions.Volcano.c1_c2.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedConditionsReport/v1/output/init_and_load/init_from_cuffdiff_test/SelectedConditions.Volcano.c1_c2.svg
-        "stdout.txt":
-            diffCmd: ../diffIgnoreGpTraces.sh
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedConditionsReport/v1/output/init_and_load/init_from_cuffdiff_test/stdout.txt
+        "SelectedConditions.MAplot.c1_c2.svg": !!null
+        "SelectedConditions.MAplot.c2_c1.svg": !!null
+        "SelectedConditions.Scatter.c1_c2.svg": !!null
+        "SelectedConditions.Scatter.c2_c1.svg": !!null
+        "SelectedConditions.Volcano.c1_c2.svg": !!null
+        "stdout.txt": !!null
         "cuffData.db": !!null

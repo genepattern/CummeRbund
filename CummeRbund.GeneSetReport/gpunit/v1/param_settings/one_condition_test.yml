@@ -12,12 +12,7 @@ params:
     log.transform: "yes"
 assertions:
     files:
-        "GeneSet.ExpressionBarplot.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/one_condition_test/GeneSet.ExpressionBarplot.svg
-        "GeneSet.ExpressionPlot.svg":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/one_condition_test/GeneSet.ExpressionPlot.svg
-        "stdout.txt":
-            diffCmd: ../diffIgnoreGpTraces.sh
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.GeneSetReport/v1/output/param_settings/one_condition_test/stdout.txt
+        "GeneSet.ExpressionBarplot.svg": !!null
+        "GeneSet.ExpressionPlot.svg": !!null
+        "stdout.txt": !!null
         "cuffData.db": !!null
-            
