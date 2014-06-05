@@ -3,12 +3,12 @@ name=CummeRbund.GeneSetReport
 commandLine=<R2.15_HOME>/bin/Rscript --no-save --quiet --slave --no-restore <libdir>run_gp_cummerbund_geneset_report.R <libdir> <patches>/rlib/2.15_20131119/site-library --cuffdiff.input\=<cuffdiff.input> --geneset.file=<geneset.file> <selected.conditions> --output.format=<output.format> --feature.level=<feature.level> --report.as.aggregate=<report.as.aggregate> --log.transform=<log.transform>
 license=
 taskDoc=doc.html
-fileFormat=
+fileFormat=svg;png;pdf;txt
 taskType=RNA-seq
 os=any
 privacy=public
 description=Cuffdiff visualization package providing plots based on a user-provided list of genes. 
-version=Improved error reporting. Fixed bugs in loading the condition list. Updated dependency installer to fix issue with pre-installed out-of-date packages
+version=Updated dependency installer to fix issue with R warnings causing steps and checks to be missed.
 minGenePatternVersion=
 author=Loyal Goff, MIT Computer Science and Artificial Intelligence Lab; David Eby, Broad Institute
 
@@ -80,10 +80,10 @@ p7_value=yes;no
 
 requiredPatchLSIDs=urn\:lsid\:broadinstitute.org\:plugin\:Ant_1.8\:1,\
   urn\:lsid\:broadinstitute.org\:plugin\:R2.15_Installer\:1,\
-  urn\:lsid\:broadinstitute.org\:plugin\:rdep_2.15_cummeRbund\:0.9
+  urn\:lsid\:broadinstitute.org\:plugin\:rdep_2.15_cummeRbund\:0.10
 requiredPatchURLs=http\://www.broadinstitute.org/webservices/gpModuleRepository/download/prod/patch/?file\=/Ant_1_8/broadinstitute.org\:plugin/Ant_1.8/1/Ant_1_8.zip,\
    http\://www.broadinstitute.org/webservices/gpModuleRepository/download/prod/patch/?file\=/R2.15_Installer/broadinstitute.org\:plugin/R2.15_Installer/1/R2.15_Installer.zip,\
-   http\://www.broadinstitute.org/webservices/gpModuleRepository/download/dev/patch/?file\=/rdep_2.15_cummeRbund/broadinstitute.org\:plugin/rdep_2.15_cummeRbund/0.9/rdep_2.15_cummeRbund.zip
+   http\://www.broadinstitute.org/webservices/gpModuleRepository/download/dev/patch/?file\=/rdep_2.15_cummeRbund/broadinstitute.org\:plugin/rdep_2.15_cummeRbund/0.10/rdep_2.15_cummeRbund.zip
 
 # The following should be the final LSID & URL for cummeRbund rdep when it's done.  Remove this comment and place the values above.
 #  urn:lsid:broadinstitute.org:plugin:rdep_2.15_cummeRbund:1
