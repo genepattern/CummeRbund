@@ -12,6 +12,7 @@ params:
     pca.y: "PC3"
 assertions:
     # Note: the output directory is for a different test.  We are checking that the results are the same regardless of the output format
+    diffCmd: diff -q -b --strip-trailing-cr
     files:
         "QC.Boxplot.png": !!null
         "QC.Dendrogram.png": !!null
