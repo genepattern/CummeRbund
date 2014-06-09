@@ -11,6 +11,7 @@ params:
     pca.x: "PC2"
     pca.y: "PC3"
 assertions:
+    diffCmd: diff -q -b --strip-trailing-cr
     files:
         "QC.Boxplot.svg": !!null
         "QC.Dendrogram.svg": !!null
