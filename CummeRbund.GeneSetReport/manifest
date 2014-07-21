@@ -6,6 +6,7 @@ taskDoc=doc.html
 fileFormat=svg;png;pdf
 taskType=RNA-seq
 os=any
+quality=preproduction
 privacy=public
 description=[Beta Release** Contact gp-help with any issues. Check stdout.txt and stderr.txt for errors] Cuffdiff visualization package providing plots based on a user-provided list of genes.
 version=
