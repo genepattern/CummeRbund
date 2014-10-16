@@ -1,6 +1,6 @@
 ## The Broad Institute
 ## SOFTWARE COPYRIGHT NOTICE AGREEMENT
-## This software and its documentation are copyright (2013) by the
+## This software and its documentation are copyright (2014) by the
 ## Broad Institute/Massachusetts Institute of Technology. All rights are
 ## reserved.
 ##
@@ -35,7 +35,8 @@ option_list <- list(
   make_option("--report.as.aggregate", dest="report.as.aggregate"),
   make_option("--log.transform", dest="log.transform"),
   make_option("--pca.x", dest="pca.x"),
-  make_option("--pca.y", dest="pca.y")
+  make_option("--pca.y", dest="pca.y"),
+  make_option("--attempt.to.merge.names", dest="attempt.to.merge.names")
   )
 
 opt <- parse_args(OptionParser(option_list=option_list), positional_arguments=TRUE, args=args)
@@ -59,6 +60,7 @@ genome <- get.genome.from.params(opts$ref.gtf, opts$genome)
 
 report.as.aggregate <- (opts$report.as.aggregate == "yes")
 log.transform <- (opts$log.transform == "yes")
+attempt.to.merge.names <- (opts$attempt.to.merge.names == "yes")
 
 print(c("Running GenePattern CummeRbund QC Report on data from:", opts$cuffdiff.input))
 
@@ -66,7 +68,7 @@ print(c("Running GenePattern CummeRbund QC Report on data from:", opts$cuffdiff.
 job.builder <- function(cuffdiff.job) {
    GP.CummeRbund.QC.Report(cuffdiff.job, opts$ref.gtf, genome, opts$output.format,
                            opts$feature.level, report.as.aggregate, log.transform,
-                           opts$pca.x, opts$pca.y)
+                           opts$pca.x, opts$pca.y, attempt.to.merge.names)
 }
 
 suppressMessages(suppressWarnings(
