@@ -1,6 +1,6 @@
 ## The Broad Institute
 ## SOFTWARE COPYRIGHT NOTICE AGREEMENT
-## This software and its documentation are copyright (2013) by the
+## This software and its documentation are copyright (2014) by the
 ## Broad Institute/Massachusetts Institute of Technology. All rights are
 ## reserved.
 ##
@@ -10,7 +10,7 @@
 
 GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome, output.format,
                                     feature.level, report.as.aggregate, log.transform,
-                                    pca.x, pca.y) {
+                                    pca.x, pca.y, attempt.to.merge.names) {
    use.replicates <- !report.as.aggregate
    
    device.open <- get.device.open(output.format)
@@ -21,14 +21,13 @@ GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome, output.forma
    selected.features <- feature.selector(cuff)
    
    # Write out a table of the differentially expressed features
-   write.significance.data(diffData(selected.features), 
-                           paste0('QC.sig_diffExp_', feature.level,'.txt'))
+   write.sig_diffExp.report(cuff, feature.level, attempt.to.merge.names)
 
    # Write out tables of the significant promoters, splicing, and relCDS data
-   write.significance.data(distValues(promoters(cuff)), 'QC.sig_promoter_data.txt')
-   write.significance.data(distValues(splicing(cuff)), 'QC.sig_splicing_data.txt')
-   write.significance.data(distValues(relCDS(cuff)), 'QC.sig_relCDS_data.txt')
-
+   write.sig_distValue.report(cuff, promoters, "genes", 'QC.sig_promoter_data.txt', attempt.to.merge.names)
+   write.sig_distValue.report(cuff, splicing, "TSS", 'QC.sig_splicing_data.txt', attempt.to.merge.names)
+   write.sig_distValue.report(cuff, relCDS, "genes", 'QC.sig_relCDS_data.txt', attempt.to.merge.names)
+   
    # Write out the various plots
    print.dispersionPlot(selected.features, device.open, "QC")
    print.fpkmSCVPlot(selected.features, device.open, "QC")
@@ -40,11 +39,19 @@ GP.CummeRbund.QC.Report <- function(cuffdiff.job, gtf.file, genome, output.forma
    print.dendrogram(selected.features, device.open, "QC", use.replicates, log.transform)
 }
 
-write.significance.data <- function(data, report.name) {
+write.sig_diffExp.report <- function(cuff, feature.level, attempt.to.merge.names) {
+   report.name <- paste0('QC.sig_diffExp_', feature.level,'.txt')
    tryCatch({
-      sig_data <- subset(data, (significant == 'yes'))
-      if (nrow(sig_data) > 0) {
-         write.table(sig_data, report.name, sep='\t', row.names = F, col.names = T, quote = F)
+      sigIDs <- getSig(cuff,level=feature.level,alpha=0.05)
+      if (NROW(sigIDs) > 0) {
+         sigFeatures <- getFeatures(cuff,sigIDs,level=feature.level)
+         sigData <- diffData(sigFeatures)
+         if (attempt.to.merge.names) {
+            names <- featureNames(sigFeatures)
+            idColumnName <- selectIdColumnName(feature.level)
+            sigData <- mergeNamesIntoReportData(names, sigData, idColumnName) 
+         }
+         write.table(sigData, report.name, sep='\t', row.names = F, col.names = T, quote = F)
       }
       else {
          print(paste0("Skipping ", report.name, " - no data found meeting significance threshold"))
@@ -54,6 +61,50 @@ write.significance.data <- function(data, report.name) {
       print(paste0("Error printing ", report.name, " - skipping"))
       print(conditionMessage(err))
    })
+}
+
+selectIdColumnName <- function(feature.level) {
+   # Return the appropriate ID column name based on the specified feature level
+   if (feature.level == "genes") { return("gene_id") }
+   if (feature.level == "isoforms") { return("isoform_id") }
+   if (feature.level == "TSS") { return("TSS_group_id") }
+   if (feature.level == "CDS") { return("CDS_id") }
+   stop(paste0("Unrecognized feature level '", feature.level, "'"))
+} 
+
+# This is similar to the code for the sig_distExp report.  Could refactor, but leaving this as a 
+# separate similar function for clarity of code flow.
+write.sig_distValue.report <- function(cuff, dist.selector.function, feature.level, report.name, attempt.to.merge.names) {
+   tryCatch({
+      distData <- distValues(dist.selector.function(cuff))
+      sigData <- subset(distData, (significant == 'yes'))
+      if (nrow(sigData) > 0) {
+         sigIDs <- sigData[[1]]
+         sigFeatures <- getFeatures(cuff,sigIDs,level=feature.level)
+         if (attempt.to.merge.names) { 
+            names <- featureNames(sigFeatures)
+            idColumnName <- selectIdColumnName(feature.level)
+            sigData <- mergeNamesIntoReportData(names, sigData, idColumnName) 
+         }
+         write.table(sigData, report.name, sep='\t', row.names = F, col.names = T, quote = F)
+      }
+      else {
+         print(paste0("Skipping ", report.name, " - no data found meeting significance threshold"))
+      }
+   },
+   error = function(err) {
+      print(paste0("Error printing ", report.name, " - skipping"))
+      print(conditionMessage(err))
+   })
+}
+
+mergeNamesIntoReportData <- function(names, data, idColumnName) {
+   sigOutput <- merge(names, data, by.x="tracking_id", by.y=idColumnName)
+
+   # Patch the merged table to have the original name for the ID column.  This is always the
+   # the first column for the examples we've seen.
+   colnames(sigOutput)[1] <- idColumnName
+   return(sigOutput)
 }
 
 print.dispersionPlot <- build.standardPlotter("Dispersion", 

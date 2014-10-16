@@ -1,6 +1,6 @@
 #Wed, 13 Nov 2013 15:59:49 -0500
 name=CummeRbund.QcReport
-commandLine=<R2.15_Rscript> --no-save --quiet --slave --no-restore <libdir>run_gp_cummerbund_qc_report.R <libdir> <patches>/rlib/2.15_20131119/site-library --cuffdiff.input\=<cuffdiff.input> --output.format=<output.format> --feature.level=<feature.level> --report.as.aggregate=<report.as.aggregate> --log.transform=<log.transform> --pca.x=<pca.x> --pca.y=<pca.y>
+commandLine=<R2.15_Rscript> --no-save --quiet --slave --no-restore <libdir>run_gp_cummerbund_qc_report.R <libdir> <patches>/rlib/2.15_20131119/site-library --cuffdiff.input\=<cuffdiff.input> --output.format=<output.format> --feature.level=<feature.level> --report.as.aggregate=<report.as.aggregate> --log.transform=<log.transform> --pca.x=<pca.x> --pca.y=<pca.y> --attempt.to.merge.names=<attempt.to.merge.names>
 license=
 taskDoc=doc.html
 fileFormat=svg;png;pdf;txt
@@ -76,6 +76,15 @@ p7_optional=
 p7_prefix_when_specified=
 p7_type=java.lang.String
 p7_value=PC1\=first principal component;PC2\=second principal component;PC3\=third principal component;PC4\=fourth principal component;PC5\=fifth principal component;PC6\=sixth principal component
+
+p8_default_value=no
+p8_description=Should the module attempt to merge gene names into the text reports?  Depending on the GTF file used in the Cuffdiff run, the text reports may instead contain tracking ID references, particularly if a Cuffmerge merged.gtf file was used.  Note that this setting does not affect the plots.
+p8_fileFormat=
+p8_name=attempt.to.merge.names
+p8_optional=
+p8_prefix_when_specified=
+p8_type=java.lang.String
+p8_value=yes;no
 
 requiredPatchLSIDs=urn\:lsid\:broadinstitute.org\:plugin\:Ant_1.8\:1,\
   urn\:lsid\:broadinstitute.org\:plugin\:R2.15_Installer\:1,\
