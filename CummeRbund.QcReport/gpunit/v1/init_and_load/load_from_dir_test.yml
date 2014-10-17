@@ -10,6 +10,7 @@ params:
     log.transform: "yes"
     pca.x: "PC2"
     pca.y: "PC3"
+    attempt.to.merge.names: "no"
 assertions:
     # Note: the output directory is for a different test.  We are checking that the results are the same regardless of the loading method
     diffCmd: diff -q -b --strip-trailing-cr
