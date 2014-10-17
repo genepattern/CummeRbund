@@ -10,6 +10,7 @@ params:
     log.transform: "yes"
     pca.x: "PC2"
     pca.y: "PC3"
+    attempt.to.merge.names: "no"
 assertions:
     diffCmd: diff -q -b --strip-trailing-cr
     files:

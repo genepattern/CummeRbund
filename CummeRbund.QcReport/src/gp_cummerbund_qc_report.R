@@ -46,6 +46,7 @@ write.sig_diffExp.report <- function(cuff, feature.level, attempt.to.merge.names
       if (NROW(sigIDs) > 0) {
          sigFeatures <- getFeatures(cuff,sigIDs,level=feature.level)
          sigData <- diffData(sigFeatures)
+         sigData <- subset(sigData, (significant == 'yes'))
          if (attempt.to.merge.names) {
             names <- featureNames(sigFeatures)
             idColumnName <- selectIdColumnName(feature.level)
