@@ -9,7 +9,7 @@ os=any
 privacy=public
 quality=preproduction
 description=[**Beta Release** Contact gp-help with any issues. Check stdout.txt and stderr.txt for errors] Cuffdiff visualization package providing plots based on a user-provided list of conditions.
-version=Updates the command line for better portability.
+version=Updates the R Installer plug-in for better portability .
 minGenePatternVersion=
 author=Loyal Goff, MIT Computer Science and Artificial Intelligence Lab; David Eby, Broad Institute
 
@@ -70,10 +70,10 @@ p6_type=java.lang.String
 p6_value=yes;no
 
 requiredPatchLSIDs=urn\:lsid\:broadinstitute.org\:plugin\:Ant_1.8\:1,\
-  urn\:lsid\:broadinstitute.org\:plugin\:R2.15_Installer\:1,\
+  urn\:lsid\:broadinstitute.org\:plugin\:R2.15_Installer\:2,\
   urn\:lsid\:broadinstitute.org\:plugin\:rdep_2.15_cummeRbund\:0.12
 requiredPatchURLs=http\://www.broadinstitute.org/webservices/gpModuleRepository/download/prod/patch/?file\=/Ant_1_8/broadinstitute.org\:plugin/Ant_1.8/1/Ant_1_8.zip,\
-   http\://www.broadinstitute.org/webservices/gpModuleRepository/download/prod/patch/?file\=/R2.15_Installer/broadinstitute.org\:plugin/R2.15_Installer/1/R2.15_Installer.zip,\
+   http\://www.broadinstitute.org/webservices/gpModuleRepository/download/prod/patch/?file\=/R2.15_Installer/broadinstitute.org\:plugin/R2.15_Installer/2/R2.15_Installer.zip,\
    http\://www.broadinstitute.org/webservices/gpModuleRepository/download/dev/patch/?file\=/rdep_2.15_cummeRbund/broadinstitute.org\:plugin/rdep_2.15_cummeRbund/0.12/rdep_2.15_cummeRbund.zip
 
 # The following should be the final LSID & URL for cummeRbund rdep when it's done.  Remove this comment and place the values above.
