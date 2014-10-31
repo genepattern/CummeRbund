@@ -221,7 +221,7 @@ build.standardPlotter <- function(plotTypeName, plotterFunction) {
 # Utility plot functions for plots used across multiple reports
 print.volcanoPlot <- build.XYAxisPlotter("Volcano",
    function(selected.features, x, y, use.replicates=FALSE, log.transform=TRUE) {
-      return(csVolcano(selected.features, x, y, showSignificant=TRUE))
+      return(csVolcano(selected.features, x, y, alpha=0.05, showSignificant=TRUE))
    }
 )
 

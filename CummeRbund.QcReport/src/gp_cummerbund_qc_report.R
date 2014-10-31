@@ -152,7 +152,7 @@ print.sigMatrix <- function(cuff, device.open, feature.level) {
    else {
       tryCatch({
          # The significance matrix behaves differently in that it handles the selection within the call.
-         sM <- sigMatrix(cuff, level=feature.level)
+         sM <- sigMatrix(cuff, level=feature.level, alpha=0.05)
          print.plotObject(sM, plotname, device.open)
       },
       error = function(err) {
