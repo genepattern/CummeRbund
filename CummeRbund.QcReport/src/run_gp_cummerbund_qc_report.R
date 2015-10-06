@@ -1,6 +1,6 @@
 ## The Broad Institute
 ## SOFTWARE COPYRIGHT NOTICE AGREEMENT
-## This software and its documentation are copyright (2014) by the
+## This software and its documentation are copyright (2015) by the
 ## Broad Institute/Massachusetts Institute of Technology. All rights are
 ## reserved.
 ##
@@ -8,20 +8,53 @@
 ## whatsoever. Neither the Broad Institute nor MIT can be responsible for its
 ## use, misuse, or functionality.
 
+suppressMessages(suppressWarnings(library(survival)))
+suppressMessages(suppressWarnings(library(getopt)))
+suppressMessages(suppressWarnings(library(optparse)))
+suppressMessages(suppressWarnings(library(colorspace)))
+suppressMessages(suppressWarnings(library(dichromat)))
+suppressMessages(suppressWarnings(library(munsell)))
+suppressMessages(suppressWarnings(library(labeling)))
+suppressMessages(suppressWarnings(library(bitops)))
+suppressMessages(suppressWarnings(library(Formula)))
+suppressMessages(suppressWarnings(library(DBI)))
+suppressMessages(suppressWarnings(library(digest)))
+suppressMessages(suppressWarnings(library(gtable)))
+suppressMessages(suppressWarnings(library(stringr)))
+suppressMessages(suppressWarnings(library(Rcpp)))
+suppressMessages(suppressWarnings(library(plyr)))
+suppressMessages(suppressWarnings(library(RColorBrewer)))
+suppressMessages(suppressWarnings(library(lattice)))
+suppressMessages(suppressWarnings(library(latticeExtra)))
+suppressMessages(suppressWarnings(library(scales)))
+suppressMessages(suppressWarnings(library(proto)))
+suppressMessages(suppressWarnings(library(reshape2)))
+suppressMessages(suppressWarnings(library(ggplot2)))
+suppressMessages(suppressWarnings(library(Hmisc)))
+suppressMessages(suppressWarnings(library(XML)))
+suppressMessages(suppressWarnings(library(RCurl)))
+suppressMessages(suppressWarnings(library(RSQLite)))
+suppressMessages(suppressWarnings(library(fastcluster)))
+suppressMessages(suppressWarnings(library(BiocGenerics)))
+suppressMessages(suppressWarnings(library(IRanges)))
+suppressMessages(suppressWarnings(library(GenomicRanges)))
+suppressMessages(suppressWarnings(library(Biostrings)))
+suppressMessages(suppressWarnings(library(BSgenome)))
+suppressMessages(suppressWarnings(library(zlibbioc)))
+suppressMessages(suppressWarnings(library(Rsamtools)))
+suppressMessages(suppressWarnings(library(biomaRt)))
+suppressMessages(suppressWarnings(library(Biobase)))
+suppressMessages(suppressWarnings(library(AnnotationDbi)))
+suppressMessages(suppressWarnings(library(rtracklayer)))
+suppressMessages(suppressWarnings(library(GenomicFeatures)))
+suppressMessages(suppressWarnings(library(biovizBase)))
+suppressMessages(suppressWarnings(library(Gviz)))
+suppressMessages(suppressWarnings(library(cummeRbund)))
+
 args <- commandArgs(trailingOnly=TRUE)
 
 libdir <- args[1]
-site.library <- args[2]
-
-cat("\nLibrary dir: ",site.library)
-.libPaths(site.library)
-
-suppressMessages(suppressWarnings(
-   library(optparse)
-))
-suppressMessages(suppressWarnings(
-   library(cummeRbund)
-))
+load.packages(file.path(libdir, "r.package.info"))
 
 # Based on info from Loyal Goff, the ref.gtf and genome parameters are unused at this time.
 # There is reason to believe that these might be brought back, however, so they have only
