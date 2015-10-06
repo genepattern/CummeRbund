@@ -1,6 +1,6 @@
 #Wed, 13 Nov 2013 15:59:49 -0500
 name=CummeRbund.SelectedGeneReport
-commandLine=<R2.15_Rscript> --no-save --quiet --slave --no-restore <libdir>run_gp_cummerbund_selected_gene_report.R <libdir> <patches>/rlib/2.15_20131119/site-library --cuffdiff.input\=<cuffdiff.input> --feature.id=<feature.id> <selected.conditions> <find.similar> --output.format=<output.format> --feature.level=<feature.level> --report.as.aggregate=<report.as.aggregate> --log.transform=<log.transform>
+commandLine=<R2.15_Rscript> --no-save --quiet --slave --no-restore <libdir>run_gp_cummerbund_selected_gene_report.R <libdir> --cuffdiff.input\=<cuffdiff.input> --feature.id=<feature.id> <selected.conditions> <find.similar> --output.format=<output.format> --feature.level=<feature.level> --report.as.aggregate=<report.as.aggregate> --log.transform=<log.transform>
 license=
 taskDoc=doc.html
 fileFormat=svg;png;pdf
