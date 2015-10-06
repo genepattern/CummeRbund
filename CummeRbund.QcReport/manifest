@@ -8,7 +8,7 @@ taskType=RNA-seq
 os=any
 privacy=public
 description=[Beta Release** Contact gp-help with any issues. Check stdout.txt and stderr.txt for errors] Cuffdiff visualization package providing plots and tables related to QC and Global Stats.
-version=Updates the R Installer plug-in for better portability .
+version=Updated to make use of the R package installer.
 minGenePatternVersion=
 author=Loyal Goff, MIT Computer Science and Artificial Intelligence Lab; David Eby, Broad Institute
 
