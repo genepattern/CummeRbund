@@ -51,20 +51,11 @@ suppressMessages(suppressWarnings(library(biovizBase)))
 suppressMessages(suppressWarnings(library(Gviz)))
 suppressMessages(suppressWarnings(library(cummeRbund)))
 
+sessionInfo()
+
 args <- commandArgs(trailingOnly=TRUE)
 
 libdir <- args[1]
-site.library <- args[2]
-
-cat("\nLibrary dir: ",site.library)
-.libPaths(site.library)
-
-suppressMessages(suppressWarnings(
-   library(optparse)
-))
-suppressMessages(suppressWarnings(
-   library(cummeRbund)
-))
 
 # Based on info from Loyal Goff, the ref.gtf and genome parameters are unused at this time.
 # There is reason to believe that these might be brought back, however, so they have only
@@ -84,8 +75,6 @@ option_list <- list(
 opt <- parse_args(OptionParser(option_list=option_list), positional_arguments=TRUE, args=args)
 print(opt)
 opts <- opt$options
-
-sessionInfo()
 
 source(file.path(libdir, "gp_cummerbund_util.R"))
 source(file.path(libdir, "gp_cummerbund_geneset_report.R"))
@@ -110,3 +99,5 @@ job.builder <- function(cuffdiff.job) {
 suppressMessages(suppressWarnings(
    run.job(opts$cuffdiff.input, job.builder)
 ))
+
+sessionInfo()
