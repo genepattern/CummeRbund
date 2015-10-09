@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Ant build file -->
 
-<project basedir="." default="create-zip" name="CummeRbund.QcReport">
+<project basedir="." default="create-zip" name="CummeRbund.GeneSetReport">
 	<property name="dirOffset" value="../../" />
 	<import file="${dirOffset}/commontargets.xml" />
 
