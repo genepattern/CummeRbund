@@ -3,7 +3,7 @@
 #
 module: CummeRbund.SelectedGeneReport
 params: 
-    cuffdiff.input: "cuffData_dir/cuffData.db"
+    cuffdiff.input: "<%gpunit.testData%>CummeRbund.SelectedGeneReport/v1/input/cuffData_dir/cuffData.db"
     feature.id: "galectin"
     selected.conditions: ""
     output.format: "pdf"

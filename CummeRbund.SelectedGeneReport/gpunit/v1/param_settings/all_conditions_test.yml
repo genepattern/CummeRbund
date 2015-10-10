@@ -3,7 +3,7 @@
 #
 module: CummeRbund.SelectedGeneReport
 params: 
-    cuffdiff.input: "cuffData_multCond_dir/cuffData.db"
+    cuffdiff.input: "<%gpunit.testData%>CummeRbund.SelectedGeneReport/v1/input/cuffData_multCond_dir/cuffData.db"
     feature.id: "Ccl17"
     selected.conditions: " s1, s2 ,s3 ,p1,p2,p3 "
     output.format: "svg"
