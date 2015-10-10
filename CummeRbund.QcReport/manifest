@@ -1,6 +1,6 @@
 #Wed, 13 Nov 2013 15:59:49 -0500
 name=CummeRbund.QcReport
-commandLine=<R2.15_Rscript_dev> --no-save --quiet --slave --no-restore <libdir>run_gp_cummerbund_qc_report.R <libdir> --cuffdiff.input\=<cuffdiff.input> --output.format=<output.format> --feature.level=<feature.level> --report.as.aggregate=<report.as.aggregate> --log.transform=<log.transform> --pca.x=<pca.x> --pca.y=<pca.y> --attempt.to.merge.names=<attempt.to.merge.names>
+commandLine=<R2.15_Rscript> --no-save --quiet --slave --no-restore <libdir>run_gp_cummerbund_qc_report.R <libdir> --cuffdiff.input\=<cuffdiff.input> --output.format=<output.format> --feature.level=<feature.level> --report.as.aggregate=<report.as.aggregate> --log.transform=<log.transform> --pca.x=<pca.x> --pca.y=<pca.y> --attempt.to.merge.names=<attempt.to.merge.names>
 license=
 taskDoc=doc.html
 fileFormat=svg;png;pdf;txt
