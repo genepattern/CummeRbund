@@ -4,7 +4,7 @@
 #
 module: CummeRbund.SelectedGeneReport
 params: 
-    cuffdiff.input: "cuffdiff_DrosM_w_cuffData"
+    cuffdiff.input: "<%gpunit.testData%>CummeRbund.SelectedGeneReport/v1/input/cuffdiff_DrosM_w_cuffData"
     feature.id: "galectin"
     selected.conditions: ""
     output.format: "svg"
