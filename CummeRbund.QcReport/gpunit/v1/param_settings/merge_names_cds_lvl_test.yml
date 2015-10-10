@@ -3,7 +3,7 @@
 #
 module: CummeRbund.QcReport
 params: 
-    cuffdiff.input: "cuffData_toMerge/cuffData.db"
+    cuffdiff.input: "<%gpunit.testData%>CummeRbund.QcReport/v1/input/cuffData_toMerge/cuffData.db"
     output.format: "svg"
     feature.level: "CDS"
     report.as.aggregate: "yes"
@@ -22,6 +22,6 @@ assertions:
         "QC.FPKM.SCV.svg": !!null
         "QC.JSDistanceHeatmap.Samples.svg": !!null
         "QC.sig_diffExp_CDS.txt":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.QcReport/v1/output/param_settings/merge_names_cds_lvl_test/QC.sig_diffExp_CDS.txt
+            diff: <%gpunit.resultData%>CummeRbund.QcReport/v1/output/param_settings/merge_names_cds_lvl_test/QC.sig_diffExp_CDS.txt
         "stdout.txt": !!null
         "cuffData.db": !!null

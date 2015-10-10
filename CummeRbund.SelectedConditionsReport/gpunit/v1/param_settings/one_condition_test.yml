@@ -3,7 +3,7 @@
 #
 module: CummeRbund.SelectedConditionsReport
 params: 
-    cuffdiff.input: "cuffData_multCond_dir/cuffData.db"
+    cuffdiff.input: "<%gpunit.testData%>CummeRbund.SelectedConditionsReport/v1/input/cuffData_multCond_dir/cuffData.db"
     selected.conditions: "c1"
     output.format: "svg"
     feature.level: "genes"
@@ -14,4 +14,4 @@ assertions:
     files:
         "stderr.txt":
             diffCmd: ../diffIgnoreGpTraces.sh
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.SelectedConditionsReport/v1/output/param_settings/one_condition_test/stderr.txt
+            diff: <%gpunit.resultData%>CummeRbund.SelectedConditionsReport/v1/output/param_settings/one_condition_test/stderr.txt
