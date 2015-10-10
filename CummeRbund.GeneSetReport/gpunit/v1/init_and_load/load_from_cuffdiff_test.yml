@@ -4,8 +4,8 @@
 #
 module: CummeRbund.GeneSetReport
 params: 
-    cuffdiff.input: "cuffdiff_DrosM_w_cuffData"
-    geneset.file: "dros_geneset.txt"
+    cuffdiff.input: "<%gpunit.testData%>CummeRbund.GeneSetReport/v1/input/cuffdiff_DrosM_w_cuffData"
+    geneset.file: "<%gpunit.testData%>CummeRbund.GeneSetReport/v1/input/dros_geneset.txt"
     selected.conditions: ""
     output.format: "svg"
     feature.level: "genes"

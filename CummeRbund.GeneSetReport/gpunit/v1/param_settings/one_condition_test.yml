@@ -3,8 +3,8 @@
 #
 module: CummeRbund.GeneSetReport
 params: 
-    cuffdiff.input: "cuffData_multCond_dir/cuffData.db"
-    geneset.file: "mm9_geneset.txt"
+    cuffdiff.input: "<%gpunit.testData%>CummeRbund.GeneSetReport/v1/input/cuffData_multCond_dir/cuffData.db"
+    geneset.file: "<%gpunit.testData%>CummeRbund.GeneSetReport/v1/input/mm9_geneset.txt"
     selected.conditions: "s1"
     output.format: "svg"
     feature.level: "genes"

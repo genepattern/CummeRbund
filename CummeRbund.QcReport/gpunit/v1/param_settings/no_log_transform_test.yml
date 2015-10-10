@@ -3,7 +3,7 @@
 #
 module: CummeRbund.QcReport
 params: 
-    cuffdiff.input: "cuffData_dir/cuffData.db"
+    cuffdiff.input: "<%gpunit.testData%>CummeRbund.QcReport/v1/input/cuffData_dir/cuffData.db"
     output.format: "svg"
     feature.level: "genes"
     report.as.aggregate: "yes"
@@ -21,12 +21,12 @@ assertions:
         "QC.FPKM.SCV.svg": !!null
         "QC.JSDistanceHeatmap.Samples.svg": !!null
         "QC.sig_diffExp_genes.txt":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.QcReport/v1/output/param_settings/no_log_transform_test/QC.sig_diffExp_genes.txt
+            diff: <%gpunit.resultData%>CummeRbund.QcReport/v1/output/param_settings/no_log_transform_test/QC.sig_diffExp_genes.txt
         "QC.sig_promoter_data.txt":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.QcReport/v1/output/param_settings/no_log_transform_test/QC.sig_promoter_data.txt
+            diff: <%gpunit.resultData%>CummeRbund.QcReport/v1/output/param_settings/no_log_transform_test/QC.sig_promoter_data.txt
         "QC.sig_relCDS_data.txt":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.QcReport/v1/output/param_settings/no_log_transform_test/QC.sig_relCDS_data.txt
+            diff: <%gpunit.resultData%>CummeRbund.QcReport/v1/output/param_settings/no_log_transform_test/QC.sig_relCDS_data.txt
         "QC.sig_splicing_data.txt":
-            diff: /xchip/sqa/Modules/TestSuiteData/CummeRbund.QcReport/v1/output/param_settings/no_log_transform_test/QC.sig_splicing_data.txt
+            diff: <%gpunit.resultData%>CummeRbund.QcReport/v1/output/param_settings/no_log_transform_test/QC.sig_splicing_data.txt
         "stdout.txt": !!null
         "cuffData.db": !!null
