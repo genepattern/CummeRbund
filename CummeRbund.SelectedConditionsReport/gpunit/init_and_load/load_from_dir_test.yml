@@ -1,9 +1,6 @@
-#
-# Test loading from a cummeRbund dir (simulates a previous job)
-#
 module: CummeRbund.SelectedConditionsReport
 name: load_from_dir_test
-description: 
+description: Test loading from a cummeRbund dir (simulates a previous job)
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.SelectedConditionsReport/v1/input/cuffData_dir"
     selected.conditions: "c1,c2"

@@ -1,9 +1,6 @@
-#
-# Test loading from a cummeRbund file
-#
 module: CummeRbund.SelectedConditionsReport
 name: load_from_file_test
-description: 
+description: Test loading from a cummeRbund file
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.SelectedConditionsReport/v1/input/cuffData_dir/cuffData.db"
     selected.conditions: "c1,c2"

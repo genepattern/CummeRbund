@@ -1,9 +1,6 @@
-#
-# Test selecting multiple conditions.  Also testing the parsing of whitespace in selected.conditions
-#
 module: CummeRbund.SelectedConditionsReport
 name: mult_conditions_test
-description: 
+description: Test selecting multiple conditions.  Also testing the parsing of whitespace in selected.conditions
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.SelectedConditionsReport/v1/input/cuffData_multCond_dir/cuffData.db"
     selected.conditions: " s1, s2 ,p1 "

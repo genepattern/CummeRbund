@@ -1,9 +1,6 @@
-#
-# Test selecting multiple conditions
-#
 module: CummeRbund.SelectedGeneReport
 name: mult_conditions_test
-description: 
+description: Test selecting multiple conditions
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.SelectedGeneReport/v1/input/cuffData_multCond_dir/cuffData.db"
     feature.id: "Ccl17"

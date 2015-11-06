@@ -1,9 +1,6 @@
-#
-# Test reporting at isoforms level
-#
 module: CummeRbund.QcReport
 name: isoforms_level_test
-description: 
+description: Test reporting at isoforms level
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.QcReport/v1/input/cuffData_dir/cuffData.db"
     output.format: "svg"

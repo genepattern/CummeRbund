@@ -1,9 +1,6 @@
-#
-# Test reporting at isoforms level
-#
 module: CummeRbund.SelectedConditionsReport
 name: isoforms_level_test
-description: 
+description: Test reporting at isoforms level
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.SelectedConditionsReport/v1/input/cuffData_dir/cuffData.db"
     selected.conditions: "c1,c2"
