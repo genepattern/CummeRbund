@@ -2,7 +2,7 @@
 # Test reporting at replicate level
 #
 module: CummeRbund.QcReport
-name: 
+name: no_aggregate_report_test
 description: 
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.QcReport/v1/input/cuffData_dir/cuffData.db"

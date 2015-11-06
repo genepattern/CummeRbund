@@ -2,7 +2,7 @@
 # Test pdf generation
 #
 module: CummeRbund.GeneSetReport
-name: 
+name: generate_pdf_test
 description: 
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.GeneSetReport/v1/input/cuffData_dir/cuffData.db"

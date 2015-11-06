@@ -2,7 +2,7 @@
 # Test loading from a cummeRbund dir (simulates a previous job)
 #
 module: CummeRbund.GeneSetReport
-name: 
+name: load_from_dir_test
 description: 
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.GeneSetReport/v1/input/cuffData_dir"
