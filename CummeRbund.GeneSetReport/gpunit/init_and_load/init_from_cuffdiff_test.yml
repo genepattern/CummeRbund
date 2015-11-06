@@ -1,9 +1,6 @@
-#
-# Test loading from a cuffdiff job
-#
 module: CummeRbund.GeneSetReport
 name: init_from_cuffdiff_test
-description: 
+description: Test loading from a cuffdiff job
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.GeneSetReport/v1/input/cuffdiff_DrosM"
     geneset.file: "<%gpunit.testData%>gpunit/CummeRbund.GeneSetReport/v1/input/dros_geneset.txt"

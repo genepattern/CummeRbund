@@ -1,9 +1,6 @@
-#
-# Test reporting at replicate level
-#
 module: CummeRbund.SelectedConditionsReport
 name: no_aggregate_report_test
-description: 
+description: Test reporting at replicate level
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.SelectedConditionsReport/v1/input/cuffData_dir/cuffData.db"
     selected.conditions: "c1,c2"

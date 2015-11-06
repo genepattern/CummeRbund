@@ -1,9 +1,6 @@
-#
-# Test reporting at replicate level
-#
 module: CummeRbund.SelectedGeneReport
 name: no_aggregate_report_test
-description: 
+description: Test reporting at replicate level
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.SelectedGeneReport/v1/input/cuffData_dir/cuffData.db"
     feature.id: "galectin"

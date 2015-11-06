@@ -1,9 +1,6 @@
-#
-# Test reporting at tss level
-#
 module: CummeRbund.GeneSetReport
 name: tss_level_test
-description: 
+description: Test reporting at tss level
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.GeneSetReport/v1/input/cuffData_dir/cuffData.db"
     geneset.file: "<%gpunit.testData%>gpunit/CummeRbund.GeneSetReport/v1/input/dros_geneset.txt"

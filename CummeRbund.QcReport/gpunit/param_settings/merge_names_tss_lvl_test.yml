@@ -1,9 +1,6 @@
-#
-# Test the merging of gene names in place of tracking_ids (at the tss level)
-#
 module: CummeRbund.QcReport
 name: merge_names_tss_lvl_test
-description: 
+description: Test the merging of gene names in place of tracking_ids (at the tss level)
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.QcReport/v1/input/cuffData_toMerge/cuffData.db"
     output.format: "svg"

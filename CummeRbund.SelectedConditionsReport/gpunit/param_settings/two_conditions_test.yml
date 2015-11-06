@@ -1,9 +1,6 @@
-#
-# Test selecting two conditions
-#
 module: CummeRbund.SelectedConditionsReport
 name: two_conditions_test
-description: 
+description: Test selecting two conditions
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.SelectedConditionsReport/v1/input/cuffData_multCond_dir/cuffData.db"
     selected.conditions: "s1,p1"

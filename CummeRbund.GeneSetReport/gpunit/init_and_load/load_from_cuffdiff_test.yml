@@ -1,10 +1,6 @@
-#
-# Test loading from a cuffdiff job containing a cummeRbund DB file.  This is not a normally expected scenario
-# within GP, but is possible and so is tested here.
-#
 module: CummeRbund.GeneSetReport
 name: load_from_cuffdiff_test
-description: 
+description: Test loading from a cuffdiff job containing a cummeRbund DB file.  This is not a normally expected scenario
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.GeneSetReport/v1/input/cuffdiff_DrosM_w_cuffData"
     geneset.file: "<%gpunit.testData%>gpunit/CummeRbund.GeneSetReport/v1/input/dros_geneset.txt"
