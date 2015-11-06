@@ -3,8 +3,10 @@
 # within GP, but is possible and so is tested here.
 #
 module: CummeRbund.SelectedGeneReport
+name: 
+description: 
 params: 
-    cuffdiff.input: "<%gpunit.testData%>CummeRbund.SelectedGeneReport/v1/input/cuffdiff_DrosM_w_cuffData"
+    cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.SelectedGeneReport/v1/input/cuffdiff_DrosM_w_cuffData"
     feature.id: "galectin"
     selected.conditions: ""
     output.format: "svg"

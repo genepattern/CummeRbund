@@ -2,8 +2,10 @@
 # Test loading from a cuffdiff job
 #
 module: CummeRbund.QcReport
+name: 
+description: 
 params: 
-    cuffdiff.input: "<%gpunit.testData%>CummeRbund.QcReport/v1/input/cuffdiff_DrosM"
+    cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.QcReport/v1/input/cuffdiff_DrosM"
     output.format: "svg"
     feature.level: "genes"
     report.as.aggregate: "yes"

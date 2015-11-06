@@ -2,8 +2,10 @@
 # Test loading from a cummeRbund dir (simulates a previous job)
 #
 module: CummeRbund.QcReport
+name: 
+description: 
 params: 
-    cuffdiff.input: "<%gpunit.testData%>CummeRbund.QcReport/v1/input/cuffData_dir"
+    cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.QcReport/v1/input/cuffData_dir"
     output.format: "svg"
     feature.level: "genes"
     report.as.aggregate: "yes"

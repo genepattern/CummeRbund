@@ -2,8 +2,10 @@
 # Test selecting a single condition
 #
 module: CummeRbund.SelectedGeneReport
+name: 
+description: 
 params: 
-    cuffdiff.input: "<%gpunit.testData%>CummeRbund.SelectedGeneReport/v1/input/cuffData_multCond_dir/cuffData.db"
+    cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.SelectedGeneReport/v1/input/cuffData_multCond_dir/cuffData.db"
     feature.id: "Ccl17"
     selected.conditions: "s1"
     output.format: "svg"

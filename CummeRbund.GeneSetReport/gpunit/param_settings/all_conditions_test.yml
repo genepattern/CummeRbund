@@ -2,9 +2,11 @@
 # Test selecting multiple conditions.  Also testing the parsing of whitespace in selected.conditions
 #
 module: CummeRbund.GeneSetReport
+name: 
+description: 
 params: 
-    cuffdiff.input: "<%gpunit.testData%>CummeRbund.GeneSetReport/v1/input/cuffData_multCond_dir/cuffData.db"
-    geneset.file: "<%gpunit.testData%>CummeRbund.GeneSetReport/v1/input/mm9_geneset.txt"
+    cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.GeneSetReport/v1/input/cuffData_multCond_dir/cuffData.db"
+    geneset.file: "<%gpunit.testData%>gpunit/CummeRbund.GeneSetReport/v1/input/mm9_geneset.txt"
     selected.conditions: " s1, s2 ,s3 ,p1,p2,p3 "
     output.format: "svg"
     feature.level: "genes"

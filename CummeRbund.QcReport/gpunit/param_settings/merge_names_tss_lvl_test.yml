@@ -2,8 +2,10 @@
 # Test the merging of gene names in place of tracking_ids (at the tss level)
 #
 module: CummeRbund.QcReport
+name: 
+description: 
 params: 
-    cuffdiff.input: "<%gpunit.testData%>CummeRbund.QcReport/v1/input/cuffData_toMerge/cuffData.db"
+    cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.QcReport/v1/input/cuffData_toMerge/cuffData.db"
     output.format: "svg"
     feature.level: "TSS"
     report.as.aggregate: "yes"

@@ -2,8 +2,10 @@
 # Test more than two samples
 #
 module: CummeRbund.QcReport
+name: 
+description: 
 params: 
-    cuffdiff.input: "<%gpunit.testData%>CummeRbund.QcReport/v1/input/cuffData_multCond_dir/cuffData.db"
+    cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.QcReport/v1/input/cuffData_multCond_dir/cuffData.db"
     output.format: "svg"
     feature.level: "genes"
     report.as.aggregate: "yes"

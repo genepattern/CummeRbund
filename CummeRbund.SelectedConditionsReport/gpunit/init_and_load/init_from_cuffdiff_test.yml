@@ -2,8 +2,10 @@
 # Test loading from a cuffdiff job
 #
 module: CummeRbund.SelectedConditionsReport
+name: 
+description: 
 params: 
-    cuffdiff.input: "<%gpunit.testData%>CummeRbund.SelectedConditionsReport/v1/input/cuffdiff_DrosM"
+    cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.SelectedConditionsReport/v1/input/cuffdiff_DrosM"
     selected.conditions: "c1,c2"
     output.format: "svg"
     feature.level: "genes"
