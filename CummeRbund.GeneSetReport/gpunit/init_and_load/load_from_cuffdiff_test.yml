@@ -12,10 +12,11 @@ params:
     report.as.aggregate: "yes"
     log.transform: "yes"
 assertions:
-    files:
-        "GeneSet.Dendrogram.svg": !!null
-        "GeneSet.ExpressionBarplot.svg": !!null
-        "GeneSet.ExpressionPlot.svg": !!null
-        "GeneSet.Heatmap.svg": !!null
-        "stdout.txt": !!null
-        "cuffData.db": !!null
+    jobStatus: success
+#    files:
+#        "GeneSet.Dendrogram.svg": !!null
+#        "GeneSet.ExpressionBarplot.svg": !!null
+#        "GeneSet.ExpressionPlot.svg": !!null
+#        "GeneSet.Heatmap.svg": !!null
+#        "stdout.txt": !!null
+#        "cuffData.db": !!null

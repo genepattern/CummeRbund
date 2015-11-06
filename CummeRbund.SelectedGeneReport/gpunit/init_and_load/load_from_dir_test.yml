@@ -11,10 +11,11 @@ params:
     report.as.aggregate: "yes"
     log.transform: "yes"
 assertions:
-    files:
-        "SelectedGene.ExpressionBarplot.svg": !!null
-        "SelectedGene.ExpressionPlot.svg": !!null
-        "SelectedGene.SimilarityExpressionBarplot.svg": !!null
-        "SelectedGene.SimilarityExpressionPlot.svg": !!null
-        "stdout.txt": !!null
-        "cuffData.db": !!null
+    jobStatus: success
+#    files:
+#        "SelectedGene.ExpressionBarplot.svg": !!null
+#        "SelectedGene.ExpressionPlot.svg": !!null
+#        "SelectedGene.SimilarityExpressionBarplot.svg": !!null
+#        "SelectedGene.SimilarityExpressionPlot.svg": !!null
+#        "stdout.txt": !!null
+#        "cuffData.db": !!null

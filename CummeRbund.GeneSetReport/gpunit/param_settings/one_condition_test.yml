@@ -11,8 +11,9 @@ params:
     report.as.aggregate: "yes"
     log.transform: "yes"
 assertions:
-    files:
-        "GeneSet.ExpressionBarplot.svg": !!null
-        "GeneSet.ExpressionPlot.svg": !!null
-        "stdout.txt": !!null
-        "cuffData.db": !!null
+    jobStatus: success
+#    files:
+#        "GeneSet.ExpressionBarplot.svg": !!null
+#        "GeneSet.ExpressionPlot.svg": !!null
+#        "stdout.txt": !!null
+#        "cuffData.db": !!null
