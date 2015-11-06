@@ -2,7 +2,7 @@
 # Test selecting multiple conditions.  Also testing the parsing of whitespace in selected.conditions
 #
 module: CummeRbund.GeneSetReport
-name: 
+name: all_conditions_test
 description: 
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.GeneSetReport/v1/input/cuffData_multCond_dir/cuffData.db"

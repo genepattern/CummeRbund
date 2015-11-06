@@ -2,7 +2,7 @@
 # Test selecting a single condition
 #
 module: CummeRbund.SelectedGeneReport
-name: 
+name: one_condition_test
 description: 
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.SelectedGeneReport/v1/input/cuffData_multCond_dir/cuffData.db"

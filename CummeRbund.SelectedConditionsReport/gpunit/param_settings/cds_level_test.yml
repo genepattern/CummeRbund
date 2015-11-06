@@ -2,7 +2,7 @@
 # Test reporting at CDS level
 #
 module: CummeRbund.SelectedConditionsReport
-name: 
+name: cds_level_test
 description: 
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.SelectedConditionsReport/v1/input/cuffData_dir/cuffData.db"

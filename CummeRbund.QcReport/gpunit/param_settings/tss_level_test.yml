@@ -2,7 +2,7 @@
 # Test reporting at tss level
 #
 module: CummeRbund.QcReport
-name: 
+name: tss_level_test
 description: 
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.QcReport/v1/input/cuffData_dir/cuffData.db"

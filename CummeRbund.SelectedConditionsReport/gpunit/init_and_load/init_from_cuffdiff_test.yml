@@ -2,7 +2,7 @@
 # Test loading from a cuffdiff job
 #
 module: CummeRbund.SelectedConditionsReport
-name: 
+name: init_from_cuffdiff_test
 description: 
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.SelectedConditionsReport/v1/input/cuffdiff_DrosM"

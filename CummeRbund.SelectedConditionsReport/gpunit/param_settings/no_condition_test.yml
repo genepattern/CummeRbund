@@ -2,7 +2,7 @@
 # Test selection of no conditions
 #
 module: CummeRbund.SelectedConditionsReport
-name: 
+name: no_condition_test
 description: 
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.SelectedConditionsReport/v1/input/cuffData_multCond_dir/cuffData.db"

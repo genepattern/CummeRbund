@@ -3,7 +3,7 @@
 # within GP, but is possible and so is tested here.
 #
 module: CummeRbund.SelectedConditionsReport
-name: 
+name: load_from_cuffdiff_test
 description: 
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.SelectedConditionsReport/v1/input/cuffdiff_DrosM_w_cuffData"

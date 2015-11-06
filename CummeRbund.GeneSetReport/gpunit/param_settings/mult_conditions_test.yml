@@ -2,7 +2,7 @@
 # Test selecting multiple conditions
 #
 module: CummeRbund.GeneSetReport
-name: 
+name: mult_conditions_test
 description: 
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.GeneSetReport/v1/input/cuffData_multCond_dir/cuffData.db"

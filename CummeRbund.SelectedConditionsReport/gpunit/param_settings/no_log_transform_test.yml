@@ -2,7 +2,7 @@
 # Test without log transform
 #
 module: CummeRbund.SelectedConditionsReport
-name: 
+name: no_log_transform_test
 description: 
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.SelectedConditionsReport/v1/input/cuffData_dir/cuffData.db"
