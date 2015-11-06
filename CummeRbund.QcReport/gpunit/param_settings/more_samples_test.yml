@@ -12,16 +12,17 @@ params:
     pca.y: "PC3"
     attempt.to.merge.names: "no"
 assertions:
-    diffCmd: diff -q -b --strip-trailing-cr
-    files:
-        "QC.Boxplot.svg": !!null
-        "QC.Dendrogram.svg": !!null
-        "QC.Density.svg": !!null
-        "QC.DimensionalityReduction.mds.svg": !!null
-        "QC.DimensionalityReduction.pca.PC2_PC3.svg": !!null
-        "QC.Dispersion.svg": !!null
-        "QC.JSDistanceHeatmap.Samples.svg": !!null
-        "QC.sig_diffExp_genes.txt":
-            diff: <%gpunit.resultData%>CummeRbund.QcReport/v1/output/param_settings/more_samples_test/QC.sig_diffExp_genes.txt
-        "stdout.txt": !!null
-        "cuffData.db": !!null
+    jobStatus: success
+#    diffCmd: diff -q -b --strip-trailing-cr
+#    files:
+#        "QC.Boxplot.svg": !!null
+#        "QC.Dendrogram.svg": !!null
+#        "QC.Density.svg": !!null
+#        "QC.DimensionalityReduction.mds.svg": !!null
+#        "QC.DimensionalityReduction.pca.PC2_PC3.svg": !!null
+#        "QC.Dispersion.svg": !!null
+#        "QC.JSDistanceHeatmap.Samples.svg": !!null
+#        "QC.sig_diffExp_genes.txt":
+#            diff: <%gpunit.resultData%>CummeRbund.QcReport/v1/output/param_settings/more_samples_test/QC.sig_diffExp_genes.txt
+#        "stdout.txt": !!null
+#        "cuffData.db": !!null

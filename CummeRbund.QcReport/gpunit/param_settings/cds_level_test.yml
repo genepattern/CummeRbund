@@ -12,21 +12,22 @@ params:
     pca.y: "PC3"
     attempt.to.merge.names: "no"
 assertions:
-    diffCmd: diff -q -b --strip-trailing-cr
-    files:
-        "QC.Boxplot.svg": !!null
-        "QC.Dendrogram.svg": !!null
-        "QC.Density.svg": !!null
-        "QC.Dispersion.svg": !!null
-        "QC.FPKM.SCV.svg": !!null
-        "QC.JSDistanceHeatmap.Samples.svg":
-        "QC.sig_diffExp_CDS.txt":
-            diff: <%gpunit.resultData%>CummeRbund.QcReport/v1/output/param_settings/cds_level_test/QC.sig_diffExp_CDS.txt
-        "QC.sig_promoter_data.txt":
-            diff: <%gpunit.resultData%>CummeRbund.QcReport/v1/output/param_settings/cds_level_test/QC.sig_promoter_data.txt
-        "QC.sig_relCDS_data.txt":
-            diff: <%gpunit.resultData%>CummeRbund.QcReport/v1/output/param_settings/cds_level_test/QC.sig_relCDS_data.txt
-        "QC.sig_splicing_data.txt":
-            diff: <%gpunit.resultData%>CummeRbund.QcReport/v1/output/param_settings/cds_level_test/QC.sig_splicing_data.txt
-        "stdout.txt": !!null
-        "cuffData.db": !!null
+    jobStatus: success
+#    diffCmd: diff -q -b --strip-trailing-cr
+#    files:
+#        "QC.Boxplot.svg": !!null
+#        "QC.Dendrogram.svg": !!null
+#        "QC.Density.svg": !!null
+#        "QC.Dispersion.svg": !!null
+#        "QC.FPKM.SCV.svg": !!null
+#        "QC.JSDistanceHeatmap.Samples.svg":
+#        "QC.sig_diffExp_CDS.txt":
+#            diff: <%gpunit.resultData%>CummeRbund.QcReport/v1/output/param_settings/cds_level_test/QC.sig_diffExp_CDS.txt
+#        "QC.sig_promoter_data.txt":
+#            diff: <%gpunit.resultData%>CummeRbund.QcReport/v1/output/param_settings/cds_level_test/QC.sig_promoter_data.txt
+#        "QC.sig_relCDS_data.txt":
+#            diff: <%gpunit.resultData%>CummeRbund.QcReport/v1/output/param_settings/cds_level_test/QC.sig_relCDS_data.txt
+#        "QC.sig_splicing_data.txt":
+#            diff: <%gpunit.resultData%>CummeRbund.QcReport/v1/output/param_settings/cds_level_test/QC.sig_splicing_data.txt
+#        "stdout.txt": !!null
+#        "cuffData.db": !!null

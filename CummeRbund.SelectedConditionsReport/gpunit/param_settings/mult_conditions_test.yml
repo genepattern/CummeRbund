@@ -10,21 +10,22 @@ params:
     report.as.aggregate: "yes"
     log.transform: "yes"
 assertions:
-    files:
-        "SelectedConditions.MAplot.p1_s1.svg": !!null
-        "SelectedConditions.MAplot.p1_s2.svg": !!null
-        "SelectedConditions.MAplot.s1_p1.svg": !!null
-        "SelectedConditions.MAplot.s1_s2.svg": !!null
-        "SelectedConditions.MAplot.s2_p1.svg": !!null
-        "SelectedConditions.MAplot.s2_s1.svg": !!null
-        "SelectedConditions.Scatter.p1_s1.svg": !!null
-        "SelectedConditions.Scatter.p1_s2.svg": !!null
-        "SelectedConditions.Scatter.s1_p1.svg": !!null
-        "SelectedConditions.Scatter.s1_s2.svg": !!null
-        "SelectedConditions.Scatter.s2_p1.svg": !!null
-        "SelectedConditions.Scatter.s2_s1.svg": !!null
-        "SelectedConditions.Volcano.s1_p1.svg": !!null
-        "SelectedConditions.Volcano.s1_s2.svg": !!null
-        "SelectedConditions.Volcano.s2_p1.svg": !!null
-        "stdout.txt": !!null
-        "cuffData.db": !!null
+    jobStatus: success
+#    files:
+#        "SelectedConditions.MAplot.p1_s1.svg": !!null
+#        "SelectedConditions.MAplot.p1_s2.svg": !!null
+#        "SelectedConditions.MAplot.s1_p1.svg": !!null
+#        "SelectedConditions.MAplot.s1_s2.svg": !!null
+#        "SelectedConditions.MAplot.s2_p1.svg": !!null
+#        "SelectedConditions.MAplot.s2_s1.svg": !!null
+#        "SelectedConditions.Scatter.p1_s1.svg": !!null
+#        "SelectedConditions.Scatter.p1_s2.svg": !!null
+#        "SelectedConditions.Scatter.s1_p1.svg": !!null
+#        "SelectedConditions.Scatter.s1_s2.svg": !!null
+#        "SelectedConditions.Scatter.s2_p1.svg": !!null
+#        "SelectedConditions.Scatter.s2_s1.svg": !!null
+#        "SelectedConditions.Volcano.s1_p1.svg": !!null
+#        "SelectedConditions.Volcano.s1_s2.svg": !!null
+#        "SelectedConditions.Volcano.s2_p1.svg": !!null
+#        "stdout.txt": !!null
+#        "cuffData.db": !!null

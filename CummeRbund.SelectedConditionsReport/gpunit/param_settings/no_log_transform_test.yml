@@ -10,11 +10,12 @@ params:
     report.as.aggregate: "yes"
     log.transform: "no"
 assertions:
-    files:
-        "SelectedConditions.MAplot.c1_c2.svg": !!null
-        "SelectedConditions.MAplot.c2_c1.svg": !!null
-        "SelectedConditions.Scatter.c1_c2.svg": !!null
-        "SelectedConditions.Scatter.c2_c1.svg": !!null
-        "SelectedConditions.Volcano.c1_c2.svg": !!null
-        "stdout.txt": !!null
-        "cuffData.db": !!null
+    jobStatus: success
+#    files:
+#        "SelectedConditions.MAplot.c1_c2.svg": !!null
+#        "SelectedConditions.MAplot.c2_c1.svg": !!null
+#        "SelectedConditions.Scatter.c1_c2.svg": !!null
+#        "SelectedConditions.Scatter.c2_c1.svg": !!null
+#        "SelectedConditions.Volcano.c1_c2.svg": !!null
+#        "stdout.txt": !!null
+#        "cuffData.db": !!null
