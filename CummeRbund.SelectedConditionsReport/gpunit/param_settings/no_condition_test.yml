@@ -2,8 +2,10 @@
 # Test selection of no conditions
 #
 module: CummeRbund.SelectedConditionsReport
+name: 
+description: 
 params: 
-    cuffdiff.input: "<%gpunit.testData%>CummeRbund.SelectedConditionsReport/v1/input/cuffData_multCond_dir/cuffData.db"
+    cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.SelectedConditionsReport/v1/input/cuffData_multCond_dir/cuffData.db"
     selected.conditions: ""
     output.format: "svg"
     feature.level: "genes"
