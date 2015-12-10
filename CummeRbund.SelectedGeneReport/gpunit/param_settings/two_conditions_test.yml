@@ -1,6 +1,7 @@
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00336:1
 module: CummeRbund.SelectedGeneReport
 name: two_conditions_test
-description: Test selecting two conditions
+description: Positive test of selecting two conditions
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.SelectedGeneReport/v1/input/cuffData_multCond_dir/cuffData.db"
     feature.id: "Ccl17"

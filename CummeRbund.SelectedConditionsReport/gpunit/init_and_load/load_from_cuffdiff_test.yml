@@ -1,8 +1,9 @@
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00342:1
 module: CummeRbund.SelectedConditionsReport
 name: load_from_cuffdiff_test
-description: Test loading from a cuffdiff job containing a cummeRbund DB file.  This is not a normally expected scenario
+description: Positive test of loading from a cuffdiff job containing a cummeRbund DB file.  This is not a normally expected scenario
 params: 
-    cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.SelectedConditionsReport/v1/input/cuffdiff_DrosM_w_cuffData"
+    cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.SelectedConditionsReport/v1/input/cuffdiff_DrosM_w_cuffData/"
     selected.conditions: "c1,c2"
     output.format: "svg"
     feature.level: "genes"

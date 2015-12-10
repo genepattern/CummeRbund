@@ -1,6 +1,7 @@
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00336:1
 module: CummeRbund.SelectedGeneReport
 name: isoforms_level_test
-description: Test reporting at isoforms level
+description: Positive test of reporting at isoforms level
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.SelectedGeneReport/v1/input/cuffData_dir/cuffData.db"
     feature.id: "galectin"

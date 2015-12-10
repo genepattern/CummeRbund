@@ -1,6 +1,7 @@
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00342:1
 module: CummeRbund.SelectedConditionsReport
 name: mult_conditions_test
-description: Test selecting multiple conditions.  Also testing the parsing of whitespace in selected.conditions
+description: Positive test of selecting multiple conditions.  Also testing the parsing of whitespace in selected.conditions
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.SelectedConditionsReport/v1/input/cuffData_multCond_dir/cuffData.db"
     selected.conditions: " s1, s2 ,p1 "
