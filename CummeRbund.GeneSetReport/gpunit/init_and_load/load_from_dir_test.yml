@@ -1,8 +1,9 @@
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00335:1
 module: CummeRbund.GeneSetReport
 name: load_from_dir_test
-description: Test loading from a cummeRbund dir (simulates a previous job)
+description: Positive test of loading from a cummeRbund dir (simulates a previous job)
 params: 
-    cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.GeneSetReport/v1/input/cuffData_dir"
+    cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.GeneSetReport/v1/input/cuffData_dir/"
     geneset.file: "<%gpunit.testData%>gpunit/CummeRbund.GeneSetReport/v1/input/dros_geneset.txt"
     selected.conditions: ""
     output.format: "svg"

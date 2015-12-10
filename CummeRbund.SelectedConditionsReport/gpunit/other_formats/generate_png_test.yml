@@ -1,6 +1,7 @@
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00342:1
 module: CummeRbund.SelectedConditionsReport
 name: generate_png_test
-description: Test png generation
+description: Positive test of png generation
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.SelectedConditionsReport/v1/input/cuffData_dir/cuffData.db"
     selected.conditions: "c1,c2"

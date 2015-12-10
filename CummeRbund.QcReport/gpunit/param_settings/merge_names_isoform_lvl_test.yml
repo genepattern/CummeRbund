@@ -1,6 +1,7 @@
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00326:1
 module: CummeRbund.QcReport
 name: merge_names_isoform_lvl_test
-description: Test the merging of gene names in place of tracking_ids (at the isoform level)
+description: Positive test of the merging of gene names in place of tracking_ids (at the isoform level)
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.QcReport/v1/input/cuffData_toMerge/cuffData.db"
     output.format: "svg"

@@ -1,6 +1,7 @@
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00336:1
 module: CummeRbund.SelectedGeneReport
 name: no_log_transform_test
-description: Test without log transform
+description: Positive test of without log transform
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.SelectedGeneReport/v1/input/cuffData_dir/cuffData.db"
     feature.id: "galectin"

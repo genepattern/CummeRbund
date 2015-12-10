@@ -1,8 +1,9 @@
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00336:1
 module: CummeRbund.SelectedGeneReport
 name: init_from_cuffdiff_test
-description: Test loading from a cuffdiff job
+description: Positive test of loading from a cuffdiff job
 params: 
-    cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.SelectedGeneReport/v1/input/cuffdiff_DrosM"
+    cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.SelectedGeneReport/v1/input/cuffdiff_DrosM/"
     feature.id: "galectin"
     selected.conditions: ""
     output.format: "svg"

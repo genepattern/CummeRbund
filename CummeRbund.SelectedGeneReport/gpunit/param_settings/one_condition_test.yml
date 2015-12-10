@@ -1,6 +1,7 @@
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00336:1
 module: CummeRbund.SelectedGeneReport
 name: one_condition_test
-description: Test selecting a single condition
+description: Positive test of selecting a single condition
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.SelectedGeneReport/v1/input/cuffData_multCond_dir/cuffData.db"
     feature.id: "Ccl17"

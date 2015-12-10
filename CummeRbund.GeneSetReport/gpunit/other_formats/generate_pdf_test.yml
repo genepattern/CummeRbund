@@ -1,6 +1,7 @@
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00335:1
 module: CummeRbund.GeneSetReport
 name: generate_pdf_test
-description: Test pdf generation
+description: Positive test of pdf generation
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.GeneSetReport/v1/input/cuffData_dir/cuffData.db"
     geneset.file: "<%gpunit.testData%>gpunit/CummeRbund.GeneSetReport/v1/input/dros_geneset.txt"

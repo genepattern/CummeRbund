@@ -1,6 +1,7 @@
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00342:1
 module: CummeRbund.SelectedConditionsReport
 name: no_condition_test
-description: Test selection of no conditions
+description: Negative test of selection of no conditions
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.SelectedConditionsReport/v1/input/cuffData_multCond_dir/cuffData.db"
     selected.conditions: ""
@@ -9,8 +10,7 @@ params:
     report.as.aggregate: "yes"
     log.transform: "yes"
 assertions:
-    jobStatus: success
-#        jobStatus: failure
+    jobStatus: failure
 #    files:
 #        "stderr.txt":
 #            diffCmd: ../diffIgnoreGpTraces.sh

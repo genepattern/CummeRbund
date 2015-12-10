@@ -1,6 +1,7 @@
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00335:1
 module: CummeRbund.GeneSetReport
 name: one_condition_test
-description: Test selecting a single condition
+description: Positive test of selecting a single condition
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.GeneSetReport/v1/input/cuffData_multCond_dir/cuffData.db"
     geneset.file: "<%gpunit.testData%>gpunit/CummeRbund.GeneSetReport/v1/input/mm9_geneset.txt"

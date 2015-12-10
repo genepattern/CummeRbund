@@ -1,6 +1,7 @@
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00335:1
 module: CummeRbund.GeneSetReport
 name: all_conditions_test
-description: Test selecting multiple conditions.  Also testing the parsing of whitespace in selected.conditions
+description: Positive test of selecting multiple conditions.  Also testing the parsing of whitespace in selected.conditions
 params: 
     cuffdiff.input: "<%gpunit.testData%>gpunit/CummeRbund.GeneSetReport/v1/input/cuffData_multCond_dir/cuffData.db"
     geneset.file: "<%gpunit.testData%>gpunit/CummeRbund.GeneSetReport/v1/input/mm9_geneset.txt"
