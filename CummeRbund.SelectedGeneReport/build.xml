@@ -2,7 +2,7 @@
 <!-- Ant build file -->
 
 <project basedir="." default="create-zip" name="CummeRbund.SelectedGeneReport">
-	<property name="dirOffset" value="../../" />
+	<property name="dirOffset" value="../../common_module_code" />
 	<import file="${dirOffset}/commontargets.xml" />
 
     <!-- Include the common src in the version check -->
